@@ -1,0 +1,69 @@
+/**
+ * vista.css
+ *   Ensure that your build system copies this file to your build output directory.
+ */
+
+#headerLabel {
+    -fx-background-color: steelblue;
+    -fx-text-fill: white;
+    -fx-padding: 5px;
+}
+
+#welcomeLabel {
+   -fx-font-size: 48px;
+   -fx-font-family: "Arial Black";
+   -fx-fill: #818181;
+   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+
+}
+
+#vistaHolder {
+    -fx-background-image: url(../Images/background.jpg);
+}
+
+#entry_vista {
+    -fx-background-color: white;
+    -fx-background-image: url(../Images/background.jpg), url(../Images/Celtic_Dragon2.jpg);
+    -fx-background-position: center, center;
+    -fx-background-repeat: repeat, no-repeat;
+}
+
+#vista2 {
+    -fx-background-color: coral;
+}
+.spinner {
+    -fx-font-size: 16;
+}
+
+.button {
+    -fx-base: lightblue;
+    -fx-font-size: 20px;
+}
+
+.text-field:error {
+    -fx-background-image: url(../Images/warn_med.png);
+    -fx-background-padding: 0, 0, 0, 10px;
+    -fx-background-position: right center;
+    -fx-background-repeat: no-repeat;
+    -fx-focus-color: #d35244;
+    -fx-faint-focus-color: #d3524422;
+
+    -fx-highlight-fill: -fx-accent;
+    -fx-highlight-text-fill: white;
+    -fx-background-color:
+        -fx-focus-color,
+        -fx-control-inner-background,
+        -fx-faint-focus-color,
+        linear-gradient(from 0px 0px to 0px 5px, derive(-fx-control-inner-background, -9%), -fx-control-inner-background);
+    -fx-background-insets: -0.2, 1, -1.4, 3;
+    -fx-background-radius: 3, 2, 4, 0;
+    }
+.text-field:hidden{
+    -fx-opacity: 0.0;
+    -fx-text-fill:  rgba(0,0,0,0);
+    }
+.label:hidden{
+    -fx-text-fill:  rgba(0,0,0,0);
+    }
+
+
