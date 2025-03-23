@@ -1,6 +1,6 @@
 /**
- * vista.css
- *   Ensure that your build system copies this file to your build output directory.
+ * Style sheet for Beithir App
+ * Ensure that your build system copies this file to your build output directory.
  */
 
 #headerLabel {
@@ -8,13 +8,23 @@
     -fx-text-fill: white;
     -fx-padding: 5px;
 }
-
+#runDate {
+    -fx-font-size: 18;
+}
+.tab-pane {
+    -fx-font-size: 18;
+}
+.menu {
+    -fx-font-size: 18;
+}
+.combo-box {
+    -fx-font-size: 20;
+}
 #welcomeLabel {
    -fx-font-size: 48px;
    -fx-font-family: "Arial Black";
    -fx-fill: #818181;
    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
-
 }
 
 #vistaHolder {
@@ -28,7 +38,7 @@
     -fx-background-repeat: repeat, no-repeat;
 }
 
-#vista2 {
+#vista1 {
     -fx-background-color: coral;
 }
 .spinner {

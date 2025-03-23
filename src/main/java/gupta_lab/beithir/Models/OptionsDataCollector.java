@@ -1,79 +1,147 @@
+/**
+ * Data collector for Beithir views
+ * Package based on GitHub Gist (https://gist.github.com/jewelsea/6460130).
+ * @author Dennis A. Simpson
+ * @since March 2025
+ * @version 0.1.1
+ */
+
 package gupta_lab.beithir.Models;
 
 import javafx.scene.control.CheckBox;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class OptionsDataCollector {
 
     private static String runModule;
     private static String userName;
+    private static String LeftPipetteFirstTip;
+    private static String RightPipetteFirstTip;
+    private static String BottomOffset;
+    private static String setTemperature;
+    private static String runDate;
+    private static CheckBox useTemperatureModule = new CheckBox();
+    private static String Slot1;
+    private static String Slot2;
+    private static String Slot3;
+    private static String Slot4;
+    private static String Slot5;
+    private static String Slot6;
+    private static String Slot7;
+    private static String Slot8;
+    private static String Slot9;
+    private static String Slot10;
+    private static String Slot11;
+    private static String target1Name;
+    private static String target2Name;
+    private static String target3Name;
+    private static String target4Name;
+    private static String target5Name;
+    private static String target6Name;
+    private static String target7Name;
+    private static String target8Name;
+    private static String target9Name;
+    private static String target10Name;
 
-    private static String segmentFile;
-    private static String targetFile;
-    private static String fastqFile1;
-    private static String indexFile;
-    private static String cellName;
-    private static String spawnJobs;
-    private static String indexMisMatch;
-    private static String targetMisMatch;
-    private static String freqIterations;
-    private static String repeatCount;
-    private static String bedGroup;
-    private static String targetGroupSize;
-    private static String progCheck;
-    private static String minLength;
-    private static String targetLength;
-    private static String targetStart;
-    private static String targetPadding;
-    private static String expectedPosition;
+
     private static CheckBox excludeChrY = new CheckBox();
     private static CheckBox writeMapFile = new CheckBox();
-    private static CheckBox targetPermFile = new CheckBox();
-    private static CheckBox segPermFile = new CheckBox();
-    private static CheckBox writeBreakPointDistFile = new CheckBox();
-    private static CheckBox writeBreakPointChromDistFile = new CheckBox();
-    private static CheckBox writeChromPloidyFile = new CheckBox();
-    private static CheckBox deleteNewFastq = new CheckBox();
-    private static CheckBox revComp = new CheckBox();
-    private static CheckBox compressFastq = new CheckBox();
 
-    public OptionsDataCollector(){
-        setTargetFile("");
-        setFastqFile1("");
-        setIndexFile("");
-        setSegmentFile("");
-        setCellName("");
-        setBedGroup("");
-        setTargetGroupSize("");
-        setMinLength("");
-        setTargetLength("");
-        setTargetStart("");
-        setExpectedPosition("");
-        getExcludeChrY().setSelected(false);
-        getWriteMapFile().setSelected(false);
-        getTargetPermFile().setSelected(false);
-        getSegPermFile().setSelected(false);
-        getWriteBreakPointDistFile().setSelected(false);
-        getWriteBreakPointChromDistFile().setSelected(false);
-        getWriteChromPloidyFile().setSelected(false);
-        getDeleteNewFastq().setSelected(false);
-        getRevComp().setSelected(false);
-        getCompressFastq().setSelected(false);
-    }
+    private static final StringBuilder returnString = new StringBuilder();
 
     public static String generateOptionsFile() throws IOException{
-        String userName = "--User\t" + getUserName() + "\n";
 
-        return userName;
+        returnString.append(runModule + "\n\n" + "#Run Date:\t" + runDate + "\n" +
+                "--User\t" + getUserName() + "\n" +
+                "--LeftPipetteFirstTip\t" + getLeftPipetteFirstTip() + "\n" +
+                "--RightPipetteFirstTip\t" + getRightPipetteFirstTip() + "\n" +
+                "--BottomOffset\t" + getBottomOffset() + "\n" +
+                "--UseTemperatureModule\t" + (getUseTemperatureModule().isSelected() ? "True\n" : "False\n") +
+                "--Temperature\t" + getsetTemperature() + "\n" +
+                "--Slot1\t" + getSlot1() + "\n" + "--Slot2\t" + getSlot2() + "\n" + "--Slot3\t" + getSlot3() + "\n" +
+                "--Slot4\t" + getSlot4() + "\n" + "--Slot5\t" + getSlot5() + "\n" + "--Slot6\t" +getSlot6() + "\n" +
+                "--Slot7\t" + getSlot7() + "\n" + "--Slot8\t" + getSlot8() + "\n" + "--Slot9\t" +getSlot9() + "\n" +
+                "--Slot10\t" + getSlot10() + "\n" + "--Slot11\t" + getSlot11() + "\n" +
+                "--Target1\t" + getTarget1Name() + "\n" + "--Target2\t" + getTarget2Name() + "\n" + "--Target3\t" + getTarget3Name() + "\n" +
+                "--Target4\t" + getTarget4Name() + "\n"
+        );
+
+        return returnString.toString();
     }
 
     private static String getUserName() {return userName;}
     public static void setUserName(String userName) {OptionsDataCollector.userName = userName;}
 
-    private static String getRunModule() {return runModule;}
     public static void setRunModule(String runModule) {OptionsDataCollector.runModule = runModule;}
 
+    public static void getRunDate(String runDate) {OptionsDataCollector.runDate = formatRunDate(runDate);}
+    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy");
+    public static String formatRunDate(String runDate) {
+        return LocalDate.parse(runDate, DateTimeFormatter.ISO_DATE).format(dateFormatter);
+    }
+
+    private static String getLeftPipetteFirstTip() {return LeftPipetteFirstTip;}
+    public static void setLeftPipetteFirstTip(String leftPipetteFirstTip) {OptionsDataCollector.LeftPipetteFirstTip = leftPipetteFirstTip;}
+
+    private static String getRightPipetteFirstTip() {return RightPipetteFirstTip;}
+    public static void setRightPipetteFirstTip(String RightPipetteFirstTip) {OptionsDataCollector.RightPipetteFirstTip = RightPipetteFirstTip;}
+
+    private static String getBottomOffset() {return BottomOffset;}
+    public static void setBottomOffset(String bottomOffset) {OptionsDataCollector.BottomOffset = bottomOffset;}
+
+    private static String getsetTemperature() {if(setTemperature == null){return "";}else{return setTemperature;}}
+    public static void setsetTemperature(String setTemperature) {OptionsDataCollector.setTemperature = setTemperature;}
+
+    private static CheckBox getUseTemperatureModule(){return useTemperatureModule;}
+    public static void setUseTemperatureModule(CheckBox useTemperatureModule){OptionsDataCollector.useTemperatureModule = useTemperatureModule;}
+
+    public static String getSlot1() {if(Slot1 == null){return "";}else{return Slot1;}}
+    public static void setSlot1(String Slot1) {OptionsDataCollector.Slot1 = Slot1;}
+
+    public static String getSlot2() {if(Slot2 == null){return "";}else{return Slot2;}}
+    public static void setSlot2(String Slot2) {OptionsDataCollector.Slot2 = Slot2;}
+
+    public static String getSlot3() {if(Slot3 == null){return "";}else{return Slot3;}}
+    public static void setSlot3(String Slot3) {OptionsDataCollector.Slot3 = Slot3;}
+
+    public static String getSlot4() {if(Slot4 == null){return "";}else{return Slot4;}}
+    public static void setSlot4(String Slot4) {OptionsDataCollector.Slot4 = Slot4;}
+
+    public static String getSlot5() {if(Slot5 == null){return "";}else{return Slot5;}}
+    public static void setSlot5(String Slot5) {OptionsDataCollector.Slot5 = Slot5;}
+
+    public static String getSlot6() {if(Slot6 == null){return "";}else{return Slot6;}}
+    public static void setSlot6(String Slot6) {OptionsDataCollector.Slot6 = Slot6;}
+
+    public static String getSlot7() {if(Slot7 == null){return "";}else{return Slot7;}}
+    public static void setSlot7(String Slot7) {OptionsDataCollector.Slot7 = Slot7;}
+
+    public static String getSlot8() {if(Slot8 == null){return "";}else{return Slot8;}}
+    public static void setSlot8(String Slot8) {OptionsDataCollector.Slot8 = Slot8;}
+
+    public static String getSlot9() {if(Slot9 == null){return "";}else{return Slot9;}}
+    public static void setSlot9(String Slot9) {OptionsDataCollector.Slot9 = Slot9;}
+
+    public static String getSlot10() {if(Slot10 == null){return "";}else{return Slot10;}}
+    public static void setSlot10(String Slot10) {OptionsDataCollector.Slot10 = Slot10;}
+
+    public static String getSlot11() {if(Slot11 == null){return "";}else{return Slot11;}}
+    public static void setSlot11(String Slot11) {OptionsDataCollector.Slot11 = Slot11;}
+
+    private static String getTarget1Name() {if(target1Name == null){return "";}else{return target1Name;}}
+    public static void setTarget1Name(String target1Name) {OptionsDataCollector.target1Name = target1Name;}
+
+    private static String getTarget2Name() {if(target2Name == null){return "";}else{return target2Name;}}
+    public static void setTarget2Name(String target2Name) {OptionsDataCollector.target2Name = target2Name;}
+
+    private static String getTarget3Name() {if(target3Name == null){return "";}else{return target3Name;}}
+    public static void setTarget3Name(String target3Name) {OptionsDataCollector.target3Name = target3Name;}
+
+    private static String getTarget4Name() {if(target4Name == null){return "";}else{return target4Name;}}
+    public static void setTarget4Name(String target4Name) {OptionsDataCollector.target4Name = target4Name;}
 
     private static CheckBox getExcludeChrY() {return excludeChrY;}
     public static void setExcludeChrY(CheckBox excludeChrY) {OptionsDataCollector.excludeChrY = excludeChrY;}
@@ -84,91 +152,5 @@ public class OptionsDataCollector {
     public static void setWriteMapFile(CheckBox writeMapFile) {
         OptionsDataCollector.writeMapFile = writeMapFile;
     }
-
-    private static CheckBox getSegPermFile() {
-        return segPermFile;
-    }
-    public static void setSegPermFile(CheckBox segPermFile) {
-        OptionsDataCollector.segPermFile = segPermFile;
-    }
-
-    private static String getTargetGroupSize() {return targetGroupSize;}
-    public static void setTargetGroupSize(String targetGroupSize) {OptionsDataCollector.targetGroupSize = targetGroupSize;}
-
-    private static CheckBox getTargetPermFile() {return targetPermFile;}
-    public static void setTargetPermFile(CheckBox targetPermFile) {OptionsDataCollector.targetPermFile = targetPermFile;}
-
-
-
-    private static String getCellName() {return cellName;}
-    public static void setCellName(String cellName) {OptionsDataCollector.cellName = cellName;}
-
-    private static String getSegmentFile() {return segmentFile;}
-    public static void setSegmentFile(String segmentFile) {OptionsDataCollector.segmentFile = segmentFile;}
-
-    private static String getBedGroup() {return bedGroup;}
-    public static void setBedGroup(String bedGroup) {OptionsDataCollector.bedGroup = bedGroup;}
-
-    private static String getSpawnJobs() {return spawnJobs;}
-    public static void setSpawnJobs(String spawnJobs) {OptionsDataCollector.spawnJobs = spawnJobs;}
-
-    private static String getIndexMisMatch() {return indexMisMatch;}
-    public static void setIndexMisMatch(String indexMisMatch) {OptionsDataCollector.indexMisMatch = indexMisMatch;}
-
-    private static String getProgCheck() {return progCheck;}
-    public static void setProgCheck(String progCheck) {OptionsDataCollector.progCheck = progCheck;}
-
-    private static String getRepeatCount() {return repeatCount;}
-    public static void setRepeatCount(String repeatCount) {OptionsDataCollector.repeatCount = repeatCount;}
-
-    private static String getFreqIterations() {return freqIterations;}
-    public static void setFreqIterations(String freqIterations) {OptionsDataCollector.freqIterations = freqIterations;}
-
-    private static String getTargetFile() {return targetFile;}
-    public static void setTargetFile(String targetFile) {OptionsDataCollector.targetFile = targetFile;}
-
-
-
-    private static CheckBox getWriteChromPloidyFile() {return writeChromPloidyFile;}
-    public static void setWriteChromPloidyFile(CheckBox writeChromPloidyFile) {OptionsDataCollector.writeChromPloidyFile = writeChromPloidyFile;}
-
-    private static CheckBox getWriteBreakPointDistFile() {return writeBreakPointDistFile;}
-    public static void setWriteBreakPointDistFile(CheckBox writeBreakPointDistFile) {OptionsDataCollector.writeBreakPointDistFile = writeBreakPointDistFile;}
-
-    private static CheckBox getWriteBreakPointChromDistFile() {return writeBreakPointChromDistFile;}
-    public static void setWriteBreakPointChromDistFile(CheckBox writeBreakPointChromDistFile) {OptionsDataCollector.writeBreakPointChromDistFile = writeBreakPointChromDistFile;}
-
-    private static CheckBox getDeleteNewFastq(){return deleteNewFastq;}
-    public static void setDeleteNewFastq(CheckBox deleteNewFastq) {OptionsDataCollector.deleteNewFastq = deleteNewFastq;}
-
-    private static CheckBox getRevComp(){return revComp;}
-    public static void setRevComp(CheckBox revComp){OptionsDataCollector.revComp = revComp;}
-
-    private static CheckBox getCompressFastq(){return compressFastq;}
-    public static void setCompressFastq(CheckBox compressFastq){OptionsDataCollector.compressFastq = compressFastq;}
-
-    private static String getFastqFile1() {return fastqFile1;}
-    public static void setFastqFile1(String fastqFile1) {OptionsDataCollector.fastqFile1 = fastqFile1;}
-
-    private static String getIndexFile(){return indexFile;}
-    public static void setIndexFile(String indexFile) {OptionsDataCollector.indexFile = indexFile;}
-
-    private static String getMinLength(){return minLength;}
-    public static void setMinLength(String minLength) {OptionsDataCollector.minLength = minLength;}
-
-    private static String getTargetLength(){return targetLength;}
-    public static void setTargetLength(String targetLength) {OptionsDataCollector.targetLength = targetLength;}
-
-    private static String getTargetStart(){return targetStart;}
-    public static void setTargetStart(String targetStart) {OptionsDataCollector.targetStart = targetStart;}
-
-    private static String getTargetPadding(){return targetPadding;}
-    public static void setTargetPadding(String targetPadding) {OptionsDataCollector.targetPadding = targetPadding;}
-
-    private static String getTargetMisMatch(){return targetMisMatch;}
-    public static void setTargetMisMatch(String targetMisMatch) {OptionsDataCollector.targetMisMatch = targetMisMatch;}
-
-    private static String getExpectedPosition(){return expectedPosition;}
-    public static void setExpectedPosition(String expectedPosition) {OptionsDataCollector.expectedPosition = expectedPosition;}
 
 }

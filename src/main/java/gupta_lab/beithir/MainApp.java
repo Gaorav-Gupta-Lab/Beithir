@@ -1,3 +1,11 @@
+/**
+ * Main entry point for Beithir
+ * Package based on GitHub Gist (https://gist.github.com/jewelsea/6460130).
+ * @author Dennis A. Simpson
+ * @since March 2025
+ * @version 0.1.1
+ */
+
 package gupta_lab.beithir;
 
 import gupta_lab.beithir.Controllers.MainController;
