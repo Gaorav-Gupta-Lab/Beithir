@@ -8,12 +8,14 @@
 
 package gupta_lab.beithir.Controllers;
 
+import com.almasb.fxgl.dsl.KeyInputBuilder;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
-
 import static gupta_lab.beithir.Models.InputValidation.numberValidate;
 import static gupta_lab.beithir.Models.InputValidation.textValidate;
 import gupta_lab.beithir.Models.OptionsDataCollector;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -21,6 +23,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -56,11 +62,95 @@ public class ddPCR_VistaController implements Initializable{
     @FXML private TableView sampleTable;
     @FXML private TableColumn sampleSlot;
     @FXML private TableColumn sampleWell;
+    @FXML private TableColumn sampleName;
+    @FXML private TableColumn sampleConcentration;
+    @FXML private TableColumn sampleTargets;
+    @FXML private TableColumn sampleReplicates;
+    @FXML private TextField addSampleSlot;
+    @FXML private TextField addSampleWell;
+    @FXML private TextField addSampleName;
+    @FXML private TextField addSampleConcentration;
+    @FXML private TextField addSampleTargets;
+    @FXML private TextField addSampleReplicates;
+    @FXML private Button addSampleInformationButton;
+    @FXML private Button deleteSampleRowButton;
+    private abstract gettable;
+
 
     private final PseudoClass errorClass = PseudoClass.getPseudoClass("error");
+    private final ObservableList<OptionsDataCollector> sampleData = FXCollections.observableArrayList(
+            new OptionsDataCollector(
+                    "Slot", "Well", "My Awesome  Sample",
+                    "27.9", "1,2", "1")
+    );
+
 
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
+        sampleTable.setEditable(true);
+        sampleSlot.setEditable(true);
+        sampleWell.setEditable(true);
+        sampleName.setEditable(true);
+        sampleConcentration.setEditable(true);
+        sampleTargets.setEditable(true);
+        sampleReplicates.setEditable(true);
+
+        sampleSlot.setCellValueFactory(new PropertyValueFactory<>("sampleSlot"));
+        sampleWell.setCellValueFactory(new PropertyValueFactory<>("sampleWell"));
+        sampleName.setCellValueFactory(new PropertyValueFactory<>("sampleName"));
+        sampleConcentration.setCellValueFactory(new PropertyValueFactory<>("sampleConcentration"));
+        sampleTargets.setCellValueFactory(new PropertyValueFactory<>("sampleTargets"));
+        sampleReplicates.setCellValueFactory(new PropertyValueFactory<>("sampleReplicates"));
+
+        sampleSlot.setCellFactory(TextFieldTableCell.forTableColumn());
+        sampleWell.setCellFactory(TextFieldTableCell.forTableColumn());
+        sampleName.setCellFactory(TextFieldTableCell.forTableColumn());
+        sampleConcentration.setCellFactory(TextFieldTableCell.forTableColumn());
+        sampleTargets.setCellFactory(TextFieldTableCell.forTableColumn());
+        sampleReplicates.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        sampleSlot.setOnEditCommit(new EventHandler<CellEditEvent<OptionsDataCollector, String>>() {
+            @Override
+            public void handle(CellEditEvent<OptionsDataCollector, String> t) {
+                t.getTableView().getItems().get(t.getTablePosition().getRow()).setSampleSlot(t.getNewValue());
+            }
+        });
+
+        sampleWell.setOnEditCommit(new EventHandler<CellEditEvent<OptionsDataCollector, String>>() {
+            @Override
+            public void handle(CellEditEvent<OptionsDataCollector, String> t) {
+                t.getTableView().getItems().get(t.getTablePosition().getRow()).setSampleWell(t.getNewValue());
+            }
+        });
+        sampleName.setOnEditCommit(new EventHandler<CellEditEvent<OptionsDataCollector, String>>() {
+            @Override
+            public void handle(CellEditEvent<OptionsDataCollector, String> t) {
+                t.getTableView().getItems().get(t.getTablePosition().getRow()).setSampleName(t.getNewValue());
+            }
+        });
+        sampleConcentration.setOnEditCommit(new EventHandler<CellEditEvent<OptionsDataCollector, String>>() {
+            @Override
+            public void handle(CellEditEvent<OptionsDataCollector, String> t) {
+                t.getTableView().getItems().get(t.getTablePosition().getRow()).setSampleConcentration(t.getNewValue());
+            }
+        });
+        sampleTargets.setOnEditCommit(new EventHandler<CellEditEvent<OptionsDataCollector, String>>() {
+            @Override
+            public void handle(CellEditEvent<OptionsDataCollector, String> t) {
+                t.getTableView().getItems().get(t.getTablePosition().getRow()).setSampleTargets(t.getNewValue());
+            }
+        });
+        sampleReplicates.setOnEditCommit(new EventHandler<CellEditEvent<OptionsDataCollector, String>>() {
+            @Override
+            public void handle(CellEditEvent<OptionsDataCollector, String> t) {
+                t.getTableView().getItems().get(t.getTablePosition().getRow()).setSampleReplicates(t.getNewValue());
+            }
+        });
+
+        // Some debugging stuff.
+        sampleTable.setItems(sampleData);
+        //System.out.println(sampleTable.getAll());
+
         userName.pseudoClassStateChanged(errorClass, true);
         OptionsDataCollector.setRunModule("#ddPCR Parameters");
 
@@ -69,14 +159,38 @@ public class ddPCR_VistaController implements Initializable{
             OptionsDataCollector.getRunDate(runDateItem);
         });
 
-        //FXCollections.observableArrayList(new User("zaza","zaza","zaza"));
-        //sampleTable.getItems().add(new User("John","NewYork","+16879060"));
-        sampleTable.setEditable(true);
-        sampleTable.setVisible(true);
-        sampleTable.setItems(FXCollections.observableArrayList("zaza","zaza","zaza"));
-        sampleTable.getItems().add("zaza");
-        System.out.println(sampleSlot.getColumns());
+        OptionsDataCollector.processSampleData(sampleTable);
 
+
+        addSampleInformationButton.setOnAction(event -> {
+            sampleData.add(new OptionsDataCollector(
+                    addSampleSlot.getText(),
+                    addSampleWell.getText(),
+                    addSampleName.getText(),
+                    addSampleConcentration.getText(),
+                    addSampleTargets.getText(),
+                    addSampleReplicates.getText()));
+
+            addSampleSlot.clear();
+            addSampleWell.clear();
+            addSampleName.clear();
+            addSampleConcentration.clear();
+            addSampleTargets.clear();
+            addSampleReplicates.clear();
+
+            sampleTable.setItems(sampleData);
+        });
+
+
+        deleteSampleRowButton.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
+            @Override
+            public void handle(javafx.event.ActionEvent event) {
+                var selectedRow = sampleTable.getSelectionModel().getSelectedItem();
+                if (selectedRow != null) {
+                    sampleData.remove(selectedRow);
+                }
+            }
+        });
 
         userName.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!StringUtils.isBlank(userName.getText()) && textValidate(userName.getText())) {
@@ -120,10 +234,10 @@ public class ddPCR_VistaController implements Initializable{
         setTemperature.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!StringUtils.isNotEmpty(setTemperature.getText()) && textValidate(setTemperature.getText())) {
                 setTemperature.pseudoClassStateChanged(errorClass, false);
-                OptionsDataCollector.setsetTemperature(setTemperature.getText());
+                OptionsDataCollector.setSetTemperature(setTemperature.getText());
             } else {
                 setTemperature.pseudoClassStateChanged(errorClass, true);
-                OptionsDataCollector.setsetTemperature(setTemperature.getText());
+                OptionsDataCollector.setSetTemperature(setTemperature.getText());
             }
         });
 

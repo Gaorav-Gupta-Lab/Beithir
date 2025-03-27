@@ -8,11 +8,17 @@
 
 package gupta_lab.beithir.Models;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
+import javax.swing.text.TabableView;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OptionsDataCollector {
 
@@ -45,14 +51,72 @@ public class OptionsDataCollector {
     private static String target8Name;
     private static String target9Name;
     private static String target10Name;
+    private static TableView<OptionsDataCollector> sampleTable;
+    //private static TableColumn<String, String> sampleColumn;
+    private static String sampleData;
+
 
 
     private static CheckBox excludeChrY = new CheckBox();
     private static CheckBox writeMapFile = new CheckBox();
 
+    private final SimpleStringProperty sampleSlot;
+    private SimpleStringProperty sampleWell;
+    private SimpleStringProperty sampleName;
+    private SimpleStringProperty sampleConcentration;
+    private SimpleStringProperty sampleTargets;
+    private SimpleStringProperty sampleReplicates;
+
+    public OptionsDataCollector(
+            String sampleSlotName, String sampleWellName, String sampleNameString, String sampleConcentrationValue,
+            String sampleTargetsName, String sampleReplicatesValue) {
+        this.sampleSlot = new SimpleStringProperty(sampleSlotName);
+        this.sampleWell = new SimpleStringProperty(sampleWellName);
+        this.sampleName = new SimpleStringProperty(sampleNameString);
+        this.sampleConcentration = new SimpleStringProperty(sampleConcentrationValue);
+        this.sampleTargets = new SimpleStringProperty(sampleTargetsName);
+        this.sampleReplicates = new SimpleStringProperty(sampleReplicatesValue);
+    }
+
+
+
+
+    public String getSampleSlot() {return sampleSlot.get();}
+    public void setSampleSlot(String sampleSlotName) {sampleSlot.set(sampleSlotName);}
+
+    public String getSampleWell() {return sampleWell.get();}
+    public void setSampleWell(String sampleWellName) {sampleWell.set(sampleWellName);}
+
+    public String getSampleName() {return sampleName.get();}
+    public void setSampleName(String sampleNameString) {sampleName.set(sampleNameString);}
+    public String getSampleConcentration() {return sampleConcentration.get();}
+    public void setSampleConcentration(String sampleConcentrationValue) {sampleConcentration.set(sampleConcentrationValue);}
+    public String getSampleTargets() {return sampleTargets.get();}
+    public void setSampleTargets(String sampleTargetsName) {sampleTargets.set(sampleTargetsName);}
+    public String getSampleReplicates() {return sampleReplicates.get();}
+    public void setSampleReplicates(String sampleReplicatesValue) {sampleReplicates.set(sampleReplicatesValue);}
+
+
     private static final StringBuilder returnString = new StringBuilder();
 
+    public static void processSampleData(TableView<OptionsDataCollector> sampleTable) {
+        System.out.println("Sample Table: " + sampleTable.getItems().size());
+        for (int i = 0; i < sampleTable.getItems().size(); i++) {
+            System.out.println("Sample Name: " + sampleTable.getItems().get(i).getSampleName());
+            String sampleSlotName = sampleTable.getItems().get(i).getSampleSlot();
+            String sampleWellName = sampleTable.getItems().get(i).getSampleWell();
+            String sampleNameString = sampleTable.getItems().get(i).getSampleName();
+            String sampleConcentrationValue = sampleTable.getItems().get(i).getSampleConcentration();
+            String sampleTargetsName = sampleTable.getItems().get(i).getSampleTargets();
+            String sampleReplicatesValue = sampleTable.getItems().get(i).getSampleReplicates();
+            sampleData = sampleSlotName + "\t" + sampleWellName + "\t" + sampleNameString + "\t" + sampleConcentrationValue + "\t" +
+                    sampleTargetsName + "\t" + sampleReplicatesValue + "\n";
+            System.out.println(sampleData);
+        }
+    }
+
     public static String generateOptionsFile() throws IOException{
+
 
         returnString.append(runModule + "\n\n" + "#Run Date:\t" + runDate + "\n" +
                 "--User\t" + getUserName() + "\n" +
@@ -60,13 +124,14 @@ public class OptionsDataCollector {
                 "--RightPipetteFirstTip\t" + getRightPipetteFirstTip() + "\n" +
                 "--BottomOffset\t" + getBottomOffset() + "\n" +
                 "--UseTemperatureModule\t" + (getUseTemperatureModule().isSelected() ? "True\n" : "False\n") +
-                "--Temperature\t" + getsetTemperature() + "\n" +
+                "--Temperature\t" + getSetTemperature() + "\n" +
                 "--Slot1\t" + getSlot1() + "\n" + "--Slot2\t" + getSlot2() + "\n" + "--Slot3\t" + getSlot3() + "\n" +
                 "--Slot4\t" + getSlot4() + "\n" + "--Slot5\t" + getSlot5() + "\n" + "--Slot6\t" +getSlot6() + "\n" +
                 "--Slot7\t" + getSlot7() + "\n" + "--Slot8\t" + getSlot8() + "\n" + "--Slot9\t" +getSlot9() + "\n" +
                 "--Slot10\t" + getSlot10() + "\n" + "--Slot11\t" + getSlot11() + "\n" +
                 "--Target1\t" + getTarget1Name() + "\n" + "--Target2\t" + getTarget2Name() + "\n" + "--Target3\t" + getTarget3Name() + "\n" +
-                "--Target4\t" + getTarget4Name() + "\n"
+                "--Target4\t" + getTarget4Name() + "\n"+
+                "Samples\t"+sampleData
         );
 
         return returnString.toString();
@@ -92,8 +157,8 @@ public class OptionsDataCollector {
     private static String getBottomOffset() {return BottomOffset;}
     public static void setBottomOffset(String bottomOffset) {OptionsDataCollector.BottomOffset = bottomOffset;}
 
-    private static String getsetTemperature() {if(setTemperature == null){return "";}else{return setTemperature;}}
-    public static void setsetTemperature(String setTemperature) {OptionsDataCollector.setTemperature = setTemperature;}
+    private static String getSetTemperature() {if(setTemperature == null){return "";}else{return setTemperature;}}
+    public static void setSetTemperature(String setTemperature) {OptionsDataCollector.setTemperature = setTemperature;}
 
     private static CheckBox getUseTemperatureModule(){return useTemperatureModule;}
     public static void setUseTemperatureModule(CheckBox useTemperatureModule){OptionsDataCollector.useTemperatureModule = useTemperatureModule;}
@@ -146,11 +211,5 @@ public class OptionsDataCollector {
     private static CheckBox getExcludeChrY() {return excludeChrY;}
     public static void setExcludeChrY(CheckBox excludeChrY) {OptionsDataCollector.excludeChrY = excludeChrY;}
 
-    private static CheckBox getWriteMapFile() {
-        return writeMapFile;
-    }
-    public static void setWriteMapFile(CheckBox writeMapFile) {
-        OptionsDataCollector.writeMapFile = writeMapFile;
-    }
 
 }
