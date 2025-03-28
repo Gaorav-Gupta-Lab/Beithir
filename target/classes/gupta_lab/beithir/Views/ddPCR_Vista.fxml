@@ -72,7 +72,7 @@
                                         <Font size="20.0" />
                                     </font>
                                     <tooltip>
-                                        <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
+                                        <Tooltip text="A1-H12.  Should be P300 pipettor." />
                                     </tooltip>
                                 </TextField>
                                 <Line endX="1276.0" layoutX="112.0" layoutY="195.0" startX="-100.0" strokeWidth="4.0" />
@@ -88,6 +88,9 @@
                                     <font>
                                         <Font size="20.0" />
                                     </font>
+                           <tooltip>
+                              <Tooltip text="A1-H12.  Should be P20 Pipettor" />
+                           </tooltip>
                                 </TextField>
                                 <Label layoutX="962.0" layoutY="229.0" prefHeight="27.0" prefWidth="135.0" text="--BottomOffset">
                                     <font>
@@ -146,7 +149,7 @@
                               <Font size="20.0" />
                            </font>
                            <tooltip>
-                              <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
+                              <Tooltip text="Slot for destination plate.  Integer. 1-11" />
                            </tooltip>
                         </TextField>
                         <Label layoutX="54.0" layoutY="478.0" prefHeight="30.0" prefWidth="149.0" text="--PCR_PlateSlot">
@@ -162,7 +165,7 @@
                               <Font size="20.0" />
                            </font>
                            <tooltip>
-                              <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
+                              <Tooltip text="Slot for dilution tubes/plate.  Integer 1-11" />
                            </tooltip>
                         </TextField>
                         <Label layoutX="475.0" layoutY="479.0" prefHeight="30.0" prefWidth="177.0" text="--DilutionPlateSlot">
@@ -178,7 +181,7 @@
                               <Font size="20.0" />
                            </font>
                            <tooltip>
-                              <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
+                              <Tooltip text="Slot for all the reagents.  Integer 1-11" />
                            </tooltip>
                         </TextField>
                         <Label layoutX="961.0" layoutY="478.0" prefHeight="30.0" prefWidth="133.0" text="--ReagentSlot">
@@ -194,7 +197,7 @@
                               <Font size="20.0" />
                            </font>
                            <tooltip>
-                              <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
+                              <Tooltip text="Well for water.  A1-A6, B1-B6..." />
                            </tooltip>
                         </TextField>
                         <Label layoutX="55.0" layoutY="573.0" prefHeight="30.0" prefWidth="149.0" text="--WaterResWell">
@@ -210,7 +213,7 @@
                               <Font size="20.0" />
                            </font>
                            <tooltip>
-                              <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
+                              <Tooltip text="uL of water in tube.  Integer, eg 1500" />
                            </tooltip>
                         </TextField>
                         <Label layoutX="507.0" layoutY="573.0" prefHeight="30.0" prefWidth="141.0" text="--WaterResVol">
@@ -226,7 +229,7 @@
                               <Font size="20.0" />
                            </font>
                            <tooltip>
-                              <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
+                              <Tooltip text="Final volume in PCR well, uL.  Default is 25" />
                            </tooltip>
                         </TextField>
                         <Label layoutX="947.0" layoutY="573.0" prefHeight="30.0" prefWidth="138.0" text="--PCR_Volume">
@@ -242,7 +245,7 @@
                               <Font size="20.0" />
                            </font>
                            <tooltip>
-                              <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
+                              <Tooltip text="uL of Master Mix per well.  Float, eg 16.5" />
                            </tooltip>
                         </TextField>
                         <Label layoutX="188.0" layoutY="692.0" prefHeight="27.0" prefWidth="189.0" text="--MasterMixPerRxn">
@@ -258,7 +261,7 @@
                               <Font size="20.0" />
                            </font>
                            <tooltip>
-                              <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
+                              <Tooltip text="ng of DNA per well.  Integer, eg 40" />
                            </tooltip>
                         </TextField>
                         <Label layoutX="648.0" layoutY="692.0" prefHeight="30.0" prefWidth="177.0" text="--DNA_in_Reaction">
@@ -410,14 +413,20 @@
                            <font>
                               <Font size="20.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip text="Name of Target, TMEJ-AAG + NHEJ" />
+                           </tooltip>
                         </TextField>
-                        <TextField fx:id="target1Well" layoutX="657.0" layoutY="110.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
+                        <TextField fx:id="target1Well" layoutX="657.0" layoutY="110.0" prefHeight="25.0" prefWidth="100.0" promptText="T1 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
                               <Font size="20.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip text="Well in Reagent Slot holding this tube." />
+                           </tooltip>
                         </TextField>
                         <TextField fx:id="target1Volume" layoutX="773.0" layoutY="110.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
                            <effect>
@@ -426,6 +435,9 @@
                            <font>
                               <Font size="20.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip text="uL of Target Reagent in tube.  Float, eg 455.4" />
+                           </tooltip>
                         </TextField>
                         <Label layoutX="317.0" layoutY="177.0" text="--Target 2">
                            <font>
@@ -440,7 +452,7 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target2Well" layoutX="657.0" layoutY="170.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
+                        <TextField fx:id="target2Well" layoutX="657.0" layoutY="170.0" prefHeight="25.0" prefWidth="100.0" promptText="T2 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -448,7 +460,7 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target2Volume" layoutX="773.0" layoutY="170.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target2Volume" layoutX="773.0" layoutY="170.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 2 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -469,7 +481,7 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target3Well" layoutX="657.0" layoutY="230.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
+                        <TextField fx:id="target3Well" layoutX="657.0" layoutY="230.0" prefHeight="25.0" prefWidth="100.0" promptText="T3 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -477,7 +489,7 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target3Volume" layoutX="773.0" layoutY="230.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target3Volume" layoutX="773.0" layoutY="230.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 3 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -498,7 +510,7 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target4Well" layoutX="657.0" layoutY="290.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
+                        <TextField fx:id="target4Well" layoutX="657.0" layoutY="290.0" prefHeight="25.0" prefWidth="100.0" promptText="T4 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -506,7 +518,7 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target4Volume" layoutX="773.0" layoutY="290.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target4Volume" layoutX="773.0" layoutY="290.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 4 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -527,7 +539,7 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target5Well" layoutX="657.0" layoutY="350.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
+                        <TextField fx:id="target5Well" layoutX="657.0" layoutY="350.0" prefHeight="25.0" prefWidth="100.0" promptText="T5 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -535,7 +547,7 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target5Volume" layoutX="773.0" layoutY="350.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target5Volume" layoutX="773.0" layoutY="350.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 5 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -556,7 +568,7 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target6Well" layoutX="657.0" layoutY="410.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
+                        <TextField fx:id="target6Well" layoutX="657.0" layoutY="410.0" prefHeight="25.0" prefWidth="100.0" promptText="T6 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -564,7 +576,7 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target6Volume" layoutX="773.0" layoutY="410.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target6Volume" layoutX="773.0" layoutY="410.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 6 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -585,7 +597,7 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target7Well" layoutX="657.0" layoutY="470.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
+                        <TextField fx:id="target7Well" layoutX="657.0" layoutY="470.0" prefHeight="25.0" prefWidth="100.0" promptText="T7 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -593,7 +605,7 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target7Volume" layoutX="773.0" layoutY="470.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target7Volume" layoutX="773.0" layoutY="470.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 7 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -614,7 +626,7 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target8Well" layoutX="657.0" layoutY="530.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
+                        <TextField fx:id="target8Well" layoutX="657.0" layoutY="530.0" prefHeight="25.0" prefWidth="100.0" promptText="T8 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -622,7 +634,7 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target8Volume" layoutX="773.0" layoutY="530.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target8Volume" layoutX="773.0" layoutY="530.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 8 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -643,7 +655,7 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target9Well" layoutX="657.0" layoutY="590.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
+                        <TextField fx:id="target9Well" layoutX="657.0" layoutY="590.0" prefHeight="25.0" prefWidth="100.0" promptText="T9 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -651,7 +663,7 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target9Volume" layoutX="773.0" layoutY="590.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target9Volume" layoutX="773.0" layoutY="590.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 9 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -672,7 +684,7 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target10Well" layoutX="657.0" layoutY="650.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
+                        <TextField fx:id="target10Well" layoutX="657.0" layoutY="650.0" prefHeight="25.0" prefWidth="100.0" promptText="T10 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -680,7 +692,7 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target10Volume" layoutX="773.0" layoutY="650.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target10Volume" layoutX="773.0" layoutY="650.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 10 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -702,8 +714,8 @@
                      <children>
                         <TableView fx:id="sampleTable" editable="true" layoutX="11.0" layoutY="198.0" prefHeight="638.0" prefWidth="1380.0">
                           <columns>
-                            <TableColumn fx:id="sampleSlot" prefWidth="80.0" text="Slot" />
-                            <TableColumn fx:id="sampleWell" prefWidth="104.0" text="Well" />
+                              <TableColumn fx:id="sampleSlot" prefWidth="80.0" text="Slot" />
+                              <TableColumn fx:id="sampleWell" prefWidth="104.0" text="Well" />
                               <TableColumn fx:id="sampleName" prefWidth="840.0" text="Sample Name" />
                               <TableColumn fx:id="sampleConcentration" prefWidth="115.0" text="Concentration" />
                               <TableColumn fx:id="sampleTargets" prefWidth="128.0" text="Targets" />
@@ -720,48 +732,66 @@
                            <effect>
                               <InnerShadow />
                            </effect>
+                           <tooltip>
+                              <Tooltip text="Integer, 1 - 10" />
+                           </tooltip>
                         </TextField>
-                        <TextField fx:id="addSampleWell" layoutX="106.0" layoutY="144.0" prefHeight="25.0" prefWidth="80.0" promptText="Well">
+                        <TextField fx:id="addSampleWell" layoutX="115.0" layoutY="144.0" prefHeight="25.0" prefWidth="80.0" promptText="Well">
                            <font>
                               <Font size="20.0" />
                            </font>
                            <effect>
                               <InnerShadow />
                            </effect>
+                           <tooltip>
+                              <Tooltip text="Example: A1-A6; B1-B6" />
+                           </tooltip>
                         </TextField>
-                        <TextField fx:id="addSampleName" layoutX="205.0" layoutY="144.0" prefHeight="43.0" prefWidth="581.0" promptText="Sample Name">
+                        <TextField fx:id="addSampleName" layoutX="300.0" layoutY="144.0" prefHeight="43.0" prefWidth="581.0" promptText="Sample Name">
                            <font>
                               <Font size="20.0" />
                            </font>
                            <effect>
                               <InnerShadow />
                            </effect>
+                           <tooltip>
+                              <Tooltip text="This is used to label the plate layout" />
+                           </tooltip>
                         </TextField>
-                        <TextField fx:id="addSampleConcentration" layoutX="1045.0" layoutY="154.0" prefHeight="25.0" prefWidth="115.0" promptText="Concentration ng/uL">
+                        <TextField fx:id="addSampleConcentration" layoutX="947.0" layoutY="144.0" prefHeight="43.0" prefWidth="202.0" promptText="Concentration ng/uL">
                            <font>
                               <Font size="20.0" />
                            </font>
                            <effect>
                               <InnerShadow />
                            </effect>
+                           <tooltip>
+                              <Tooltip text="Float eg 35.4 ng/uL.  DO NOT include units" />
+                           </tooltip>
                         </TextField>
-                        <TextField fx:id="addSampleTargets" layoutX="1160.0" layoutY="154.0" prefHeight="25.0" prefWidth="128.0" promptText="Targets">
+                        <TextField fx:id="addSampleTargets" layoutX="1155.0" layoutY="144.0" prefHeight="25.0" prefWidth="128.0" promptText="Targets">
                            <font>
                               <Font size="20.0" />
                            </font>
                            <effect>
                               <InnerShadow />
                            </effect>
+                           <tooltip>
+                              <Tooltip text="Targets written a 1,2,3 for Targets 1, 2, 3" />
+                           </tooltip>
                         </TextField>
-                        <TextField fx:id="addSampleReplicates" layoutX="1288.0" layoutY="154.0" prefHeight="43.0" prefWidth="99.0" promptText="Replicates">
+                        <TextField fx:id="addSampleReplicates" layoutX="1288.0" layoutY="144.0" prefHeight="43.0" prefWidth="104.0" promptText="Replicates">
                            <font>
                               <Font size="20.0" />
                            </font>
                            <effect>
                               <InnerShadow />
                            </effect>
+                           <tooltip>
+                              <Tooltip text="How many technical replicates.  Integer." />
+                           </tooltip>
                         </TextField>
-                        <Button fx:id="addSampleInformationButton" layoutX="305.0" layoutY="53.0" mnemonicParsing="false" text="Add Sample Information">
+                        <Button fx:id="addSampleInformationButton" layoutX="386.0" layoutY="58.0" mnemonicParsing="false" text="Add Sample Information">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -769,7 +799,7 @@
                               <InnerShadow />
                            </effect>
                         </Button>
-                        <Button fx:id="deleteSampleRowButton" layoutX="683.0" layoutY="53.0" mnemonicParsing="false" text="Delete Selected Row">
+                        <Button fx:id="deleteSampleRowButton" layoutX="764.0" layoutY="58.0" mnemonicParsing="false" text="Delete Selected Row">
                            <font>
                               <Font size="24.0" />
                            </font>

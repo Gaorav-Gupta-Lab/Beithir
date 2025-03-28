@@ -3,7 +3,7 @@
  * Package loosely based on GitHub Gist (https://gist.github.com/jewelsea/6460130).
  * @author Dennis A. Simpson
  * @since March 2025
- * @version 0.5.0
+ * @version 0.8.0
  */
 
 package gupta_lab.beithir;
@@ -15,8 +15,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class MainApp extends Application {
+    private static final String VISTA_CSS_PATH = "/gupta_lab/beithir/Views/vista.css";
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -27,13 +29,12 @@ public class MainApp extends Application {
 
     private Scene createScene(Pane mainPane) {
         // Ensure the resource path is correct
-        String resourcePath = "/gupta_lab/beithir/Views/vista.css";
-        if (getClass().getResource(resourcePath) == null) {
-            throw new IllegalArgumentException("stylesheet resource not found at: " + resourcePath);
+        if (getClass().getResource(VISTA_CSS_PATH) == null) {
+            throw new IllegalArgumentException("stylesheet resource not found at: " + VISTA_CSS_PATH);
         }
 
         Scene scene = new Scene(mainPane);
-        scene.getStylesheets().setAll(getClass().getResource(resourcePath).toExternalForm());
+        scene.getStylesheets().setAll(Objects.requireNonNull(getClass().getResource(VISTA_CSS_PATH)).toExternalForm());
 
         return scene;
     }

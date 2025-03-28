@@ -3,13 +3,13 @@
  * Package loosely based on GitHub Gist (https://gist.github.com/jewelsea/6460130).
  * @author Dennis A. Simpson
  * @since March 2025
- * @version 0.5.0
+ * @version 0.8.0
  */
 
 package gupta_lab.beithir.Controllers;
 
+import gupta_lab.beithir.Models.ddPCR_OptionsDataCollector;
 import gupta_lab.beithir.VistaNavigator;
-import gupta_lab.beithir.Models.OptionsDataCollector;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
@@ -30,12 +30,11 @@ public class MainController {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
         fileChooser.getExtensionFilters().add(extFilter);
-
-        fileChooser.setInitialFileName(OptionsDataCollector.fileName() + ".tsv");
+        fileChooser.setInitialFileName(ddPCR_OptionsDataCollector.fileName() + ".tsv");
         try{
             BufferedWriter bw = Files.newBufferedWriter(fileChooser.showSaveDialog(
                     this.vistaHolder.getScene().getWindow()).toPath());
-            bw.write(OptionsDataCollector.generateOptionsFile());
+            bw.write(ddPCR_OptionsDataCollector.generateOptionsFile());
             bw.close();
         }catch (NullPointerException e){
             //If the user cancels the save, BufferWriter returns a null exception that can be safely ignored.
