@@ -1,14 +1,13 @@
 /**
  * Vista Controller for Beithir ddPCR views
- * Package based on GitHub Gist (https://gist.github.com/jewelsea/6460130).
+ * Package loosely based on GitHub Gist (https://gist.github.com/jewelsea/6460130).
  * @author Dennis A. Simpson
  * @since March 2025
- * @version 0.1.1
+ * @version 0.5.0
  */
 
 package gupta_lab.beithir.Controllers;
 
-import com.almasb.fxgl.dsl.KeyInputBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
@@ -29,8 +28,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import org.apache.commons.lang3.StringUtils;
 
-
 public class ddPCR_VistaController implements Initializable{
+    //Required Parameters tab
+    @FXML private TextField versionNumber;
     @FXML private TextField userName;
     @FXML private DatePicker runDate;
     @FXML private TextField LeftPipetteFirstTip;
@@ -38,6 +38,16 @@ public class ddPCR_VistaController implements Initializable{
     @FXML private TextField BottomOffset;
     @FXML private CheckBox useTemperatureModule;
     @FXML private TextField setTemperature;
+    @FXML private TextField pcrPlateSlot;
+    @FXML private TextField dilutionPlateSlot;
+    @FXML private TextField reagentSlot;
+    @FXML private TextField waterReservoirWell;
+    @FXML private TextField waterResVol;
+    @FXML private TextField prcVolume;
+    @FXML private TextField masterMixPerRxn;
+    @FXML private TextField dnaPerWell;
+
+    //Deck Layout Tab
     @FXML private ComboBox<String> Slot1;
     @FXML private ComboBox<String> Slot2;
     @FXML private ComboBox<String> Slot3;
@@ -49,6 +59,8 @@ public class ddPCR_VistaController implements Initializable{
     @FXML private ComboBox<String> Slot9;
     @FXML private ComboBox<String> Slot10;
     @FXML private ComboBox<String> Slot11;
+
+    //Target Information Tab
     @FXML private TextField target1Name;
     @FXML private TextField target2Name;
     @FXML private TextField target3Name;
@@ -59,6 +71,8 @@ public class ddPCR_VistaController implements Initializable{
     @FXML private TextField target8Name;
     @FXML private TextField target9Name;
     @FXML private TextField target10Name;
+
+    //Sample Information Tab
     @FXML private TableView sampleTable;
     @FXML private TableColumn sampleSlot;
     @FXML private TableColumn sampleWell;
@@ -74,19 +88,251 @@ public class ddPCR_VistaController implements Initializable{
     @FXML private TextField addSampleReplicates;
     @FXML private Button addSampleInformationButton;
     @FXML private Button deleteSampleRowButton;
-    private abstract gettable;
-
 
     private final PseudoClass errorClass = PseudoClass.getPseudoClass("error");
+    private final ObservableList<OptionsDataCollector> sampleData = FXCollections.observableArrayList();
+
+    /*
+    * debugging code to add some data to the sampleTable.  Will remove in future version.
+    *
     private final ObservableList<OptionsDataCollector> sampleData = FXCollections.observableArrayList(
             new OptionsDataCollector(
                     "Slot", "Well", "My Awesome  Sample",
                     "27.9", "1,2", "1")
     );
-
+    */
 
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
+
+        OptionsDataCollector.setVersionString(versionNumber.getText());
+        userName.pseudoClassStateChanged(errorClass, true);
+        OptionsDataCollector.setRunModule("#ddPCR Parameters\t");
+
+        runDate.setOnAction(_ -> OptionsDataCollector.getRunDate(runDate.getValue().toString()));
+
+        userName.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(userName.getText()) && textValidate(userName.getText())) {
+                userName.pseudoClassStateChanged(errorClass, false);
+                OptionsDataCollector.setUserName(userName.getText());
+            } else {
+                userName.pseudoClassStateChanged(errorClass, true);
+                OptionsDataCollector.setUserName(userName.getText());
+            }
+        });
+
+        if (StringUtils.isNotEmpty(LeftPipetteFirstTip.getText()) && textValidate(LeftPipetteFirstTip.getText())) {
+            LeftPipetteFirstTip.pseudoClassStateChanged(errorClass, false);
+            OptionsDataCollector.setLeftPipetteFirstTip(LeftPipetteFirstTip.getText());
+
+        } else {
+            LeftPipetteFirstTip.pseudoClassStateChanged(errorClass, true);
+            OptionsDataCollector.setLeftPipetteFirstTip(LeftPipetteFirstTip.getText());
+        }
+
+        if (StringUtils.isNotEmpty(RightPipetteFirstTip.getText()) && textValidate(RightPipetteFirstTip.getText())) {
+            RightPipetteFirstTip.pseudoClassStateChanged(errorClass, false);
+            OptionsDataCollector.setRightPipetteFirstTip(RightPipetteFirstTip.getText());
+        } else {
+            RightPipetteFirstTip.pseudoClassStateChanged(errorClass, true);
+            OptionsDataCollector.setRightPipetteFirstTip(RightPipetteFirstTip.getText());
+        }
+
+        if (!StringUtils.isNotEmpty(BottomOffset.getText()) && numberValidate(BottomOffset.getText())) {
+            BottomOffset.pseudoClassStateChanged(errorClass, false);
+            OptionsDataCollector.setBottomOffset(BottomOffset.getText());
+        } else {
+            BottomOffset.pseudoClassStateChanged(errorClass, true);
+            OptionsDataCollector.setBottomOffset(BottomOffset.getText());
+        }
+
+//      Selection for use of Temperature Module.  Set Temperature field is only active when module is selected for use.
+        useTemperatureModule.setSelected(false);
+        setTemperature.disableProperty().bind(useTemperatureModule.selectedProperty().not());
+        OptionsDataCollector.setUseTemperatureModule(useTemperatureModule);
+        setTemperature.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isNotEmpty(setTemperature.getText()) && textValidate(setTemperature.getText())) {
+                setTemperature.pseudoClassStateChanged(errorClass, false);
+                OptionsDataCollector.setSetTemperature(setTemperature.getText());
+            } else {
+                setTemperature.pseudoClassStateChanged(errorClass, true);
+                OptionsDataCollector.setSetTemperature(setTemperature.getText());
+            }
+        });
+
+        pcrPlateSlot.textProperty().addListener((observable, oldValue, newValue) -> {
+            OptionsDataCollector.setPCR_PlateSlot(pcrPlateSlot.getText());
+        });
+
+        dilutionPlateSlot.textProperty().addListener((observable, oldValue, newValue) -> {
+            OptionsDataCollector.setDilutionPlateSlot(dilutionPlateSlot.getText());
+        });
+
+        reagentSlot.textProperty().addListener((observable, oldValue, newValue) -> {
+            OptionsDataCollector.setReagentSlot(reagentSlot.getText());
+        });
+
+        waterReservoirWell.textProperty().addListener((observable, oldValue, newValue) -> {
+            OptionsDataCollector.setWaterReservoirWell(waterReservoirWell.getText());
+        });
+
+        waterResVol.textProperty().addListener((observable, oldValue, newValue) -> {
+            OptionsDataCollector.setWaterResVol(waterResVol.getText());
+        });
+
+        prcVolume.textProperty().addListener((observable, oldValue, newValue) -> {
+            OptionsDataCollector.setPCR_Volume(prcVolume.getText());
+        });
+
+        masterMixPerRxn.textProperty().addListener((observable, oldValue, newValue) -> {
+            OptionsDataCollector.setMasterMixPerRxn(masterMixPerRxn.getText());
+        });
+
+        dnaPerWell.textProperty().addListener((observable, oldValue, newValue) -> {
+            OptionsDataCollector.setDNAPerWell(dnaPerWell.getText());
+        });
+
+       /*
+       * Beginning the code for the "Samples" Tab. This handles the display and editing of the table.
+       */
+        String[] SlotLabware = {
+                "8_well_strip_tubes_200ul",
+                "bigwell_96_tuberack_200ul_dilution_tube",
+                "stacked_96_well",
+                "biorad_ddpcr_plate_aluminum_block_100ul",
+                "eppendorftwin.tecpcrplates_96_aluminumblock_150ul",
+                "parhelia_temp_module_with_biorad_ddpcr_plate_100ul",
+                "parhelia_temp_module_with_twintec_ddpcr_plate_150ul",
+                "opentrons_96_tiprack_300ul",
+                "opentrons_96_filtertiprack_200ul",
+                "opentrons_96_tiprack_20ul",
+                "opentrons_96_filtertiprack_20ul",
+                "screwcap_24_tuberack_500ul",
+                "opentrons_24_tuberack_generic_2ml_screwcap",
+                "opentrons_24_tube_rack_vwr_microfuge_tube_1.5ml",
+                "vwrscrewcapcentrifugetube5ml_15_tuberack_5000ul"
+        };
+
+        Slot1.getItems().addAll(SlotLabware);
+        Slot1.setOnAction(_ -> OptionsDataCollector.setSlot1(Slot1.getSelectionModel().getSelectedItem()));
+        Slot2.getItems().addAll(SlotLabware);
+        Slot2.setOnAction(_ -> OptionsDataCollector.setSlot2(Slot2.getSelectionModel().getSelectedItem()));
+        Slot3.getItems().addAll(SlotLabware);
+        Slot3.setOnAction(_ -> OptionsDataCollector.setSlot3(Slot3.getSelectionModel().getSelectedItem()));
+        Slot4.getItems().addAll(SlotLabware);
+        Slot4.setOnAction(_ -> OptionsDataCollector.setSlot4(Slot4.getSelectionModel().getSelectedItem()));
+        Slot5.getItems().addAll(SlotLabware);
+        Slot5.setOnAction(_ -> OptionsDataCollector.setSlot5(Slot5.getSelectionModel().getSelectedItem()));
+        Slot6.getItems().addAll(SlotLabware);
+        Slot6.setOnAction(_ -> OptionsDataCollector.setSlot6(Slot6.getSelectionModel().getSelectedItem()));
+        Slot7.getItems().addAll(SlotLabware);
+        Slot7.setOnAction(_ -> OptionsDataCollector.setSlot7(Slot7.getSelectionModel().getSelectedItem()));
+        Slot8.getItems().addAll(SlotLabware);
+        Slot8.setOnAction(_ -> OptionsDataCollector.setSlot8(Slot8.getSelectionModel().getSelectedItem()));
+        Slot9.getItems().addAll(SlotLabware);
+        Slot9.setOnAction(_ -> OptionsDataCollector.setSlot9(Slot9.getSelectionModel().getSelectedItem()));
+        Slot10.getItems().addAll(SlotLabware);
+        Slot10.setOnAction(_ -> OptionsDataCollector.setSlot10(Slot10.getSelectionModel().getSelectedItem()));
+        Slot11.getItems().addAll(SlotLabware);
+        Slot11.setOnAction(_ -> OptionsDataCollector.setSlot11(Slot11.getSelectionModel().getSelectedItem()));
+
+        /*
+        * Beginning of code for the Target Reagent information.
+        */
+        target1Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(target1Name.getText()) && textValidate(target1Name.getText())) {
+                target1Name.pseudoClassStateChanged(errorClass, false);
+                OptionsDataCollector.setTarget1Name(target1Name.getText());
+            } else {
+                target1Name.pseudoClassStateChanged(errorClass, true);
+                OptionsDataCollector.setTarget1Name(target1Name.getText());
+            }
+        });
+        target2Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(target2Name.getText()) && textValidate(target2Name.getText())) {
+                target2Name.pseudoClassStateChanged(errorClass, false);
+                OptionsDataCollector.setTarget2Name(target2Name.getText());
+            } else {
+                target2Name.pseudoClassStateChanged(errorClass, true);
+                OptionsDataCollector.setTarget2Name(target2Name.getText());
+            }
+        });
+        target3Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(target3Name.getText()) && textValidate(target3Name.getText())) {
+                target3Name.pseudoClassStateChanged(errorClass, false);
+                OptionsDataCollector.setTarget3Name(target3Name.getText());
+            } else {
+                target3Name.pseudoClassStateChanged(errorClass, true);
+                OptionsDataCollector.setTarget3Name(target3Name.getText());
+            }
+        });
+        target4Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(target4Name.getText()) && textValidate(target4Name.getText())) {
+                target4Name.pseudoClassStateChanged(errorClass, false);
+                OptionsDataCollector.setTarget4Name(target4Name.getText());
+            } else {
+                target4Name.pseudoClassStateChanged(errorClass, true);
+                OptionsDataCollector.setTarget4Name(target4Name.getText());
+            }
+        });
+        target5Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(target5Name.getText()) && textValidate(target5Name.getText())) {
+                target5Name.pseudoClassStateChanged(errorClass, false);
+                OptionsDataCollector.setTarget5Name(target5Name.getText());
+            } else {
+                target5Name.pseudoClassStateChanged(errorClass, true);
+                OptionsDataCollector.setTarget5Name(target5Name.getText());
+            }
+        });
+        target6Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(target6Name.getText()) && textValidate(target6Name.getText())) {
+                target6Name.pseudoClassStateChanged(errorClass, false);
+                OptionsDataCollector.setTarget6Name(target6Name.getText());
+            } else {
+                target6Name.pseudoClassStateChanged(errorClass, true);
+                OptionsDataCollector.setTarget6Name(target6Name.getText());
+            }
+        });
+        target7Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(target7Name.getText()) && textValidate(target7Name.getText())) {
+                target7Name.pseudoClassStateChanged(errorClass, false);
+                OptionsDataCollector.setTarget7Name(target7Name.getText());
+            } else {
+                target7Name.pseudoClassStateChanged(errorClass, true);
+                OptionsDataCollector.setTarget7Name(target7Name.getText());
+            }
+        });
+        target8Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(target8Name.getText()) && textValidate(target8Name.getText())) {
+                target8Name.pseudoClassStateChanged(errorClass, false);
+                OptionsDataCollector.setTarget8Name(target8Name.getText());
+            } else {
+                target8Name.pseudoClassStateChanged(errorClass, true);
+                OptionsDataCollector.setTarget8Name(target8Name.getText());
+            }
+        });
+        target9Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(target9Name.getText()) && textValidate(target9Name.getText())) {
+                target9Name.pseudoClassStateChanged(errorClass, false);
+                OptionsDataCollector.setTarget9Name(target9Name.getText());
+            } else {
+                target9Name.pseudoClassStateChanged(errorClass, true);
+                OptionsDataCollector.setTarget9Name(target9Name.getText());
+            }
+        });
+        target10Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(target10Name.getText()) && textValidate(target10Name.getText())) {
+                target10Name.pseudoClassStateChanged(errorClass, false);
+                OptionsDataCollector.setTarget10Name(target10Name.getText());
+            } else {
+                target10Name.pseudoClassStateChanged(errorClass, true);
+                OptionsDataCollector.setTarget10Name(target10Name.getText());
+            }
+        });
+
+        /*
+        * Beginning of code for Sample Table
+        * */
         sampleTable.setEditable(true);
         sampleSlot.setEditable(true);
         sampleWell.setEditable(true);
@@ -147,22 +393,7 @@ public class ddPCR_VistaController implements Initializable{
             }
         });
 
-        // Some debugging stuff.
-        sampleTable.setItems(sampleData);
-        //System.out.println(sampleTable.getAll());
-
-        userName.pseudoClassStateChanged(errorClass, true);
-        OptionsDataCollector.setRunModule("#ddPCR Parameters");
-
-        runDate.setOnAction(e -> {
-            String runDateItem = runDate.getValue().toString();
-            OptionsDataCollector.getRunDate(runDateItem);
-        });
-
-        OptionsDataCollector.processSampleData(sampleTable);
-
-
-        addSampleInformationButton.setOnAction(event -> {
+        addSampleInformationButton.setOnAction(_ -> {
             sampleData.add(new OptionsDataCollector(
                     addSampleSlot.getText(),
                     addSampleWell.getText(),
@@ -179,8 +410,8 @@ public class ddPCR_VistaController implements Initializable{
             addSampleReplicates.clear();
 
             sampleTable.setItems(sampleData);
+            OptionsDataCollector.processSampleData(sampleTable);
         });
-
 
         deleteSampleRowButton.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
             @Override
@@ -189,150 +420,13 @@ public class ddPCR_VistaController implements Initializable{
                 if (selectedRow != null) {
                     sampleData.remove(selectedRow);
                 }
+                OptionsDataCollector.processSampleData(sampleTable);
             }
         });
 
-        userName.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!StringUtils.isBlank(userName.getText()) && textValidate(userName.getText())) {
-                userName.pseudoClassStateChanged(errorClass, false);
-                OptionsDataCollector.setUserName(userName.getText());
-            } else {
-                userName.pseudoClassStateChanged(errorClass, true);
-                OptionsDataCollector.setUserName(userName.getText());
-            }
-        });
-
-        if (StringUtils.isNotEmpty(LeftPipetteFirstTip.getText()) && textValidate(LeftPipetteFirstTip.getText())) {
-            LeftPipetteFirstTip.pseudoClassStateChanged(errorClass, false);
-            OptionsDataCollector.setLeftPipetteFirstTip(LeftPipetteFirstTip.getText());
-
-        } else {
-            LeftPipetteFirstTip.pseudoClassStateChanged(errorClass, true);
-            OptionsDataCollector.setLeftPipetteFirstTip(LeftPipetteFirstTip.getText());
-        }
-
-        if (StringUtils.isNotEmpty(RightPipetteFirstTip.getText()) && textValidate(RightPipetteFirstTip.getText())) {
-
-            RightPipetteFirstTip.pseudoClassStateChanged(errorClass, false);
-            OptionsDataCollector.setRightPipetteFirstTip(RightPipetteFirstTip.getText());
-        } else {
-            RightPipetteFirstTip.pseudoClassStateChanged(errorClass, true);
-            OptionsDataCollector.setRightPipetteFirstTip(RightPipetteFirstTip.getText());
-        }
-
-        if (!StringUtils.isNotEmpty(BottomOffset.getText()) && numberValidate(BottomOffset.getText())) {
-            BottomOffset.pseudoClassStateChanged(errorClass, false);
-            OptionsDataCollector.setBottomOffset(BottomOffset.getText());
-        } else {
-            BottomOffset.pseudoClassStateChanged(errorClass, true);
-            OptionsDataCollector.setBottomOffset(BottomOffset.getText());
-        }
-
-        OptionsDataCollector.setUseTemperatureModule(useTemperatureModule);
-
-
-        setTemperature.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!StringUtils.isNotEmpty(setTemperature.getText()) && textValidate(setTemperature.getText())) {
-                setTemperature.pseudoClassStateChanged(errorClass, false);
-                OptionsDataCollector.setSetTemperature(setTemperature.getText());
-            } else {
-                setTemperature.pseudoClassStateChanged(errorClass, true);
-                OptionsDataCollector.setSetTemperature(setTemperature.getText());
-            }
-        });
-
-        String[] SlotLabware = {
-                "8_well_strip_tubes_200ul",
-                "bigwell_96_tuberack_200ul_dilution_tube",
-                "stacked_96_well",
-                "biorad_ddpcr_plate_aluminum_block_100ul",
-                "eppendorftwin.tecpcrplates_96_aluminumblock_150ul",
-                "parhelia_temp_module_with_biorad_ddpcr_plate_100ul",
-                "parhelia_temp_module_with_twintec_ddpcr_plate_150ul",
-                "opentrons_96_tiprack_300ul",
-                "opentrons_96_filtertiprack_200ul",
-                "opentrons_96_tiprack_20ul",
-                "opentrons_96_filtertiprack_20ul",
-                "screwcap_24_tuberack_500ul",
-                "opentrons_24_tuberack_generic_2ml_screwcap",
-                "opentrons_24_tube_rack_vwr_microfuge_tube_1.5ml",
-                "vwrscrewcapcentrifugetube5ml_15_tuberack_5000ul"
-        };
-
-        Slot1.getItems().addAll(SlotLabware);
-        Slot1.setOnAction(e -> {
-            String Slot1Item = Slot1.getSelectionModel().getSelectedItem().toString();
-            OptionsDataCollector.setSlot1(Slot1Item);
-        });
-
-        Slot2.getItems().addAll(SlotLabware);
-        Slot2.setOnAction(e -> {
-            String Slot2Item = Slot2.getSelectionModel().getSelectedItem().toString();
-            OptionsDataCollector.setSlot2(Slot2Item);
-        });
-        Slot3.getItems().addAll(SlotLabware);
-        Slot3.setOnAction(e -> {
-            String Slot3Item = Slot3.getSelectionModel().getSelectedItem().toString();
-            OptionsDataCollector.setSlot3(Slot3Item);
-        });
-        Slot4.getItems().addAll(SlotLabware);
-        Slot4.setOnAction(e -> {
-            String Slot4Item = Slot4.getSelectionModel().getSelectedItem().toString();
-            OptionsDataCollector.setSlot4(Slot4Item);
-        });
-        Slot5.getItems().addAll(SlotLabware);
-        Slot5.setOnAction(e -> {
-            String Slot5Item = Slot5.getSelectionModel().getSelectedItem().toString();
-            OptionsDataCollector.setSlot5(Slot5Item);
-        });
-        Slot6.getItems().addAll(SlotLabware);
-        Slot6.setOnAction(e -> {
-            String Slot6Item = Slot6.getSelectionModel().getSelectedItem().toString();
-            OptionsDataCollector.setSlot6(Slot6Item);
-        });
-        Slot7.getItems().addAll(SlotLabware);
-        Slot7.setOnAction(e -> {
-            String Slot7Item = Slot7.getSelectionModel().getSelectedItem().toString();
-            OptionsDataCollector.setSlot7(Slot7Item);
-        });
-        Slot8.getItems().addAll(SlotLabware);
-        Slot8.setOnAction(e -> {
-            String Slot8Item = Slot8.getSelectionModel().getSelectedItem().toString();
-            OptionsDataCollector.setSlot8(Slot8Item);
-        });
-        Slot9.getItems().addAll(SlotLabware);
-        Slot9.setOnAction(e -> {
-            String Slot9Item = Slot9.getSelectionModel().getSelectedItem().toString();
-            OptionsDataCollector.setSlot9(Slot9Item);
-        });
-        Slot10.getItems().addAll(SlotLabware);
-        Slot10.setOnAction(e -> {
-            String Slot10Item = Slot10.getSelectionModel().getSelectedItem().toString();
-            OptionsDataCollector.setSlot10(Slot10Item);
-        });
-        Slot11.getItems().addAll(SlotLabware);
-        Slot11.setOnAction(e -> {
-            String Slot11Item = Slot11.getSelectionModel().getSelectedItem().toString();
-            OptionsDataCollector.setSlot11(Slot11Item);
-        });
-        target1Name.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!StringUtils.isBlank(target1Name.getText()) && textValidate(target1Name.getText())) {
-                target1Name.pseudoClassStateChanged(errorClass, false);
-                OptionsDataCollector.setTarget1Name(target1Name.getText());
-            } else {
-                target1Name.pseudoClassStateChanged(errorClass, true);
-                OptionsDataCollector.setTarget1Name(target1Name.getText());
-            }
-        });
-        target2Name.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!StringUtils.isBlank(target2Name.getText()) && textValidate(target2Name.getText())) {
-                target2Name.pseudoClassStateChanged(errorClass, false);
-                OptionsDataCollector.setTarget2Name(target2Name.getText());
-            } else {
-                target2Name.pseudoClassStateChanged(errorClass, true);
-                OptionsDataCollector.setTarget2Name(target2Name.getText());
-            }
+        sampleTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Sample Table Listeners: ");
+            OptionsDataCollector.processSampleData(sampleTable);
         });
     }
 }
-

@@ -1,3 +1,11 @@
+/**
+ * Main Controller for Beithir views
+ * Package loosely based on GitHub Gist (https://gist.github.com/jewelsea/6460130).
+ * @author Dennis A. Simpson
+ * @since March 2025
+ * @version 0.5.0
+ */
+
 package gupta_lab.beithir.Controllers;
 
 import gupta_lab.beithir.VistaNavigator;
@@ -22,10 +30,11 @@ public class MainController {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
         fileChooser.getExtensionFilters().add(extFilter);
-        fileChooser.setInitialFileName("Test.tsv");
+
+        fileChooser.setInitialFileName(OptionsDataCollector.fileName() + ".tsv");
         try{
-            BufferedWriter bw = Files.newBufferedWriter((fileChooser.showSaveDialog(
-                    this.vistaHolder.getScene().getWindow())).toPath());
+            BufferedWriter bw = Files.newBufferedWriter(fileChooser.showSaveDialog(
+                    this.vistaHolder.getScene().getWindow()).toPath());
             bw.write(OptionsDataCollector.generateOptionsFile());
             bw.close();
         }catch (NullPointerException e){

@@ -1,9 +1,9 @@
 /**
  * Main entry point for Beithir
- * Package based on GitHub Gist (https://gist.github.com/jewelsea/6460130).
+ * Package loosely based on GitHub Gist (https://gist.github.com/jewelsea/6460130).
  * @author Dennis A. Simpson
  * @since March 2025
- * @version 0.1.1
+ * @version 0.5.0
  */
 
 package gupta_lab.beithir;
@@ -14,7 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class MainApp extends Application {

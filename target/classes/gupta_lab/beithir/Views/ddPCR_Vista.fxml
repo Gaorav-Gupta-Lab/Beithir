@@ -18,6 +18,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane minHeight="200.0" minWidth="300.0" prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gupta_lab.beithir.Controllers.ddPCR_VistaController">
@@ -27,105 +28,255 @@
             <tabs>
                 <Tab styleClass="Tab" text="Required Parameters">
                     <content>
-                        <AnchorPane prefHeight="430.0" prefWidth="1400.0">
+                        <AnchorPane prefHeight="871.0" prefWidth="1389.0">
                             <children>
-                                <Label layoutX="29.0" layoutY="135.0" prefHeight="27.0" prefWidth="62.0" text="--User">
-                                    <font>
-                                        <Font size="20.0" />
-                                    </font>
-                                </Label>
-                                <TextField fx:id="userName" layoutX="104.0" layoutY="129.0" prefHeight="25.0" prefWidth="217.0" promptText="Your Name">
-                                    <effect>
-                                        <InnerShadow />
-                                    </effect>
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </TextField>
-                                <DatePicker fx:id="runDate" layoutX="485.0" layoutY="129.0" prefHeight="39.0" prefWidth="217.0">
-                                    <effect>
-                                        <InnerShadow />
-                                    </effect>
-                                </DatePicker>
-                                <Label layoutX="398.0" layoutY="135.0" text="Run Date">
-                                    <font>
-                                        <Font size="20.0" />
-                                    </font>
-                                </Label>
-                                <Label layoutX="30.0" layoutY="229.0" prefHeight="27.0" prefWidth="189.0" text="--LeftPipetteFirstTip">
-                                    <font>
-                                        <Font size="20.0" />
-                                    </font>
-                                </Label>
-                                <TextField fx:id="LeftPipetteFirstTip" layoutX="199.0" layoutY="223.0" prefHeight="25.0" prefWidth="217.0" promptText="Location of First Tip for Left Pipette" text="A1">
-                                    <effect>
-                                        <InnerShadow />
-                                    </effect>
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                    <tooltip>
-                                        <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
-                                    </tooltip>
-                                </TextField>
-                                <Line endX="1276.0" layoutX="112.0" layoutY="195.0" startX="-100.0" />
-                                <Label layoutX="458.0" layoutY="229.0" prefHeight="27.0" prefWidth="171.0" text="--RightPipetteFirstTip">
-                                    <font>
-                                        <Font size="20.0" />
-                                    </font>
-                                </Label>
-                                <TextField fx:id="RightPipetteFirstTip" layoutX="640.0" layoutY="223.0" prefHeight="25.0" prefWidth="217.0" promptText="Location of First Tip for Right Pipette" text="A1">
-                                    <effect>
-                                        <InnerShadow />
-                                    </effect>
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </TextField>
-                                <Label layoutX="880.0" layoutY="229.0" prefHeight="27.0" prefWidth="135.0" text="--BottomOffset">
-                                    <font>
-                                        <Font size="20.0" />
-                                    </font>
-                                </Label>
-                                <TextField fx:id="BottomOffset" layoutX="1015.0" layoutY="223.0" prefHeight="39.0" prefWidth="116.0" promptText="Bottom Offset in mm" text="1.0">
-                                    <effect>
-                                        <InnerShadow />
-                                    </effect>
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </TextField>
-                                <Label alignment="CENTER" layoutX="4.0" layoutY="10.0" prefHeight="53.0" prefWidth="1187.0" text="Initial Setup Information for ddPCR" textAlignment="CENTER" textFill="#0e11d7">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ffaf" height="200.0" layoutX="13.0" layoutY="210.0" stroke="BLACK" strokeType="INSIDE" width="1370.0" />
+                                <Label alignment="CENTER" layoutX="4.0" layoutY="10.0" prefHeight="53.0" prefWidth="1391.0" text="Initial Setup Information for ddPCR" textAlignment="CENTER" textFill="#0e11d7">
                                     <font>
                                         <Font size="36.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="31.0" layoutY="339.0" prefHeight="27.0" prefWidth="220.0" text="--UseTemperatureModule">
+                                <Label layoutX="160.0" layoutY="135.0" prefHeight="27.0" prefWidth="62.0" text="--User">
                                     <font>
                                         <Font size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="setTemperature" layoutX="613.0" layoutY="333.0" prefHeight="25.0" prefWidth="217.0" promptText="Set Temperature">
+                                <TextField fx:id="userName" layoutX="235.0" layoutY="129.0" prefHeight="25.0" prefWidth="217.0" promptText="Your Name">
                                     <effect>
                                         <InnerShadow />
                                     </effect>
                                     <font>
-                                        <Font size="18.0" />
+                                        <Font size="20.0" />
+                                    </font>
+                                </TextField>
+                                <DatePicker fx:id="runDate" layoutX="613.0" layoutY="131.0" prefHeight="39.0" prefWidth="217.0">
+                                    <effect>
+                                        <InnerShadow />
+                                    </effect>
+                                </DatePicker>
+                                <Label layoutX="522.0" layoutY="135.0" text="Run Date">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="51.0" layoutY="229.0" prefHeight="27.0" prefWidth="189.0" text="--LeftPipetteFirstTip">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="LeftPipetteFirstTip" layoutX="233.0" layoutY="223.0" prefHeight="25.0" prefWidth="217.0" promptText="Location of First Tip for Left Pipette" text="A1">
+                                    <effect>
+                                        <InnerShadow />
+                                    </effect>
+                                    <font>
+                                        <Font size="20.0" />
                                     </font>
                                     <tooltip>
                                         <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
                                     </tooltip>
                                 </TextField>
-                                <Label layoutX="472.0" layoutY="339.0" prefHeight="27.0" prefWidth="130.0" text="--Temperature">
+                                <Line endX="1276.0" layoutX="112.0" layoutY="195.0" startX="-100.0" strokeWidth="4.0" />
+                                <Label layoutX="479.0" layoutY="229.0" prefHeight="30.0" prefWidth="197.0" text="--RightPipetteFirstTip">
                                     <font>
                                         <Font size="20.0" />
                                     </font>
                                 </Label>
-                        <CheckBox fx:id="useTemperatureModule" layoutX="257.0" layoutY="338.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="17.0" scaleX="1.5" scaleY="1.5" scaleZ="2.0">
+                                <TextField fx:id="RightPipetteFirstTip" layoutX="692.0" layoutY="223.0" prefHeight="25.0" prefWidth="217.0" promptText="Location of First Tip for Right Pipette" text="A1">
+                                    <effect>
+                                        <InnerShadow />
+                                    </effect>
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </TextField>
+                                <Label layoutX="962.0" layoutY="229.0" prefHeight="27.0" prefWidth="135.0" text="--BottomOffset">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="BottomOffset" layoutX="1114.0" layoutY="223.0" prefHeight="39.0" prefWidth="116.0" promptText="Bottom Offset in mm" text="1.0">
+                                    <effect>
+                                        <InnerShadow />
+                                    </effect>
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                           <tooltip>
+                              <Tooltip text="Height of Tip From Bottom in mm.  Float">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip>
+                                </TextField>
+                        <CheckBox fx:id="useTemperatureModule" layoutX="533.0" layoutY="318.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="17.0" scaleX="1.5" scaleY="1.5" scaleZ="2.0">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </CheckBox>
+                                <Label layoutX="289.0" layoutY="317.0" prefHeight="30.0" prefWidth="245.0" text="--UseTemperatureModule">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="setTemperature" layoutX="724.0" layoutY="310.0" prefHeight="25.0" prefWidth="217.0" promptText="Set Temperature">
+                                    <effect>
+                                        <InnerShadow />
+                                    </effect>
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                    <tooltip>
+                                        <Tooltip text="Module Temperature in Celsius.  4 to 99 C.  ">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font></Tooltip>
+                                    </tooltip>
+                                </TextField>
+                                <Label layoutX="583.0" layoutY="316.0" prefHeight="27.0" prefWidth="130.0" text="--Temperature">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </Label>
+                        <TextField fx:id="pcrPlateSlot" layoutX="205.0" layoutY="473.0" prefHeight="25.0" prefWidth="217.0" promptText="Slot # of Destination PCR Plate">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
+                           </tooltip>
+                        </TextField>
+                        <Label layoutX="54.0" layoutY="478.0" prefHeight="30.0" prefWidth="149.0" text="--PCR_PlateSlot">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="dilutionPlateSlot" layoutX="657.0" layoutY="473.0" prefHeight="25.0" prefWidth="217.0" promptText="Slot # of Dilution Tubes/Plate">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
+                           </tooltip>
+                        </TextField>
+                        <Label layoutX="475.0" layoutY="479.0" prefHeight="30.0" prefWidth="177.0" text="--DilutionPlateSlot">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="reagentSlot" layoutX="1094.0" layoutY="473.0" prefHeight="25.0" prefWidth="217.0" promptText="Slot # of Reagents">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
+                           </tooltip>
+                        </TextField>
+                        <Label layoutX="961.0" layoutY="478.0" prefHeight="30.0" prefWidth="133.0" text="--ReagentSlot">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="waterReservoirWell" layoutX="205.0" layoutY="566.0" prefHeight="25.0" prefWidth="217.0" promptText="Well Containing Water">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
+                           </tooltip>
+                        </TextField>
+                        <Label layoutX="55.0" layoutY="573.0" prefHeight="30.0" prefWidth="149.0" text="--WaterResWell">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="waterResVol" layoutX="656.0" layoutY="566.0" prefHeight="25.0" prefWidth="217.0" promptText="Volume of Water iin Resivior Tube, uL">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
+                           </tooltip>
+                        </TextField>
+                        <Label layoutX="507.0" layoutY="573.0" prefHeight="30.0" prefWidth="141.0" text="--WaterResVol">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="prcVolume" layoutX="1094.0" layoutY="566.0" prefHeight="25.0" prefWidth="217.0" promptText="Final Volumn of PCR in uL" text="25">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
+                           </tooltip>
+                        </TextField>
+                        <Label layoutX="947.0" layoutY="573.0" prefHeight="30.0" prefWidth="138.0" text="--PCR_Volume">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="masterMixPerRxn" layoutX="376.0" layoutY="685.0" prefHeight="25.0" prefWidth="217.0" promptText="Amount of Master Mix Per Well, uL">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
+                           </tooltip>
+                        </TextField>
+                        <Label layoutX="188.0" layoutY="692.0" prefHeight="27.0" prefWidth="189.0" text="--MasterMixPerRxn">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="dnaPerWell" layoutX="826.0" layoutY="685.0" prefHeight="25.0" prefWidth="217.0" promptText="Amount of DNA Per Well">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Confirm on robot.  Should be Gen2- p300 pipette" />
+                           </tooltip>
+                        </TextField>
+                        <Label layoutX="648.0" layoutY="692.0" prefHeight="30.0" prefWidth="177.0" text="--DNA_in_Reaction">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="versionNumber" editable="false" layoutX="996.0" layoutY="4.0" prefHeight="27.0" prefWidth="128.0" promptText="Version" text="v3.0.1">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font name="System Italic" size="30.0" />
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Software Version Number.  Do Not Change" />
+                           </tooltip>
+                        </TextField>
                             </children>
                         </AnchorPane>
                     </content>
@@ -134,104 +285,109 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <ComboBox fx:id="Slot1" layoutX="109.0" layoutY="32.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 1 Labware">
+                                <ComboBox fx:id="Slot1" layoutX="185.0" layoutY="105.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 1 Labware">
                            <effect>
                               <DropShadow />
                            </effect></ComboBox>
 
-                                <Label fx:id="labelSlot1" layoutX="30.0" layoutY="40.0" text="--Slot 1">
+                                <Label fx:id="labelSlot1" layoutX="106.0" layoutY="113.0" text="--Slot 1" textAlignment="RIGHT">
                                     <font>
                                         <Font size="20.0" />
                                     </font>
                                 </Label>
-                        <ComboBox fx:id="Slot2" layoutX="109.0" layoutY="87.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 2 Labware">
+                        <ComboBox fx:id="Slot2" layoutX="185.0" layoutY="160.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 2 Labware">
                            <effect>
                               <DropShadow />
                            </effect></ComboBox>
-                        <Label fx:id="labelSlot2" layoutX="30.0" layoutY="95.0" text="--Slot 2">
+                        <Label fx:id="labelSlot2" layoutX="106.0" layoutY="168.0" text="--Slot 2" textAlignment="RIGHT">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="Slot3" layoutX="109.0" layoutY="142.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 3 Labware">
+                        <ComboBox fx:id="Slot3" layoutX="185.0" layoutY="215.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 3 Labware">
                            <effect>
                               <DropShadow />
                            </effect></ComboBox>
-                        <Label fx:id="labelSlot3" layoutX="30.0" layoutY="150.0" text="--Slot 3">
+                        <Label fx:id="labelSlot3" layoutX="106.0" layoutY="223.0" text="--Slot 3" textAlignment="RIGHT">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="Slot4" layoutX="109.0" layoutY="197.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 4 Labware">
+                        <ComboBox fx:id="Slot4" layoutX="185.0" layoutY="270.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 4 Labware">
                            <effect>
                               <DropShadow />
                            </effect></ComboBox>
-                        <Label fx:id="labelSlot4" layoutX="30.0" layoutY="205.0" text="--Slot 4">
+                        <Label fx:id="labelSlot4" layoutX="106.0" layoutY="278.0" text="--Slot 4" textAlignment="RIGHT">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="Slot5" layoutX="109.0" layoutY="252.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 5 Labware">
+                        <ComboBox fx:id="Slot5" layoutX="185.0" layoutY="325.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 5 Labware">
                            <effect>
                               <DropShadow />
                            </effect></ComboBox>
-                        <Label fx:id="labelSlot5" layoutX="30.0" layoutY="260.0" text="--Slot 5">
+                        <Label fx:id="labelSlot5" layoutX="106.0" layoutY="333.0" text="--Slot 5" textAlignment="RIGHT">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="Slot6" layoutX="109.0" layoutY="307.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 6 Labware">
+                        <ComboBox fx:id="Slot6" layoutX="185.0" layoutY="380.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 6 Labware">
                            <effect>
                               <DropShadow />
                            </effect></ComboBox>
-                        <Label fx:id="labelSlot6" layoutX="30.0" layoutY="315.0" text="--Slot 6">
+                        <Label fx:id="labelSlot6" layoutX="106.0" layoutY="388.0" text="--Slot 6" textAlignment="RIGHT">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="Slot7" layoutX="109.0" layoutY="362.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 7 Labware">
+                        <ComboBox fx:id="Slot7" layoutX="185.0" layoutY="435.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 7 Labware">
                            <effect>
                               <DropShadow />
                            </effect></ComboBox>
-                        <Label fx:id="labelSlot7" layoutX="30.0" layoutY="370.0" text="--Slot 7">
+                        <Label fx:id="labelSlot7" layoutX="106.0" layoutY="443.0" text="--Slot 7" textAlignment="RIGHT">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="Slot8" layoutX="109.0" layoutY="417.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 8 Labware">
+                        <ComboBox fx:id="Slot8" layoutX="185.0" layoutY="490.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 8 Labware">
                            <effect>
                               <DropShadow />
                            </effect></ComboBox>
-                        <Label fx:id="labelSlot8" layoutX="30.0" layoutY="425.0" text="--Slot 8">
+                        <Label fx:id="labelSlot8" layoutX="106.0" layoutY="498.0" text="--Slot 8" textAlignment="RIGHT">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="Slot9" layoutX="109.0" layoutY="472.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 9 Labware">
+                        <ComboBox fx:id="Slot9" layoutX="185.0" layoutY="545.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 9 Labware">
                            <effect>
                               <DropShadow />
                            </effect></ComboBox>
-                        <Label fx:id="labelSlot9" layoutX="30.0" layoutY="480.0" text="--Slot 9">
+                        <Label fx:id="labelSlot9" layoutX="106.0" layoutY="553.0" text="--Slot 9" textAlignment="RIGHT">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="Slot10" layoutX="109.0" layoutY="527.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 10 Labware">
+                        <ComboBox fx:id="Slot10" layoutX="185.0" layoutY="600.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 10 Labware">
                            <effect>
                               <DropShadow />
                            </effect></ComboBox>
-                        <Label fx:id="labelSlot10" layoutX="20.0" layoutY="535.0" text="--Slot 10">
+                        <Label fx:id="labelSlot10" layoutX="96.0" layoutY="608.0" text="--Slot 10" textAlignment="RIGHT">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="Slot11" layoutX="109.0" layoutY="582.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 11 Labware">
+                        <ComboBox fx:id="Slot11" layoutX="185.0" layoutY="655.0" prefHeight="43.0" prefWidth="1068.0" promptText="Slot 11 Labware" visibleRowCount="15">
                            <effect>
                               <DropShadow />
                            </effect></ComboBox>
-                        <Label fx:id="labelSlot11" layoutX="20.0" layoutY="590.0" text="--Slot 11">
+                        <Label fx:id="labelSlot11" layoutX="96.0" layoutY="663.0" text="--Slot 11" textAlignment="RIGHT">
                            <font>
                               <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutY="12.0" prefHeight="53.0" prefWidth="1391.0" text="Select Labware" textAlignment="CENTER" textFill="#0e11d7">
+                           <font>
+                              <Font size="36.0" />
                            </font>
                         </Label>
                             </children>
@@ -242,296 +398,301 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="335.0" prefWidth="1400.0">
                      <children>
-                        <Label layoutX="36.0" layoutY="33.0" text="--Target 1">
+                        <Label layoutX="317.0" layoutY="117.0" text="--Target 1">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target1Name" layoutX="139.0" layoutY="29.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Name">
+                        <TextField fx:id="target1Name" layoutX="415.0" layoutY="110.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 1 Name">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target1Well" layoutX="381.0" layoutY="29.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Well">
+                        <TextField fx:id="target1Well" layoutX="657.0" layoutY="110.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target1Volume" layoutX="624.0" layoutY="29.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target1Volume" layoutX="773.0" layoutY="110.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="36.0" layoutY="85.0" text="--Target 2">
+                        <Label layoutX="317.0" layoutY="177.0" text="--Target 2">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target2Name" layoutX="139.0" layoutY="81.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 2 Name">
+                        <TextField fx:id="target2Name" layoutX="415.0" layoutY="170.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 2 Name">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target2Well" layoutX="381.0" layoutY="81.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Well">
+                        <TextField fx:id="target2Well" layoutX="657.0" layoutY="170.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target2Volume" layoutX="624.0" layoutY="81.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target2Volume" layoutX="773.0" layoutY="170.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="36.0" layoutY="135.0" text="--Target 3">
+                        <Label layoutX="317.0" layoutY="237.0" text="--Target 3">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target3Name" layoutX="139.0" layoutY="131.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 3 Name">
+                        <TextField fx:id="target3Name" layoutX="415.0" layoutY="230.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 3 Name">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target3Well" layoutX="381.0" layoutY="131.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Well">
+                        <TextField fx:id="target3Well" layoutX="657.0" layoutY="230.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target3Volume" layoutX="624.0" layoutY="131.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target3Volume" layoutX="773.0" layoutY="230.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="36.0" layoutY="188.0" text="--Target 4">
+                        <Label layoutX="317.0" layoutY="297.0" text="--Target 4">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target4Name" layoutX="139.0" layoutY="184.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 4 Name">
+                        <TextField fx:id="target4Name" layoutX="415.0" layoutY="290.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 4 Name">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target4Well" layoutX="381.0" layoutY="184.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Well">
+                        <TextField fx:id="target4Well" layoutX="657.0" layoutY="290.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target4Volume" layoutX="624.0" layoutY="184.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target4Volume" layoutX="773.0" layoutY="290.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="36.0" layoutY="241.0" text="--Target 5">
+                        <Label layoutX="317.0" layoutY="357.0" text="--Target 5">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target5Name" layoutX="139.0" layoutY="237.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 5 Name">
+                        <TextField fx:id="target5Name" layoutX="415.0" layoutY="350.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 5 Name">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target5Well" layoutX="381.0" layoutY="237.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Well">
+                        <TextField fx:id="target5Well" layoutX="657.0" layoutY="350.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target5Volume" layoutX="624.0" layoutY="237.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target5Volume" layoutX="773.0" layoutY="350.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="36.0" layoutY="293.0" text="--Target 6">
+                        <Label layoutX="317.0" layoutY="417.0" text="--Target 6">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target6Name" layoutX="139.0" layoutY="289.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 6 Name">
+                        <TextField fx:id="target6Name" layoutX="415.0" layoutY="410.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 6 Name">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target6Well" layoutX="381.0" layoutY="289.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Well">
+                        <TextField fx:id="target6Well" layoutX="657.0" layoutY="410.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target6Volume" layoutX="624.0" layoutY="289.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target6Volume" layoutX="773.0" layoutY="410.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="36.0" layoutY="342.0" text="--Target 7">
+                        <Label layoutX="317.0" layoutY="477.0" text="--Target 7">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target7Name" layoutX="139.0" layoutY="338.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 7 Name">
+                        <TextField fx:id="target7Name" layoutX="415.0" layoutY="470.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 7 Name">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target7Well" layoutX="381.0" layoutY="338.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Well">
+                        <TextField fx:id="target7Well" layoutX="657.0" layoutY="470.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target7Volume" layoutX="624.0" layoutY="338.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target7Volume" layoutX="773.0" layoutY="470.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="36.0" layoutY="389.0" text="--Target 8">
+                        <Label layoutX="317.0" layoutY="537.0" text="--Target 8">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target8Name" layoutX="139.0" layoutY="385.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 8 Name">
+                        <TextField fx:id="target8Name" layoutX="415.0" layoutY="530.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 8 Name">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target8Well" layoutX="381.0" layoutY="385.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Well">
+                        <TextField fx:id="target8Well" layoutX="657.0" layoutY="530.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target8Volume" layoutX="624.0" layoutY="385.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target8Volume" layoutX="773.0" layoutY="530.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="36.0" layoutY="440.0" text="--Target 9">
+                        <Label layoutX="317.0" layoutY="597.0" text="--Target 9">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target9Name" layoutX="139.0" layoutY="436.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 9 Name">
+                        <TextField fx:id="target9Name" layoutX="415.0" layoutY="590.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 9 Name">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target9Well" layoutX="381.0" layoutY="436.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Well">
+                        <TextField fx:id="target9Well" layoutX="657.0" layoutY="590.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target9Volume" layoutX="624.0" layoutY="436.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target9Volume" layoutX="773.0" layoutY="590.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="36.0" layoutY="489.0" text="--Target 10">
+                        <Label layoutX="307.0" layoutY="657.0" text="--Target 10">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target10Name" layoutX="139.0" layoutY="485.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 10 Name">
+                        <TextField fx:id="target10Name" layoutX="415.0" layoutY="650.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 10 Name">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target10Well" layoutX="381.0" layoutY="485.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Well">
+                        <TextField fx:id="target10Well" layoutX="657.0" layoutY="650.0" prefHeight="25.0" prefWidth="100.0" promptText="Target 1 Well">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target10Volume" layoutX="624.0" layoutY="485.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
+                        <TextField fx:id="target10Volume" layoutX="773.0" layoutY="650.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
                            <effect>
                               <InnerShadow />
                            </effect>
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </TextField>
+                        <Label alignment="CENTER" layoutY="15.0" prefHeight="53.0" prefWidth="1391.0" text="Enter Information About Targets" textAlignment="CENTER" textFill="#0e11d7">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
                     </content>
                 </Tab>
@@ -553,6 +714,14 @@
                            </columnResizePolicy>
                         </TableView>
                         <TextField fx:id="addSampleSlot" layoutX="14.0" layoutY="144.0" prefHeight="25.0" prefWidth="80.0" promptText="Slot">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                        </TextField>
+                        <TextField fx:id="addSampleWell" layoutX="106.0" layoutY="144.0" prefHeight="25.0" prefWidth="80.0" promptText="Well">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -600,14 +769,6 @@
                               <InnerShadow />
                            </effect>
                         </Button>
-                        <TextField fx:id="addSampleWell" layoutX="106.0" layoutY="144.0" prefHeight="25.0" prefWidth="80.0" promptText="Well">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                        </TextField>
                         <Button fx:id="deleteSampleRowButton" layoutX="683.0" layoutY="53.0" mnemonicParsing="false" text="Delete Selected Row">
                            <font>
                               <Font size="24.0" />
