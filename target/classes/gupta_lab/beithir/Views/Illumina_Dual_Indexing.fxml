@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--Scene to enter ddPCR parameters for Beithir App.-->
+<!--Scene to enter Illumina Dual Indexing parameters for Beithir App.-->
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
@@ -21,7 +21,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="200.0" minWidth="300.0" prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gupta_lab.beithir.Controllers.ddPCR_VistaController">
+<AnchorPane minHeight="200.0" minWidth="300.0" prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gupta_lab.beithir.Controllers.Illumina_Dual_Indexing_VistaController">
 
     <children>
         <TabPane prefHeight="900.0" prefWidth="1400.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
@@ -31,7 +31,7 @@
                         <AnchorPane prefHeight="870.0" prefWidth="1390.0">
                             <children>
                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ffaf" height="200.0" layoutX="13.0" layoutY="210.0" stroke="BLACK" strokeType="INSIDE" width="1370.0" />
-                                <Label alignment="CENTER" layoutX="4.0" layoutY="10.0" prefHeight="53.0" prefWidth="1391.0" text="Initial Setup Information for ddPCR" textAlignment="CENTER" textFill="#0e11d7">
+                                <Label alignment="CENTER" layoutX="4.0" layoutY="10.0" prefHeight="53.0" prefWidth="1391.0" text="Initial Setup Information for Illumina Dual Indexing PCR" textAlignment="CENTER" textFill="#0e11d7">
                                     <font>
                                         <Font size="36.0" />
                                     </font>
@@ -221,7 +221,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="prcVolume" layoutX="1094.0" layoutY="566.0" prefHeight="25.0" prefWidth="217.0" promptText="Final Volumn of PCR in uL" text="25">
+                        <TextField fx:id="prcVolume" layoutX="1094.0" layoutY="566.0" prefHeight="25.0" prefWidth="217.0" promptText="Final Volumn of PCR in uL" text="50">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -269,7 +269,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="versionNumber" editable="false" layoutX="996.0" layoutY="4.0" prefHeight="27.0" prefWidth="128.0" promptText="Version" text="v3.0.1">
+                        <TextField fx:id="versionNumber" editable="false" layoutX="1157.0" layoutY="4.0" prefHeight="27.0" prefWidth="128.0" promptText="Version" text="v2.0.0">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -397,16 +397,11 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Target Information">
+                <Tab text="Indexing Primers">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="335.0" prefWidth="1400.0">
                      <children>
-                        <Label layoutX="317.0" layoutY="117.0" text="--Target 1">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="target1Name" layoutX="415.0" layoutY="110.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 1 Name">
+                        <TextField fx:id="indexPrimerSlot" alignment="CENTER" layoutX="408.0" layoutY="137.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer Slot">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -414,10 +409,20 @@
                               <Font size="20.0" />
                            </font>
                            <tooltip>
-                              <Tooltip text="Name of Target, TMEJ-AAG + NHEJ" />
+                              <Tooltip text="Which Slot are the Primers In" />
                            </tooltip>
                         </TextField>
-                        <TextField fx:id="target1Well" layoutX="657.0" layoutY="110.0" prefHeight="25.0" prefWidth="100.0" promptText="T1 Well">
+                        <Label layoutX="206.0" layoutY="144.0" text="--IndexPrimerSlot">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="565.0" layoutY="123.0" text="--D501">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="primerD501" alignment="CENTER" layoutX="644.0" layoutY="116.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D501" text="A1">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -428,23 +433,12 @@
                               <Tooltip text="Well in Reagent Slot holding this tube." />
                            </tooltip>
                         </TextField>
-                        <TextField fx:id="target1Volume" layoutX="773.0" layoutY="110.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 1 Volume">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                           <tooltip>
-                              <Tooltip text="uL of Target Reagent in tube.  Float, eg 455.4" />
-                           </tooltip>
-                        </TextField>
-                        <Label layoutX="317.0" layoutY="177.0" text="--Target 2">
+                        <Label layoutX="565.0" layoutY="183.0" text="--D502">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target2Name" layoutX="415.0" layoutY="170.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 2 Name">
+                        <TextField fx:id="primerD502" alignment="CENTER" layoutX="644.0" layoutY="176.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D502" text="A2">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -452,28 +446,12 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target2Well" layoutX="657.0" layoutY="170.0" prefHeight="25.0" prefWidth="100.0" promptText="T2 Well">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="target2Volume" layoutX="773.0" layoutY="170.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 2 Volume">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="317.0" layoutY="237.0" text="--Target 3">
+                        <Label layoutX="565.0" layoutY="243.0" text="--D503">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target3Name" layoutX="415.0" layoutY="230.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 3 Name">
+                        <TextField fx:id="primerD503" alignment="CENTER" layoutX="644.0" layoutY="236.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D503" text="A3">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -481,28 +459,12 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target3Well" layoutX="657.0" layoutY="230.0" prefHeight="25.0" prefWidth="100.0" promptText="T3 Well">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="target3Volume" layoutX="773.0" layoutY="230.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 3 Volume">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="317.0" layoutY="297.0" text="--Target 4">
+                        <Label layoutX="565.0" layoutY="303.0" text="--D504">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target4Name" layoutX="415.0" layoutY="290.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 4 Name">
+                        <TextField fx:id="primerD504" alignment="CENTER" layoutX="644.0" layoutY="296.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D504" text="A4">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -510,28 +472,12 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target4Well" layoutX="657.0" layoutY="290.0" prefHeight="25.0" prefWidth="100.0" promptText="T4 Well">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="target4Volume" layoutX="773.0" layoutY="290.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 4 Volume">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="317.0" layoutY="357.0" text="--Target 5">
+                        <Label layoutX="565.0" layoutY="363.0" text="--D505">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target5Name" layoutX="415.0" layoutY="350.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 5 Name">
+                        <TextField fx:id="primerD505" alignment="CENTER" layoutX="644.0" layoutY="356.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D505" text="A5">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -539,28 +485,12 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target5Well" layoutX="657.0" layoutY="350.0" prefHeight="25.0" prefWidth="100.0" promptText="T5 Well">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="target5Volume" layoutX="773.0" layoutY="350.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 5 Volume">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="317.0" layoutY="417.0" text="--Target 6">
+                        <Label layoutX="565.0" layoutY="423.0" text="--D506">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target6Name" layoutX="415.0" layoutY="410.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 6 Name">
+                        <TextField fx:id="primerD506" alignment="CENTER" layoutX="644.0" layoutY="416.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D506" text="A6">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -568,28 +498,12 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target6Well" layoutX="657.0" layoutY="410.0" prefHeight="25.0" prefWidth="100.0" promptText="T6 Well">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="target6Volume" layoutX="773.0" layoutY="410.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 6 Volume">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="317.0" layoutY="477.0" text="--Target 7">
+                        <Label layoutX="565.0" layoutY="483.0" text="--D507">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target7Name" layoutX="415.0" layoutY="470.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 7 Name">
+                        <TextField fx:id="primerD507" alignment="CENTER" layoutX="644.0" layoutY="476.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D507" text="B1">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -597,28 +511,12 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target7Well" layoutX="657.0" layoutY="470.0" prefHeight="25.0" prefWidth="100.0" promptText="T7 Well">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="target7Volume" layoutX="773.0" layoutY="470.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 7 Volume">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="317.0" layoutY="537.0" text="--Target 8">
+                        <Label layoutX="565.0" layoutY="543.0" text="--D508">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target8Name" layoutX="415.0" layoutY="530.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 8 Name">
+                        <TextField fx:id="primerD508" alignment="CENTER" layoutX="644.0" layoutY="536.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D508" text="B2">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -626,28 +524,12 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target8Well" layoutX="657.0" layoutY="530.0" prefHeight="25.0" prefWidth="100.0" promptText="T8 Well">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="target8Volume" layoutX="773.0" layoutY="530.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 8 Volume">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="317.0" layoutY="597.0" text="--Target 9">
+                        <Label layoutX="801.0" layoutY="123.0" text="--D701">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target9Name" layoutX="415.0" layoutY="590.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 9 Name">
+                        <TextField fx:id="primerD701" alignment="CENTER" layoutX="868.0" layoutY="116.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D701" text="B3">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -655,28 +537,12 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target9Well" layoutX="657.0" layoutY="590.0" prefHeight="25.0" prefWidth="100.0" promptText="T9 Well">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="target9Volume" layoutX="773.0" layoutY="590.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 9 Volume">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="307.0" layoutY="657.0" text="--Target 10">
+                        <Label layoutX="791.0" layoutY="183.0" text="--D702">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="target10Name" layoutX="415.0" layoutY="650.0" prefHeight="25.0" prefWidth="225.0" promptText="Target 10 Name">
+                        <TextField fx:id="primerD702" alignment="CENTER" layoutX="868.0" layoutY="176.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D702" text="B4">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -684,25 +550,139 @@
                               <Font size="20.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="target10Well" layoutX="657.0" layoutY="650.0" prefHeight="25.0" prefWidth="100.0" promptText="T10 Well">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="target10Volume" layoutX="773.0" layoutY="650.0" prefHeight="25.0" prefWidth="217.0" promptText="Target 10 Volume">
-                           <effect>
-                              <InnerShadow />
-                           </effect>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </TextField>
-                        <Label alignment="CENTER" layoutY="15.0" prefHeight="53.0" prefWidth="1391.0" text="Enter Information About Targets" textAlignment="CENTER" textFill="#0e11d7">
+                        <Label alignment="CENTER" layoutY="15.0" prefHeight="53.0" prefWidth="1391.0" text="Recommended Location of Indexing Primers" textAlignment="CENTER" textFill="#0e11d7">
                            <font>
                               <Font size="36.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="primerD703" alignment="CENTER" layoutX="870.0" layoutY="236.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D703" text="B5">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="801.0" layoutY="243.0" text="--D703">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="primerD704" alignment="CENTER" layoutX="868.0" layoutY="289.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D704" text="B6">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="801.0" layoutY="296.0" text="--D704">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="primerD705" alignment="CENTER" layoutX="868.0" layoutY="348.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D705" text="C1">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="793.0" layoutY="355.0" text="--D705">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="primerD706" alignment="CENTER" layoutX="868.0" layoutY="409.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D706" text="C2">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="801.0" layoutY="416.0" text="--D706">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="primerD707" alignment="CENTER" layoutX="868.0" layoutY="469.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D707" text="C3">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="793.0" layoutY="476.0" text="--D707">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="primerD708" alignment="CENTER" layoutX="868.0" layoutY="529.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D708" text="C4">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="797.0" layoutY="534.0" text="--D708">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="primerD709" alignment="CENTER" layoutX="868.0" layoutY="594.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D709" text="C5">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="789.0" layoutY="594.0" text="--D709">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="primerD710a" alignment="CENTER" layoutX="868.0" layoutY="654.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D710a" text="C6">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="797.0" layoutY="661.0" text="--D710a">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="primerD711" alignment="CENTER" layoutX="868.0" layoutY="715.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D7011" text="D1">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="793.0" layoutY="715.0" text="--D711">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="primerD712" alignment="CENTER" layoutX="868.0" layoutY="775.0" prefHeight="25.0" prefWidth="100.0" promptText="Indexing Primer D712" text="D2">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="801.0" layoutY="782.0" text="--D712">
+                           <font>
+                              <Font size="20.0" />
                            </font>
                         </Label>
                      </children></AnchorPane>
@@ -812,6 +792,5 @@
                 </Tab>
             </tabs>
         </TabPane>
-
     </children>
 </AnchorPane>
