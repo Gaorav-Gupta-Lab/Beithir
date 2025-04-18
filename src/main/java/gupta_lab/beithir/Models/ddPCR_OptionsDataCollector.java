@@ -129,7 +129,7 @@ public class ddPCR_OptionsDataCollector {
         returnString.append(runModule).append(getVersionNumber()).append("#Run Date:\t").append(runDate).append("\n").
                 append("--User\t").append(getUserName()).append("\n").
 
-                append("\n#Deck Layout\n").
+                append("\n# Deck Layout\n").
                 append("--Slot1\t").append(getSlot1()).
                 append("--Slot2\t").append(getSlot2()).
                 append("--Slot3\t").append(getSlot3()).
@@ -142,15 +142,15 @@ public class ddPCR_OptionsDataCollector {
                 append("--Slot10\t").append(getSlot10()).
                 append("--Slot11\t").append(getSlot11()).
 
-                append("\nLocation of the first tip in pipette tip boxes and bottom offset value for tips\n").
+                append("\n# Location of the first tip in pipette tip boxes and bottom offset value for tips\n").
                 append("--LeftPipetteFirstTip\t").append(getLeftPipetteFirstTip()).
                 append("--RightPipetteFirstTip\t").append(getRightPipetteFirstTip()).
                 append("--BottomOffset\t").append(getBottomOffset()).
-                append("\nTemperature Module Settings\n").
+                append("\n# Temperature Module Settings\n").
                 append("--UseTemperatureModule\t").append(getUseTemperatureModule().isSelected() ? "True\n" : "False\n").
                 append("--Temperature\t").append(getSetTemperature()).
 
-                append("\nLocation of Reagents and Volumes\n").
+                append("\n# Location of Reagents and Volumes\n").
                 append("--PCR_PlateSlot\t").append(getPCR_PlateSlot()).
                 append("--DilutionPlateSlot\t").append(getDilutionPlateSlot()).
                 append("--ReagentSlot\t").append(getReagentSlot()).
@@ -160,7 +160,7 @@ public class ddPCR_OptionsDataCollector {
                 append("--MasterMixPerRxn\t").append(getMasterMixPerRxn()).
                 append("--DNA_in_Reaction\t").append(getDNAPerWell()).
 
-                append("\n#Targets\n").
+                append("\n# Targets\n").
                 append("--Target1\t").append(getTarget1Name()).append(getTarget1Well()).append(getTarget1Volume()).
                 append("--Target2\t").append(getTarget2Name()).append(getTarget2Well()).append(getTarget2Volume()).
                 append("--Target3\t").append(getTarget3Name()).append(getTarget3Well()).append(getTarget3Volume()).
@@ -172,9 +172,9 @@ public class ddPCR_OptionsDataCollector {
                 append("--Target9\t").append(getTarget9Name()).append(getTarget9Well()).append(getTarget9Volume()).
                 append("--Target10\t").append(getTarget10Name()).append(getTarget10Well()).append(getTarget10Volume()).
 
-                append("\n#Samples\n").
+                append("\n# Samples\n").
                 append(sampleData);
-
+        System.out.println("User Name: " + getUserName() + "\nModule: " + runModule);
         return returnString.toString();
     }
 

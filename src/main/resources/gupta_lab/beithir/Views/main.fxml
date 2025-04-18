@@ -30,7 +30,7 @@
             <items>
                 <MenuItem fx:id="Home" mnemonicParsing="false" onAction="#Home" text="Home" />
                 <MenuItem fx:id="ddPCR" mnemonicParsing="false" onAction="#ddPCR" text="ddPCR" />
-                <MenuItem fx:id="NGS_Library_Indexing" mnemonicParsing="false" text="NGS Library Indexing" />
+                <MenuItem fx:id="Illumina_Dual_Indexing" mnemonicParsing="false" onAction="#Illumina_Dual_Indexing" text="Illumina Dual Indexing" />
 
             </items>
           </Menu>

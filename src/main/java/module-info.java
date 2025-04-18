@@ -18,4 +18,7 @@ module gupta_lab.beithir {
     exports gupta_lab.beithir.Controllers;
     opens gupta_lab.beithir.Controllers to javafx.fxml;
     opens gupta_lab.beithir.Models to javafx.base;
+
+    uses gupta_lab.beithir.MainApp;
+
 }

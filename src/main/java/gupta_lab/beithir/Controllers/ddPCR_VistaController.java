@@ -8,6 +8,7 @@
 
 package gupta_lab.beithir.Controllers;
 
+import gupta_lab.beithir.Models.LabwareDefinitions;
 import gupta_lab.beithir.Models.ddPCR_OptionsDataCollector;
 import static gupta_lab.beithir.Models.InputValidation.*;
 import javafx.collections.FXCollections;
@@ -179,7 +180,7 @@ public class ddPCR_VistaController implements Initializable{
             }
         });
 
-//      Selection for use of Temperature Module.  Set Temperature field is only active when module is selected for use.
+//      Selection for use of Temperature Module.  Set Temperature field is only active when the module is selected for use.
         useTemperatureModule.setSelected(false);
         setTemperature.disableProperty().bind(useTemperatureModule.selectedProperty().not());
         ddPCR_OptionsDataCollector.setUseTemperatureModule(useTemperatureModule);
@@ -228,45 +229,27 @@ public class ddPCR_VistaController implements Initializable{
        /*
        * Beginning the code for the "Samples" Tab. This handles the display and editing of the table.
        */
-        String[] SlotLabware = {
-                "8_well_strip_tubes_200ul",
-                "bigwell_96_tuberack_200ul_dilution_tube",
-                "stacked_96_well",
-                "biorad_ddpcr_plate_aluminum_block_100ul",
-                "eppendorftwin.tecpcrplates_96_aluminumblock_150ul",
-                "parhelia_temp_module_with_biorad_ddpcr_plate_100ul",
-                "parhelia_temp_module_with_twintec_ddpcr_plate_150ul",
-                "opentrons_96_tiprack_300ul",
-                "opentrons_96_filtertiprack_200ul",
-                "opentrons_96_tiprack_20ul",
-                "opentrons_96_filtertiprack_20ul",
-                "screwcap_24_tuberack_500ul",
-                "opentrons_24_tuberack_generic_2ml_screwcap",
-                "opentrons_24_tube_rack_vwr_microfuge_tube_1.5ml",
-                "vwrscrewcapcentrifugetube5ml_15_tuberack_5000ul"
-        };
-
-        Slot1.getItems().addAll(SlotLabware);
+        Slot1.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
         Slot1.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot1(Slot1.getSelectionModel().getSelectedItem()));
-        Slot2.getItems().addAll(SlotLabware);
+        Slot2.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
         Slot2.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot2(Slot2.getSelectionModel().getSelectedItem()));
-        Slot3.getItems().addAll(SlotLabware);
+        Slot3.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
         Slot3.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot3(Slot3.getSelectionModel().getSelectedItem()));
-        Slot4.getItems().addAll(SlotLabware);
+        Slot4.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
         Slot4.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot4(Slot4.getSelectionModel().getSelectedItem()));
-        Slot5.getItems().addAll(SlotLabware);
+        Slot5.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
         Slot5.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot5(Slot5.getSelectionModel().getSelectedItem()));
-        Slot6.getItems().addAll(SlotLabware);
+        Slot6.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
         Slot6.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot6(Slot6.getSelectionModel().getSelectedItem()));
-        Slot7.getItems().addAll(SlotLabware);
+        Slot7.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
         Slot7.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot7(Slot7.getSelectionModel().getSelectedItem()));
-        Slot8.getItems().addAll(SlotLabware);
+        Slot8.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
         Slot8.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot8(Slot8.getSelectionModel().getSelectedItem()));
-        Slot9.getItems().addAll(SlotLabware);
+        Slot9.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
         Slot9.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot9(Slot9.getSelectionModel().getSelectedItem()));
-        Slot10.getItems().addAll(SlotLabware);
+        Slot10.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
         Slot10.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot10(Slot10.getSelectionModel().getSelectedItem()));
-        Slot11.getItems().addAll(SlotLabware);
+        Slot11.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
         Slot11.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot11(Slot11.getSelectionModel().getSelectedItem()));
 
         /*

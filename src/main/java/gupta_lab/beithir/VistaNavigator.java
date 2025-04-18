@@ -17,6 +17,7 @@ public class VistaNavigator {
     public static final String MAIN = "/gupta_lab/beithir/Views/main.fxml";
     public static final String VISTA_0 = "/gupta_lab/beithir/Views/entryVista.fxml";
     public static final String VISTA_1 = "/gupta_lab/beithir/Views/ddPCR_Vista.fxml";
+    public static final String VISTA_2 = "/gupta_lab/beithir/Views/Illumina_Dual_Indexing.fxml";
 
     /** The main application layout controller. */
     private static MainController mainController;
