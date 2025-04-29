@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<!--Scene 0 for Beithir App. Loads when app is initialized.-->
-
-<?import javafx.scene.layout.StackPane?>
-
-<StackPane
-        fx:id="entry_vista" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-</StackPane>
