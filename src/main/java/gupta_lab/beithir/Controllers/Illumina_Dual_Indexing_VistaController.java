@@ -3,15 +3,16 @@
  * Package loosely based on GitHub Gist (https://gist.github.com/jewelsea/6460130).
  * @author Dennis A. Simpson
  * @since April 2025
- * @version 0.8.0
+ * @version 0.8.1
  */
 
 package gupta_lab.beithir.Controllers;
 
-import gupta_lab.beithir.Models.FirstTabDataCollector;
+import gupta_lab.beithir.Models.commonDataCollector;
 import gupta_lab.beithir.Models.illumina_Dual_Indexing_OptionsDataCollector;
 import gupta_lab.beithir.Models.LabwareDefinitions;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
@@ -58,6 +59,29 @@ public class Illumina_Dual_Indexing_VistaController implements Initializable {
     @FXML private ComboBox<String> Slot10;
     @FXML private ComboBox<String> Slot11;
 
+    //Indexing Primer Tab
+    @FXML private TextField indexPrimerSlot;
+    @FXML private TextField primerD501;
+    @FXML private TextField primerD502;
+    @FXML private TextField primerD503;
+    @FXML private TextField primerD504;
+    @FXML private TextField primerD505;
+    @FXML private TextField primerD506;
+    @FXML private TextField primerD507;
+    @FXML private TextField primerD508;
+    @FXML private TextField primerD701;
+    @FXML private TextField primerD702;
+    @FXML private TextField primerD703;
+    @FXML private TextField primerD704;
+    @FXML private TextField primerD705;
+    @FXML private TextField primerD706;
+    @FXML private TextField primerD707;
+    @FXML private TextField primerD708;
+    @FXML private TextField primerD709;
+    @FXML private TextField primerD710a;
+    @FXML private TextField primerD711;
+    @FXML private TextField primerD712;
+
     //Sample Information Tab
     @FXML private TableView sampleTable;
     @FXML private TableColumn sampleSlot;
@@ -94,122 +118,202 @@ public class Illumina_Dual_Indexing_VistaController implements Initializable {
         illumina_Dual_Indexing_OptionsDataCollector.setVersionString(versionNumber.getText());
         illumina_Dual_Indexing_OptionsDataCollector.setRunModule("#Illumina Dual Indexing Parameters\t");
 
-        runDate.setOnAction(_ -> FirstTabDataCollector.getRunDate(runDate.getValue().toString()));
+        runDate.setOnAction(_ -> commonDataCollector.getRunDate(runDate.getValue().toString()));
 
         userName.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!StringUtils.isBlank(userName.getText()) && textValidate(userName.getText())) {
                 userName.pseudoClassStateChanged(errorClass, false);
-                FirstTabDataCollector.setUserName(userName.getText());
+                commonDataCollector.setUserName(userName.getText());
             } else {
                 userName.pseudoClassStateChanged(errorClass, true);
-                FirstTabDataCollector.setUserName(userName.getText());
+                commonDataCollector.setUserName(userName.getText());
             }
         });
 
-        LeftPipetteFirstTip.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (LeftPipetteFirstTip.getText().equalsIgnoreCase("A1")){
+            commonDataCollector.setLeftPipetteFirstTip("A1");
+            System.out.println("Left Tip: "+LeftPipetteFirstTip.getText().toUpperCase());
+        }
+        LeftPipetteFirstTip.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             if (!StringUtils.isBlank(LeftPipetteFirstTip.getText()) && firstTipLocationValidate(LeftPipetteFirstTip.getText())) {
                 LeftPipetteFirstTip.pseudoClassStateChanged(errorClass, false);
-                FirstTabDataCollector.setLeftPipetteFirstTip(LeftPipetteFirstTip.getText().toUpperCase());
+                commonDataCollector.setLeftPipetteFirstTip(LeftPipetteFirstTip.getText().toUpperCase());
             } else {
                 LeftPipetteFirstTip.pseudoClassStateChanged(errorClass, true);
-                FirstTabDataCollector.setLeftPipetteFirstTip(LeftPipetteFirstTip.getText().toUpperCase());
+                commonDataCollector.setLeftPipetteFirstTip(LeftPipetteFirstTip.getText().toUpperCase());
             }
         });
 
+        if (RightPipetteFirstTip.getText().equalsIgnoreCase("A1")){
+            commonDataCollector.setRightPipetteFirstTip("A1");
+            // System.out.println("Right Tip: "+RightPipetteFirstTip.getText().toUpperCase());
+        }
         RightPipetteFirstTip.textProperty().addListener((observable, oldValue, newValue) -> {
-
             if (!StringUtils.isBlank(RightPipetteFirstTip.getText()) && firstTipLocationValidate(RightPipetteFirstTip.getText())) {
                 RightPipetteFirstTip.pseudoClassStateChanged(errorClass, false);
-                FirstTabDataCollector.setRightPipetteFirstTip(RightPipetteFirstTip.getText().toUpperCase());
+                commonDataCollector.setRightPipetteFirstTip(RightPipetteFirstTip.getText().toUpperCase());
             } else {
                 RightPipetteFirstTip.pseudoClassStateChanged(errorClass, true);
             }
         });
         //System.out.println(numberValidate(BottomOffset.getText()));
+        if (BottomOffset.getText().equalsIgnoreCase("1.0")){
+            commonDataCollector.setBottomOffset("1.0");
+            System.out.println("Bottom Offset: "+BottomOffset.getText());
+        }
         BottomOffset.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!StringUtils.isBlank(BottomOffset.getText()) && numberValidate(BottomOffset.getText())) {
                 BottomOffset.pseudoClassStateChanged(errorClass, false);
-                illumina_Dual_Indexing_OptionsDataCollector.setBottomOffset(BottomOffset.getText());
+                commonDataCollector.setBottomOffset(BottomOffset.getText());
             } else {
                 BottomOffset.pseudoClassStateChanged(errorClass, true);
             }
         });
 
 //      Selection for use of Temperature Module.  Set Temperature field is only active when module is selected for use.
-        useTemperatureModule.setSelected(false);
-        setTemperature.disableProperty().bind(useTemperatureModule.selectedProperty().not());
-        illumina_Dual_Indexing_OptionsDataCollector.setUseTemperatureModule(useTemperatureModule);
+        commonDataCollector.getUseTemperatureModule().setSelected(false);
+        setTemperature.disableProperty().bind(commonDataCollector.useTemperatureModule.selectedProperty().not());
+        commonDataCollector.setUseTemperatureModule(useTemperatureModule);
+
         setTemperature.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!StringUtils.isNotEmpty(setTemperature.getText()) && textValidate(setTemperature.getText())) {
                 setTemperature.pseudoClassStateChanged(errorClass, false);
-                illumina_Dual_Indexing_OptionsDataCollector.setSetTemperature(setTemperature.getText());
+                commonDataCollector.setSetTemperature(setTemperature.getText());
             } else {
                 setTemperature.pseudoClassStateChanged(errorClass, true);
-                illumina_Dual_Indexing_OptionsDataCollector.setSetTemperature(setTemperature.getText());
+                commonDataCollector.setSetTemperature(setTemperature.getText());
             }
         });
 
         pcrPlateSlot.textProperty().addListener((observable, oldValue, newValue) -> {
-            illumina_Dual_Indexing_OptionsDataCollector.setPCR_PlateSlot(pcrPlateSlot.getText());
+            commonDataCollector.setPCR_PlateSlot(pcrPlateSlot.getText());
         });
 
         dilutionPlateSlot.textProperty().addListener((observable, oldValue, newValue) -> {
-            illumina_Dual_Indexing_OptionsDataCollector.setDilutionPlateSlot(dilutionPlateSlot.getText());
+            commonDataCollector.setDilutionPlateSlot(dilutionPlateSlot.getText());
         });
 
         reagentSlot.textProperty().addListener((observable, oldValue, newValue) -> {
-            illumina_Dual_Indexing_OptionsDataCollector.setReagentSlot(reagentSlot.getText());
+            commonDataCollector.setReagentSlot(reagentSlot.getText());
         });
 
         waterReservoirWell.textProperty().addListener((observable, oldValue, newValue) -> {
-            illumina_Dual_Indexing_OptionsDataCollector.setWaterReservoirWell(waterReservoirWell.getText());
+            commonDataCollector.setWaterReservoirWell(waterReservoirWell.getText());
         });
 
         waterResVol.textProperty().addListener((observable, oldValue, newValue) -> {
-            illumina_Dual_Indexing_OptionsDataCollector.setWaterResVol(waterResVol.getText());
+            commonDataCollector.setWaterResVol(waterResVol.getText());
         });
 
         prcVolume.textProperty().addListener((observable, oldValue, newValue) -> {
-            illumina_Dual_Indexing_OptionsDataCollector.setPCR_Volume(prcVolume.getText());
+            commonDataCollector.setPCR_Volume(prcVolume.getText());
         });
 
         masterMixPerRxn.textProperty().addListener((observable, oldValue, newValue) -> {
-            illumina_Dual_Indexing_OptionsDataCollector.setMasterMixPerRxn(masterMixPerRxn.getText());
+            commonDataCollector.setMasterMixPerRxn(masterMixPerRxn.getText());
         });
 
         dnaPerWell.textProperty().addListener((observable, oldValue, newValue) -> {
-            illumina_Dual_Indexing_OptionsDataCollector.setDNAPerWell(dnaPerWell.getText());
+            commonDataCollector.setDNAPerWell(dnaPerWell.getText());
         });
 
         /*
-         * Beginning the code for the "Samples" Tab. This handles the display and editing of the table.
+         * Beginning the code for the Deck Layout Tab.
          */
         Slot1.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot1.setOnAction(_ -> illumina_Dual_Indexing_OptionsDataCollector.setSlot1(Slot1.getSelectionModel().getSelectedItem()));
+        Slot1.setOnAction(_ -> commonDataCollector.setSlot1(Slot1.getSelectionModel().getSelectedItem()));
         Slot2.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot2.setOnAction(_ -> illumina_Dual_Indexing_OptionsDataCollector.setSlot2(Slot2.getSelectionModel().getSelectedItem()));
+        Slot2.setOnAction(_ -> commonDataCollector.setSlot2(Slot2.getSelectionModel().getSelectedItem()));
         Slot3.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot3.setOnAction(_ -> illumina_Dual_Indexing_OptionsDataCollector.setSlot3(Slot3.getSelectionModel().getSelectedItem()));
+        Slot3.setOnAction(_ -> commonDataCollector.setSlot3(Slot3.getSelectionModel().getSelectedItem()));
         Slot4.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot4.setOnAction(_ -> illumina_Dual_Indexing_OptionsDataCollector.setSlot4(Slot4.getSelectionModel().getSelectedItem()));
+        Slot4.setOnAction(_ -> commonDataCollector.setSlot4(Slot4.getSelectionModel().getSelectedItem()));
         Slot5.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot5.setOnAction(_ -> illumina_Dual_Indexing_OptionsDataCollector.setSlot5(Slot5.getSelectionModel().getSelectedItem()));
+        Slot5.setOnAction(_ -> commonDataCollector.setSlot5(Slot5.getSelectionModel().getSelectedItem()));
         Slot6.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot6.setOnAction(_ -> illumina_Dual_Indexing_OptionsDataCollector.setSlot6(Slot6.getSelectionModel().getSelectedItem()));
+        Slot6.setOnAction(_ -> commonDataCollector.setSlot6(Slot6.getSelectionModel().getSelectedItem()));
         Slot7.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot7.setOnAction(_ -> illumina_Dual_Indexing_OptionsDataCollector.setSlot7(Slot7.getSelectionModel().getSelectedItem()));
+        Slot7.setOnAction(_ -> commonDataCollector.setSlot7(Slot7.getSelectionModel().getSelectedItem()));
         Slot8.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot8.setOnAction(_ -> illumina_Dual_Indexing_OptionsDataCollector.setSlot8(Slot8.getSelectionModel().getSelectedItem()));
+        Slot8.setOnAction(_ -> commonDataCollector.setSlot8(Slot8.getSelectionModel().getSelectedItem()));
         Slot9.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot9.setOnAction(_ -> illumina_Dual_Indexing_OptionsDataCollector.setSlot9(Slot9.getSelectionModel().getSelectedItem()));
+        Slot9.setOnAction(_ -> commonDataCollector.setSlot9(Slot9.getSelectionModel().getSelectedItem()));
         Slot10.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot10.setOnAction(_ -> illumina_Dual_Indexing_OptionsDataCollector.setSlot10(Slot10.getSelectionModel().getSelectedItem()));
+        Slot10.setOnAction(_ -> commonDataCollector.setSlot10(Slot10.getSelectionModel().getSelectedItem()));
         Slot11.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot11.setOnAction(_ -> illumina_Dual_Indexing_OptionsDataCollector.setSlot11(Slot11.getSelectionModel().getSelectedItem()));
+        Slot11.setOnAction(_ -> commonDataCollector.setSlot11(Slot11.getSelectionModel().getSelectedItem()));
+
+        /*
+         * Beginning of code for Indexing Primer Tab
+         */
+        indexPrimerSlot.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setIndexPrimerSlot(indexPrimerSlot.getText());
+        });
+        primerD501.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD501(primerD501.getText());
+        });
+        primerD502.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD502(primerD502.getText());
+        });
+        primerD503.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD503(primerD503.getText());
+        });
+        primerD504.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD504(primerD504.getText());
+        });
+        primerD505.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD505(primerD505.getText());
+        });
+        primerD506.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD506(primerD506.getText());
+        });
+        primerD507.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD507(primerD507.getText());
+        });
+        primerD508.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD508(primerD508.getText());
+        });
+        primerD701.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD701(primerD701.getText());
+        });
+        primerD702.textProperty().addListener((observable, oldValue, newValue) -> {
+
+        });
+        primerD703.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD703(primerD703.getText());
+        });
+        primerD704.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD704(primerD704.getText());
+        });
+        primerD705.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD705(primerD705.getText());
+        });
+        primerD706.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD706(primerD706.getText());
+        });
+        primerD707.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD707(primerD707.getText());
+        });
+        primerD708.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD708(primerD708.getText());
+        });
+        primerD709.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD709(primerD709.getText());
+        });
+        primerD710a.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD710a(primerD710a.getText());
+        });
+        primerD711.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD711(primerD711.getText());
+        });
+        primerD712.textProperty().addListener((observable, oldValue, newValue) -> {
+            illumina_Dual_Indexing_OptionsDataCollector.setPrimerD712(primerD712.getText());
+        });
 
         /*
          * Beginning of code for Sample Table
          * */
+
         sampleTable.setEditable(true);
         sampleSlot.setEditable(true);
         sampleWell.setEditable(true);

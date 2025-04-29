@@ -8,6 +8,7 @@
 
 package gupta_lab.beithir.Controllers;
 
+import gupta_lab.beithir.Models.commonDataCollector;
 import gupta_lab.beithir.Models.LabwareDefinitions;
 import gupta_lab.beithir.Models.ddPCR_OptionsDataCollector;
 import static gupta_lab.beithir.Models.InputValidation.*;
@@ -139,42 +140,51 @@ public class ddPCR_VistaController implements Initializable{
         ddPCR_OptionsDataCollector.setVersionString(versionNumber.getText());
         ddPCR_OptionsDataCollector.setRunModule("#ddPCR Parameters\t");
 
-        runDate.setOnAction(_ -> ddPCR_OptionsDataCollector.getRunDate(runDate.getValue().toString()));
+        runDate.setOnAction(_ -> commonDataCollector.getRunDate(runDate.getValue().toString()));
 
         userName.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!StringUtils.isBlank(userName.getText()) && textValidate(userName.getText())) {
                 userName.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setUserName(userName.getText());
+                commonDataCollector.setUserName(userName.getText());
             } else {
                 userName.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setUserName(userName.getText());
+                commonDataCollector.setUserName(userName.getText());
             }
         });
 
+        if (LeftPipetteFirstTip.getText().equalsIgnoreCase("A1")){
+            commonDataCollector.setLeftPipetteFirstTip("A1");
+        }
         LeftPipetteFirstTip.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!StringUtils.isBlank(LeftPipetteFirstTip.getText()) && firstTipLocationValidate(LeftPipetteFirstTip.getText())) {
                 LeftPipetteFirstTip.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setLeftPipetteFirstTip(LeftPipetteFirstTip.getText().toUpperCase());
+                commonDataCollector.setLeftPipetteFirstTip(LeftPipetteFirstTip.getText().toUpperCase());
             } else {
                 LeftPipetteFirstTip.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setLeftPipetteFirstTip(LeftPipetteFirstTip.getText());
+                commonDataCollector.setLeftPipetteFirstTip(LeftPipetteFirstTip.getText());
             }
         });
 
+        if (RightPipetteFirstTip.getText().equalsIgnoreCase("A1")){
+            commonDataCollector.setLeftPipetteFirstTip("A1");
+        }
        RightPipetteFirstTip.textProperty().addListener((observable, oldValue, newValue) -> {
 
            if (!StringUtils.isBlank(RightPipetteFirstTip.getText()) && firstTipLocationValidate(RightPipetteFirstTip.getText())) {
                RightPipetteFirstTip.pseudoClassStateChanged(errorClass, false);
-               ddPCR_OptionsDataCollector.setRightPipetteFirstTip(RightPipetteFirstTip.getText().toUpperCase());
+               commonDataCollector.setRightPipetteFirstTip(RightPipetteFirstTip.getText().toUpperCase());
            } else {
                RightPipetteFirstTip.pseudoClassStateChanged(errorClass, true);
            }
        });
         //System.out.println(numberValidate(BottomOffset.getText()));
+        if (BottomOffset.getText().equalsIgnoreCase("1.0")){
+            commonDataCollector.setBottomOffset("1.0");
+        }
         BottomOffset.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!StringUtils.isBlank(BottomOffset.getText()) && numberValidate(BottomOffset.getText())) {
                 BottomOffset.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setBottomOffset(BottomOffset.getText());
+                commonDataCollector.setBottomOffset(BottomOffset.getText());
             } else {
                 BottomOffset.pseudoClassStateChanged(errorClass, true);
             }
@@ -183,74 +193,74 @@ public class ddPCR_VistaController implements Initializable{
 //      Selection for use of Temperature Module.  Set Temperature field is only active when the module is selected for use.
         useTemperatureModule.setSelected(false);
         setTemperature.disableProperty().bind(useTemperatureModule.selectedProperty().not());
-        ddPCR_OptionsDataCollector.setUseTemperatureModule(useTemperatureModule);
+        commonDataCollector.setUseTemperatureModule(useTemperatureModule);
         setTemperature.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!StringUtils.isNotEmpty(setTemperature.getText()) && textValidate(setTemperature.getText())) {
                 setTemperature.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setSetTemperature(setTemperature.getText());
+                commonDataCollector.setSetTemperature(setTemperature.getText());
             } else {
                 setTemperature.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setSetTemperature(setTemperature.getText());
+                commonDataCollector.setSetTemperature(setTemperature.getText());
             }
         });
 
         pcrPlateSlot.textProperty().addListener((observable, oldValue, newValue) -> {
-            ddPCR_OptionsDataCollector.setPCR_PlateSlot(pcrPlateSlot.getText());
+            commonDataCollector.setPCR_PlateSlot(pcrPlateSlot.getText());
         });
 
         dilutionPlateSlot.textProperty().addListener((observable, oldValue, newValue) -> {
-            ddPCR_OptionsDataCollector.setDilutionPlateSlot(dilutionPlateSlot.getText());
+            commonDataCollector.setDilutionPlateSlot(dilutionPlateSlot.getText());
         });
 
         reagentSlot.textProperty().addListener((observable, oldValue, newValue) -> {
-            ddPCR_OptionsDataCollector.setReagentSlot(reagentSlot.getText());
+            commonDataCollector.setReagentSlot(reagentSlot.getText());
         });
 
         waterReservoirWell.textProperty().addListener((observable, oldValue, newValue) -> {
-            ddPCR_OptionsDataCollector.setWaterReservoirWell(waterReservoirWell.getText());
+            commonDataCollector.setWaterReservoirWell(waterReservoirWell.getText());
         });
 
         waterResVol.textProperty().addListener((observable, oldValue, newValue) -> {
-            ddPCR_OptionsDataCollector.setWaterResVol(waterResVol.getText());
+            commonDataCollector.setWaterResVol(waterResVol.getText());
         });
 
         prcVolume.textProperty().addListener((observable, oldValue, newValue) -> {
-            ddPCR_OptionsDataCollector.setPCR_Volume(prcVolume.getText());
+            commonDataCollector.setPCR_Volume(prcVolume.getText());
         });
 
         masterMixPerRxn.textProperty().addListener((observable, oldValue, newValue) -> {
-            ddPCR_OptionsDataCollector.setMasterMixPerRxn(masterMixPerRxn.getText());
+            commonDataCollector.setMasterMixPerRxn(masterMixPerRxn.getText());
         });
 
         dnaPerWell.textProperty().addListener((observable, oldValue, newValue) -> {
-            ddPCR_OptionsDataCollector.setDNAPerWell(dnaPerWell.getText());
+            commonDataCollector.setDNAPerWell(dnaPerWell.getText());
         });
 
        /*
        * Beginning the code for the "Samples" Tab. This handles the display and editing of the table.
        */
         Slot1.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot1.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot1(Slot1.getSelectionModel().getSelectedItem()));
+        Slot1.setOnAction(_ -> commonDataCollector.setSlot1(Slot1.getSelectionModel().getSelectedItem()));
         Slot2.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot2.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot2(Slot2.getSelectionModel().getSelectedItem()));
+        Slot2.setOnAction(_ -> commonDataCollector.setSlot2(Slot2.getSelectionModel().getSelectedItem()));
         Slot3.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot3.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot3(Slot3.getSelectionModel().getSelectedItem()));
+        Slot3.setOnAction(_ -> commonDataCollector.setSlot3(Slot3.getSelectionModel().getSelectedItem()));
         Slot4.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot4.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot4(Slot4.getSelectionModel().getSelectedItem()));
+        Slot4.setOnAction(_ -> commonDataCollector.setSlot4(Slot4.getSelectionModel().getSelectedItem()));
         Slot5.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot5.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot5(Slot5.getSelectionModel().getSelectedItem()));
+        Slot5.setOnAction(_ -> commonDataCollector.setSlot5(Slot5.getSelectionModel().getSelectedItem()));
         Slot6.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot6.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot6(Slot6.getSelectionModel().getSelectedItem()));
+        Slot6.setOnAction(_ -> commonDataCollector.setSlot6(Slot6.getSelectionModel().getSelectedItem()));
         Slot7.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot7.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot7(Slot7.getSelectionModel().getSelectedItem()));
+        Slot7.setOnAction(_ -> commonDataCollector.setSlot7(Slot7.getSelectionModel().getSelectedItem()));
         Slot8.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot8.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot8(Slot8.getSelectionModel().getSelectedItem()));
+        Slot8.setOnAction(_ -> commonDataCollector.setSlot8(Slot8.getSelectionModel().getSelectedItem()));
         Slot9.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot9.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot9(Slot9.getSelectionModel().getSelectedItem()));
+        Slot9.setOnAction(_ -> commonDataCollector.setSlot9(Slot9.getSelectionModel().getSelectedItem()));
         Slot10.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot10.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot10(Slot10.getSelectionModel().getSelectedItem()));
+        Slot10.setOnAction(_ -> commonDataCollector.setSlot10(Slot10.getSelectionModel().getSelectedItem()));
         Slot11.getItems().addAll(LabwareDefinitions.getSupportedLabwareTypes());
-        Slot11.setOnAction(_ -> ddPCR_OptionsDataCollector.setSlot11(Slot11.getSelectionModel().getSelectedItem()));
+        Slot11.setOnAction(_ -> commonDataCollector.setSlot11(Slot11.getSelectionModel().getSelectedItem()));
 
         /*
         * Beginning of code for the Target Reagent information.

@@ -9,41 +9,13 @@
 package gupta_lab.beithir.Models;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableView;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class ddPCR_OptionsDataCollector {
     private static String versionNumber;
     private static String runModule;
     private static String errorClass;
-    private static String userName;
-    private static String runDate;
-    private static String LeftPipetteFirstTip;
-    private static String RightPipetteFirstTip;
-    private static String BottomOffset;
-    private static CheckBox useTemperatureModule = new CheckBox();
-    private static String setTemperature;
-    private static String pcrPlateSlot;
-    private static String dilutionPlateSlot;
-    private static String reagentSlot;
-    private static String waterReservoirWell;
-    private static String waterResVol;
-    private static String pcrVolume;
-    private static String masterMixPerRxn;
-    private static String dnaPerWell;
-    private static String Slot1;
-    private static String Slot2;
-    private static String Slot3;
-    private static String Slot4;
-    private static String Slot5;
-    private static String Slot6;
-    private static String Slot7;
-    private static String Slot8;
-    private static String Slot9;
-    private static String Slot10;
-    private static String Slot11;
+
     private static String target1Name;
     private static String target1Well;
     private static String target1Volume;
@@ -74,6 +46,7 @@ public class ddPCR_OptionsDataCollector {
     private static String target10Name;
     private static String target10Well;
     private static String target10Volume;
+
     private final SimpleStringProperty sampleSlot;
     private final SimpleStringProperty sampleWell;
     private final SimpleStringProperty sampleName;
@@ -126,39 +99,39 @@ public class ddPCR_OptionsDataCollector {
     }
     public static String fileName(){return "ddPCR Parameters";}
     public static String generateOptionsFile() {
-        returnString.append(runModule).append(getVersionNumber()).append("#Run Date:\t").append(runDate).append("\n").
-                append("--User\t").append(getUserName()).append("\n").
+        returnString.append(runModule).append(getVersionNumber()).append("#Run Date:\t").append(commonDataCollector.runDate).append("\n").
+                append("--User\t").append(commonDataCollector.getUserName()).append("\n").
 
                 append("\n# Deck Layout\n").
-                append("--Slot1\t").append(getSlot1()).
-                append("--Slot2\t").append(getSlot2()).
-                append("--Slot3\t").append(getSlot3()).
-                append("--Slot4\t").append(getSlot4()).
-                append("--Slot5\t").append(getSlot5()).
-                append("--Slot6\t").append(getSlot6()).
-                append("--Slot7\t").append(getSlot7()).
-                append("--Slot8\t").append(getSlot8()).
-                append("--Slot9\t").append(getSlot9()).
-                append("--Slot10\t").append(getSlot10()).
-                append("--Slot11\t").append(getSlot11()).
+                append("--Slot1\t").append(commonDataCollector.getSlot1()).
+                append("--Slot2\t").append(commonDataCollector.getSlot2()).
+                append("--Slot3\t").append(commonDataCollector.getSlot3()).
+                append("--Slot4\t").append(commonDataCollector.getSlot4()).
+                append("--Slot5\t").append(commonDataCollector.getSlot5()).
+                append("--Slot6\t").append(commonDataCollector.getSlot6()).
+                append("--Slot7\t").append(commonDataCollector.getSlot7()).
+                append("--Slot8\t").append(commonDataCollector.getSlot8()).
+                append("--Slot9\t").append(commonDataCollector.getSlot9()).
+                append("--Slot10\t").append(commonDataCollector.getSlot10()).
+                append("--Slot11\t").append(commonDataCollector.getSlot11()).
 
                 append("\n# Location of the first tip in pipette tip boxes and bottom offset value for tips\n").
-                append("--LeftPipetteFirstTip\t").append(getLeftPipetteFirstTip()).
-                append("--RightPipetteFirstTip\t").append(getRightPipetteFirstTip()).
-                append("--BottomOffset\t").append(getBottomOffset()).
+                append("--LeftPipetteFirstTip\t").append(commonDataCollector.getLeftPipetteFirstTip()).
+                append("--RightPipetteFirstTip\t").append(commonDataCollector.getRightPipetteFirstTip()).
+                append("--BottomOffset\t").append(commonDataCollector.getBottomOffset()).
                 append("\n# Temperature Module Settings\n").
-                append("--UseTemperatureModule\t").append(getUseTemperatureModule().isSelected() ? "True\n" : "False\n").
-                append("--Temperature\t").append(getSetTemperature()).
+                append("--UseTemperatureModule\t").append(commonDataCollector.getUseTemperatureModule().isSelected() ? "True\n" : "False\n").
+                append("--Temperature\t").append(commonDataCollector.getSetTemperature()).
 
                 append("\n# Location of Reagents and Volumes\n").
-                append("--PCR_PlateSlot\t").append(getPCR_PlateSlot()).
-                append("--DilutionPlateSlot\t").append(getDilutionPlateSlot()).
-                append("--ReagentSlot\t").append(getReagentSlot()).
-                append("--WaterResWell\t").append(getWaterReservoirWell()).
-                append("--WaterResVol\t").append(getWaterResVol()).
-                append("--PCR_Volume\t").append(getPCR_Volume()).
-                append("--MasterMixPerRxn\t").append(getMasterMixPerRxn()).
-                append("--DNA_in_Reaction\t").append(getDNAPerWell()).
+                append("--PCR_PlateSlot\t").append(commonDataCollector.getPCR_PlateSlot()).
+                append("--DilutionPlateSlot\t").append(commonDataCollector.getDilutionPlateSlot()).
+                append("--ReagentSlot\t").append(commonDataCollector.getReagentSlot()).
+                append("--WaterResWell\t").append(commonDataCollector.getWaterReservoirWell()).
+                append("--WaterResVol\t").append(commonDataCollector.getWaterResVol()).
+                append("--PCR_Volume\t").append(commonDataCollector.getPCR_Volume()).
+                append("--MasterMixPerRxn\t").append(commonDataCollector.getMasterMixPerRxn()).
+                append("--DNA_in_Reaction\t").append(commonDataCollector.getDNAPerWell()).
 
                 append("\n# Targets\n").
                 append("--Target1\t").append(getTarget1Name()).append(getTarget1Well()).append(getTarget1Volume()).
@@ -174,7 +147,7 @@ public class ddPCR_OptionsDataCollector {
 
                 append("\n# Samples\n").
                 append(sampleData);
-        System.out.println("User Name: " + getUserName() + "\nModule: " + runModule);
+        System.out.println("User Name: " + commonDataCollector.getUserName() + "\nModule: " + runModule);
         return returnString.toString();
     }
 
@@ -186,103 +159,6 @@ public class ddPCR_OptionsDataCollector {
 
     public static void setRunModule(String runModule) {
         ddPCR_OptionsDataCollector.runModule = runModule;}
-
-    private static String getUserName() {return userName;}
-    public static void setUserName(String userName) {
-        ddPCR_OptionsDataCollector.userName = userName;}
-
-    public static void getRunDate(String runDate) {
-        ddPCR_OptionsDataCollector.runDate = formatRunDate(runDate);}
-    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy");
-    public static String formatRunDate(String runDate) {
-        return LocalDate.parse(runDate, DateTimeFormatter.ISO_DATE).format(dateFormatter);
-    }
-
-    private static String getLeftPipetteFirstTip() {return LeftPipetteFirstTip+"\n"; }
-    public static void setLeftPipetteFirstTip(String leftPipetteFirstTip) {
-        ddPCR_OptionsDataCollector.LeftPipetteFirstTip = leftPipetteFirstTip;}
-
-    private static String getRightPipetteFirstTip() {return RightPipetteFirstTip+"\n"; }
-    public static void setRightPipetteFirstTip(String RightPipetteFirstTip) {
-        ddPCR_OptionsDataCollector.RightPipetteFirstTip = RightPipetteFirstTip;}
-
-    private static String getBottomOffset() {return BottomOffset+"\n";}
-    public static void setBottomOffset(String bottomOffset) {
-        ddPCR_OptionsDataCollector.BottomOffset = bottomOffset;}
-
-    private static String getSetTemperature() {if(setTemperature == null){return "\n";}else{return setTemperature+"\n";}}
-    public static void setSetTemperature(String setTemperature) {
-        ddPCR_OptionsDataCollector.setTemperature = setTemperature;}
-
-    private static CheckBox getUseTemperatureModule(){return useTemperatureModule;}
-    public static void setUseTemperatureModule(CheckBox useTemperatureModule){
-        ddPCR_OptionsDataCollector.useTemperatureModule = useTemperatureModule;}
-
-    private static String getPCR_PlateSlot(){return pcrPlateSlot+"\n";}
-    public static void setPCR_PlateSlot(String pcrPlateSlot){
-        ddPCR_OptionsDataCollector.pcrPlateSlot = pcrPlateSlot;}
-
-    private static String getDilutionPlateSlot(){return dilutionPlateSlot+"\n";}
-    public static void setDilutionPlateSlot(String dilutionPlateSlot){
-        ddPCR_OptionsDataCollector.dilutionPlateSlot = dilutionPlateSlot;}
-
-    private static String getReagentSlot(){return reagentSlot+"\n";}
-    public static void setReagentSlot(String reagentSlot){
-        ddPCR_OptionsDataCollector.reagentSlot = reagentSlot;}
-
-    private static String getWaterReservoirWell(){return waterReservoirWell+"\n";}
-    public static void setWaterReservoirWell(String waterReservoirWell){
-        ddPCR_OptionsDataCollector.waterReservoirWell = waterReservoirWell;}
-
-    private static String getWaterResVol(){return waterResVol+"\n";}
-    public static void setWaterResVol(String waterResVol){
-        ddPCR_OptionsDataCollector.waterResVol = waterResVol;}
-
-    private static String getPCR_Volume(){return pcrVolume+"\n";}
-    public static void setPCR_Volume(String pcrVolume){
-        ddPCR_OptionsDataCollector.pcrVolume = pcrVolume;}
-
-    private static String getMasterMixPerRxn(){return masterMixPerRxn+"\n";}
-    public static void setMasterMixPerRxn(String masterMixPerRxn){
-        ddPCR_OptionsDataCollector.masterMixPerRxn = masterMixPerRxn;}
-
-    private static String getDNAPerWell(){return dnaPerWell+"\n";}
-    public static void setDNAPerWell(String dnaPerWell){
-        ddPCR_OptionsDataCollector.dnaPerWell = dnaPerWell;}
-
-    public static String getSlot1() {if(Slot1 == null){return "\n";}else{return Slot1+"\n";}}
-    public static void setSlot1(String Slot1) {
-        ddPCR_OptionsDataCollector.Slot1 = Slot1;}
-    public static String getSlot2() {if(Slot2 == null){return "\n";}else{return Slot2+"\n";}}
-    public static void setSlot2(String Slot2) {
-        ddPCR_OptionsDataCollector.Slot2 = Slot2;}
-    public static String getSlot3() {if(Slot3 == null){return "\n";}else{return Slot3+"\n";}}
-    public static void setSlot3(String Slot3) {
-        ddPCR_OptionsDataCollector.Slot3 = Slot3;}
-    public static String getSlot4() {if(Slot4 == null){return "\n";}else{return Slot4+"\n";}}
-    public static void setSlot4(String Slot4) {
-        ddPCR_OptionsDataCollector.Slot4 = Slot4;}
-    public static String getSlot5() {if(Slot5 == null){return "\n";}else{return Slot5+"\n";}}
-    public static void setSlot5(String Slot5) {
-        ddPCR_OptionsDataCollector.Slot5 = Slot5;}
-    public static String getSlot6() {if(Slot6 == null){return "\n";}else{return Slot6+"\n";}}
-    public static void setSlot6(String Slot6) {
-        ddPCR_OptionsDataCollector.Slot6 = Slot6;}
-    public static String getSlot7() {if(Slot7 == null){return "\n";}else{return Slot7+"\n";}}
-    public static void setSlot7(String Slot7) {
-        ddPCR_OptionsDataCollector.Slot7 = Slot7;}
-    public static String getSlot8() {if(Slot8 == null){return "\n";}else{return Slot8+"\n";}}
-    public static void setSlot8(String Slot8) {
-        ddPCR_OptionsDataCollector.Slot8 = Slot8;}
-    public static String getSlot9() {if(Slot9 == null){return "\n";}else{return Slot9+"\n";}}
-    public static void setSlot9(String Slot9) {
-        ddPCR_OptionsDataCollector.Slot9 = Slot9;}
-    public static String getSlot10() {if(Slot10 == null){return "\n";}else{return Slot10+"\n";}}
-    public static void setSlot10(String Slot10) {
-        ddPCR_OptionsDataCollector.Slot10 = Slot10;}
-    public static String getSlot11() {if(Slot11 == null){return "\n";}else{return Slot11+"\n";}}
-    public static void setSlot11(String Slot11) {
-        ddPCR_OptionsDataCollector.Slot11 = Slot11;}
 
     private static String getTarget1Name() {if(target1Name == null){return "\n";}else{return target1Name+"\t";}}
     public static void setTarget1Name(String target1Name) {ddPCR_OptionsDataCollector.target1Name = target1Name;}

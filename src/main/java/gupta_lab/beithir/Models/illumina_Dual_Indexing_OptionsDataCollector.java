@@ -9,38 +9,34 @@
 package gupta_lab.beithir.Models;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableView;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class illumina_Dual_Indexing_OptionsDataCollector {
     private static String versionNumber;
     private static String runModule;
     public static String errorClass;
+    private static String indexPrimerSlot;
+    private static String primerD501;
+    private static String primerD502;
+    private static String primerD503;
+    private static String primerD504;
+    private static String primerD505;
+    private static String primerD506;
+    private static String primerD507;
+    private static String primerD508;
+    private static String primerD701;
+    private static String primerD702;
+    private static String primerD703;
+    private static String primerD704;
+    private static String primerD705;
+    private static String primerD706;
+    private static String primerD707;
+    private static String primerD708;
+    private static String primerD709;
+    private static String primerD710a;
+    private static String primerD711;
+    private static String primerD712;
 
-    private static String BottomOffset;
-    private static CheckBox useTemperatureModule = new CheckBox();
-    private static String setTemperature;
-    private static String pcrPlateSlot;
-    private static String dilutionPlateSlot;
-    private static String reagentSlot;
-    private static String waterReservoirWell;
-    private static String waterResVol;
-    private static String pcrVolume;
-    private static String masterMixPerRxn;
-    private static String dnaPerWell;
-    private static String Slot1;
-    private static String Slot2;
-    private static String Slot3;
-    private static String Slot4;
-    private static String Slot5;
-    private static String Slot6;
-    private static String Slot7;
-    private static String Slot8;
-    private static String Slot9;
-    private static String Slot10;
-    private static String Slot11;
 
     private final SimpleStringProperty sampleSlot;
     private final SimpleStringProperty sampleWell;
@@ -60,7 +56,6 @@ public class illumina_Dual_Indexing_OptionsDataCollector {
         this.sampleTargets = new SimpleStringProperty(sampleTargetsName);
         this.sampleReplicates = new SimpleStringProperty(sampleReplicatesValue);
     }
-
     public String getSampleSlot() {return sampleSlot.get();}
     public void setSampleSlot(String sampleSlotName) {sampleSlot.set(sampleSlotName);}
     public String getSampleWell() {return sampleWell.get();}
@@ -77,6 +72,7 @@ public class illumina_Dual_Indexing_OptionsDataCollector {
     private static final StringBuilder returnString = new StringBuilder();
     private static final StringBuilder sampleData = new StringBuilder();
 
+    public static String fileName(){return "Illumina Dual Indexing Parameters";}
 
     public static void processSampleData(TableView<illumina_Dual_Indexing_OptionsDataCollector> sampleTable) {
         sampleData.delete(0, sampleData.length());
@@ -95,61 +91,68 @@ public class illumina_Dual_Indexing_OptionsDataCollector {
         }
     }
 
-    public static String fileName(){return "Illumina Dual Indexing Parameters";}
     public static String generateOptionsFile() {
-        returnString.append(runModule).append(getVersionNumber()).append("#Run Date:\t").append(FirstTabDataCollector.runDate).append("\n").
-                append("--User\t").append(FirstTabDataCollector.getUserName()).append("\n").
+        returnString.append(runModule).append(getVersionNumber()).append("#Run Date:\t").append(commonDataCollector.runDate).append("\n").
+                append("--User\t").append(commonDataCollector.getUserName()).append("\n").
                 append("\n# Deck Layout\n").
-                append("--Slot1\t").append(getSlot1()).
-                append("--Slot2\t").append(getSlot2()).
-                append("--Slot3\t").append(getSlot3()).
-                append("--Slot4\t").append(getSlot4()).
-                append("--Slot5\t").append(getSlot5()).
-                append("--Slot6\t").append(getSlot6()).
-                append("--Slot7\t").append(getSlot7()).
-                append("--Slot8\t").append(getSlot8()).
-                append("--Slot9\t").append(getSlot9()).
-                append("--Slot10\t").append(getSlot10()).
-                append("--Slot11\t").append(getSlot11()).
+                append("--Slot1\t").append(commonDataCollector.getSlot1()).
+                append("--Slot2\t").append(commonDataCollector.getSlot2()).
+                append("--Slot3\t").append(commonDataCollector.getSlot3()).
+                append("--Slot4\t").append(commonDataCollector.getSlot4()).
+                append("--Slot5\t").append(commonDataCollector.getSlot5()).
+                append("--Slot6\t").append(commonDataCollector.getSlot6()).
+                append("--Slot7\t").append(commonDataCollector.getSlot7()).
+                append("--Slot8\t").append(commonDataCollector.getSlot8()).
+                append("--Slot9\t").append(commonDataCollector.getSlot9()).
+                append("--Slot10\t").append(commonDataCollector.getSlot10()).
+                append("--Slot11\t").append(commonDataCollector.getSlot11()).
 
                 append("\n# Location of the first tip in pipette tip boxes and bottom offset value for tips\n").
-                append("--LeftPipetteFirstTip\t").append(FirstTabDataCollector.getLeftPipetteFirstTip()).
-                append("--RightPipetteFirstTip\t").append(FirstTabDataCollector.RightPipetteFirstTip).
-                append("--BottomOffset\t").append(getBottomOffset()).
+                append("--LeftPipetteFirstTip\t").append(commonDataCollector.getLeftPipetteFirstTip()).
+                append("--RightPipetteFirstTip\t").append(commonDataCollector.getRightPipetteFirstTip()).
+                append("--BottomOffset\t").append(commonDataCollector.getBottomOffset()).
                 append("\n# Temperature Module Settings\n").
-                append("--UseTemperatureModule\t").append(getUseTemperatureModule().isSelected() ? "True\n" : "False\n").
-                append("--Temperature\t").append(getSetTemperature()).
+                append("--UseTemperatureModule\t").append(commonDataCollector.getUseTemperatureModule().isSelected() ? "True\n" : "False\n").
+                append("--Temperature\t").append(commonDataCollector.getSetTemperature()).
 
                 append("\n# Location of Reagents and Volumes\n").
-                append("--PCR_PlateSlot\t").append(getPCR_PlateSlot()).
-                append("--DilutionPlateSlot\t").append(getDilutionPlateSlot()).
-                append("--ReagentSlot\t").append(getReagentSlot()).
-                append("--WaterResWell\t").append(getWaterReservoirWell()).
-                append("--WaterResVol\t").append(getWaterResVol()).
-                append("--PCR_Volume\t").append(getPCR_Volume()).
-                append("--MasterMixPerRxn\t").append(getMasterMixPerRxn()).
-                append("--DNA_in_Reaction\t").append(getDNAPerWell()).
+                append("--PCR_PlateSlot\t").append(commonDataCollector.getPCR_PlateSlot()).
+                append("--DilutionPlateSlot\t").append(commonDataCollector.getDilutionPlateSlot()).
+                append("--ReagentSlot\t").append(commonDataCollector.getReagentSlot()).
+                append("--WaterResWell\t").append(commonDataCollector.getWaterReservoirWell()).
+                append("--WaterResVol\t").append(commonDataCollector.getWaterResVol()).
+                append("--PCR_Volume\t").append(commonDataCollector.getPCR_Volume()).
+                append("--MasterMixPerRxn\t").append(commonDataCollector.getMasterMixPerRxn()).
+                append("--DNA_in_Reaction\t").append(commonDataCollector.getDNAPerWell()).
 
                 append("\n# Indexing Primers\n").
-
+                append("--IndexPrimerSlot\t").append(getIndexPrimerSlot()).
+                append("--D501\t").append(getPrimerD501()).
+                append("--D502\t").append(getPrimerD502()).
+                append("--D503\t").append(getPrimerD503()).
+                append("--D504\t").append(getPrimerD504()).
+                append("--D505\t").append(getPrimerD505()).
+                append("--D506\t").append(getPrimerD506()).
+                append("--D507\t").append(getPrimerD507()).
+                append("--D508\t").append(getPrimerD508()).
+                append("--D701\t").append(getPrimerD701()).
+                append("--D702\t").append(getPrimerD702()).
+                append("--D703\t").append(getPrimerD703()).
+                append("--D704\t").append(getPrimerD704()).
+                append("--D705\t").append(getPrimerD705()).
+                append("--D706\t").append(getPrimerD706()).
+                append("--D707\t").append(getPrimerD707()).
+                append("--D708\t").append(getPrimerD708()).
+                append("--D709\t").append(getPrimerD709()).
+                append("--D710a\t").append(getPrimerD710a()).
+                append("--D711\t").append(getPrimerD711()).
+                append("--D712\t").append(getPrimerD712()).
 
                 append("\n# Samples\n").
                 append(sampleData);
-        System.out.println("User Name: " + FirstTabDataCollector.userName + "\nModule: " + runModule + "\nLeft Tip: " + FirstTabDataCollector.getLeftPipetteFirstTip());
+        // System.out.println("User Name: " + commonDataCollector.userName + "\nModule: " + runModule + "\nLeft Tip: " + commonDataCollector.getLeftPipetteFirstTip());
         return returnString.toString();
     }
-
-    /*append("--Target1\t").append(getTarget1Name()).append(getTarget1Well()).append(getTarget1Volume()).
-    append("--Target2\t").append(getTarget2Name()).append(getTarget2Well()).append(getTarget2Volume()).
-    append("--Target3\t").append(getTarget3Name()).append(getTarget3Well()).append(getTarget3Volume()).
-    append("--Target4\t").append(getTarget4Name()).append(getTarget4Well()).append(getTarget4Volume()).
-    append("--Target5\t").append(getTarget5Name()).append(getTarget5Well()).append(getTarget5Volume()).
-    append("--Target6\t").append(getTarget6Name()).append(getTarget6Well()).append(getTarget6Volume()).
-    append("--Target7\t").append(getTarget7Name()).append(getTarget7Well()).append(getTarget7Volume()).
-    append("--Target8\t").append(getTarget8Name()).append(getTarget8Well()).append(getTarget8Volume()).
-    append("--Target9\t").append(getTarget9Name()).append(getTarget9Well()).append(getTarget9Volume()).
-    append("--Target10\t").append(getTarget10Name()).append(getTarget10Well()).append(getTarget10Volume()).*/
-
 
     private static String getErrorClass() {return errorClass;}
     public static void setErrorClass(String errorClass){illumina_Dual_Indexing_OptionsDataCollector.errorClass = errorClass;}
@@ -160,84 +163,86 @@ public class illumina_Dual_Indexing_OptionsDataCollector {
     public static void setRunModule(String runModule) {
         illumina_Dual_Indexing_OptionsDataCollector.runModule = runModule;}
 
+    public static String getIndexPrimerSlot() {return indexPrimerSlot+"\n";}
+    public static void setIndexPrimerSlot(String indexPrimerSlot){illumina_Dual_Indexing_OptionsDataCollector.indexPrimerSlot = indexPrimerSlot;}
 
-    private static String getBottomOffset() {return BottomOffset+"\n";}
-    public static void setBottomOffset(String bottomOffset) {
-        illumina_Dual_Indexing_OptionsDataCollector.BottomOffset = bottomOffset;}
+    public static String getPrimerD501() {return primerD501+"\n";}
+    public static void setPrimerD501(String indexPrimerSlot){illumina_Dual_Indexing_OptionsDataCollector.primerD501 = primerD501;}
 
-    private static String getSetTemperature() {if(setTemperature == null){return "\n";}else{return setTemperature+"\n";}}
-    public static void setSetTemperature(String setTemperature) {
-        illumina_Dual_Indexing_OptionsDataCollector.setTemperature = setTemperature;}
+    public static String getPrimerD502() {return primerD502+"\n";}
+    public static void setPrimerD502(String indexPrimerSlot){illumina_Dual_Indexing_OptionsDataCollector.primerD502 = primerD502;}
 
-    private static CheckBox getUseTemperatureModule(){return useTemperatureModule;}
-    public static void setUseTemperatureModule(CheckBox useTemperatureModule){
-        illumina_Dual_Indexing_OptionsDataCollector.useTemperatureModule = useTemperatureModule;}
+    public static void setPrimerD503(String primerD503) {
+        illumina_Dual_Indexing_OptionsDataCollector.primerD503 = primerD503;
+    }
+    public static String getPrimerD503() {return primerD503+"\n";}
+    public static void setPrimerD504(String primerD504) {
+        illumina_Dual_Indexing_OptionsDataCollector.primerD504 = primerD504;
+    }
+    public static String getPrimerD504() {return primerD504+"\n";}
+    public static void setPrimerD505(String primerD505) {
+        illumina_Dual_Indexing_OptionsDataCollector.primerD505 = primerD505;
+    }
+    public static String getPrimerD505() {return primerD505+"\n";}
+    public static void setPrimerD506(String primerD506) {
+        illumina_Dual_Indexing_OptionsDataCollector.primerD506 = primerD506;
+    }
+    public static String getPrimerD506() {return primerD506+"\n";}
+    public static void setPrimerD507(String primerD507) {
+        illumina_Dual_Indexing_OptionsDataCollector.primerD507 = primerD507;
+    }
+    public static String getPrimerD507() {return primerD507+"\n";}
 
-    private static String getPCR_PlateSlot(){return pcrPlateSlot+"\n";}
-    public static void setPCR_PlateSlot(String pcrPlateSlot){
-        illumina_Dual_Indexing_OptionsDataCollector.pcrPlateSlot = pcrPlateSlot;}
-
-    private static String getDilutionPlateSlot(){return dilutionPlateSlot+"\n";}
-    public static void setDilutionPlateSlot(String dilutionPlateSlot){
-        illumina_Dual_Indexing_OptionsDataCollector.dilutionPlateSlot = dilutionPlateSlot;}
-
-    private static String getReagentSlot(){return reagentSlot+"\n";}
-    public static void setReagentSlot(String reagentSlot){
-        illumina_Dual_Indexing_OptionsDataCollector.reagentSlot = reagentSlot;}
-
-    private static String getWaterReservoirWell(){return waterReservoirWell+"\n";}
-    public static void setWaterReservoirWell(String waterReservoirWell){
-        illumina_Dual_Indexing_OptionsDataCollector.waterReservoirWell = waterReservoirWell;}
-
-    private static String getWaterResVol(){return waterResVol+"\n";}
-    public static void setWaterResVol(String waterResVol){
-        illumina_Dual_Indexing_OptionsDataCollector.waterResVol = waterResVol;}
-
-    private static String getPCR_Volume(){return pcrVolume+"\n";}
-    public static void setPCR_Volume(String pcrVolume){
-        illumina_Dual_Indexing_OptionsDataCollector.pcrVolume = pcrVolume;}
-
-    private static String getMasterMixPerRxn(){return masterMixPerRxn+"\n";}
-    public static void setMasterMixPerRxn(String masterMixPerRxn){
-        illumina_Dual_Indexing_OptionsDataCollector.masterMixPerRxn = masterMixPerRxn;}
-
-    private static String getDNAPerWell(){return dnaPerWell+"\n";}
-    public static void setDNAPerWell(String dnaPerWell){
-        illumina_Dual_Indexing_OptionsDataCollector.dnaPerWell = dnaPerWell;}
-
-    public static String getSlot1() {if(Slot1 == null){return "\n";}else{return Slot1+"\n";}}
-    public static void setSlot1(String Slot1) {
-        illumina_Dual_Indexing_OptionsDataCollector.Slot1 = Slot1;}
-    public static String getSlot2() {if(Slot2 == null){return "\n";}else{return Slot2+"\n";}}
-    public static void setSlot2(String Slot2) {
-        illumina_Dual_Indexing_OptionsDataCollector.Slot2 = Slot2;}
-    public static String getSlot3() {if(Slot3 == null){return "\n";}else{return Slot3+"\n";}}
-    public static void setSlot3(String Slot3) {
-        illumina_Dual_Indexing_OptionsDataCollector.Slot3 = Slot3;}
-    public static String getSlot4() {if(Slot4 == null){return "\n";}else{return Slot4+"\n";}}
-    public static void setSlot4(String Slot4) {
-        illumina_Dual_Indexing_OptionsDataCollector.Slot4 = Slot4;}
-    public static String getSlot5() {if(Slot5 == null){return "\n";}else{return Slot5+"\n";}}
-    public static void setSlot5(String Slot5) {
-        illumina_Dual_Indexing_OptionsDataCollector.Slot5 = Slot5;}
-    public static String getSlot6() {if(Slot6 == null){return "\n";}else{return Slot6+"\n";}}
-    public static void setSlot6(String Slot6) {
-        illumina_Dual_Indexing_OptionsDataCollector.Slot6 = Slot6;}
-    public static String getSlot7() {if(Slot7 == null){return "\n";}else{return Slot7+"\n";}}
-    public static void setSlot7(String Slot7) {
-        illumina_Dual_Indexing_OptionsDataCollector.Slot7 = Slot7;}
-    public static String getSlot8() {if(Slot8 == null){return "\n";}else{return Slot8+"\n";}}
-    public static void setSlot8(String Slot8) {
-        illumina_Dual_Indexing_OptionsDataCollector.Slot8 = Slot8;}
-    public static String getSlot9() {if(Slot9 == null){return "\n";}else{return Slot9+"\n";}}
-    public static void setSlot9(String Slot9) {
-        illumina_Dual_Indexing_OptionsDataCollector.Slot9 = Slot9;}
-    public static String getSlot10() {if(Slot10 == null){return "\n";}else{return Slot10+"\n";}}
-    public static void setSlot10(String Slot10) {
-        illumina_Dual_Indexing_OptionsDataCollector.Slot10 = Slot10;}
-    public static String getSlot11() {if(Slot11 == null){return "\n";}else{return Slot11+"\n";}}
-    public static void setSlot11(String Slot11) {
-        illumina_Dual_Indexing_OptionsDataCollector.Slot11 = Slot11;}
-
-
+    public static void setPrimerD508(String primerD508) {
+        illumina_Dual_Indexing_OptionsDataCollector.primerD508 = primerD508;
+    }
+    public static String getPrimerD508() {return primerD508+"\n";}
+    public static void setPrimerD701(String primerD701) {
+        illumina_Dual_Indexing_OptionsDataCollector.primerD701 = primerD701;
+    }
+    public static String getPrimerD701() {return primerD701+"\n";}
+    public static void setPrimerD702(String primerD702) {
+        illumina_Dual_Indexing_OptionsDataCollector.primerD702 = primerD702;
+    }
+    public static String getPrimerD702() {return primerD702+"\n";}
+    public static void setPrimerD703(String primerD703) {
+        illumina_Dual_Indexing_OptionsDataCollector.primerD703 = primerD703;
+    }
+    public static String getPrimerD703() {return primerD703+"\n";}
+    public static void setPrimerD704(String primerD704) {
+        illumina_Dual_Indexing_OptionsDataCollector.primerD704 = primerD704;
+    }
+    public static String getPrimerD704() {return primerD704+"\n";}
+    public static void setPrimerD705(String primerD705) {
+        illumina_Dual_Indexing_OptionsDataCollector.primerD705 = primerD705;
+    }
+    public static String getPrimerD705() {return primerD705+"\n";}
+    public static void setPrimerD706(String primerD706) {
+        illumina_Dual_Indexing_OptionsDataCollector.primerD706 = primerD706;
+    }
+    public static String getPrimerD706() {return primerD706+"\n";}
+    public static void setPrimerD707(String primerD707) {
+        illumina_Dual_Indexing_OptionsDataCollector.primerD707 = primerD707;
+    }
+    public static String getPrimerD707() {return primerD707+"\n";}
+    public static void setPrimerD708(String primerD708) {
+        illumina_Dual_Indexing_OptionsDataCollector.primerD708 = primerD708;
+    }
+    public static String getPrimerD708() {return primerD708+"\n";}
+    public static void setPrimerD709(String primerD709) {
+        illumina_Dual_Indexing_OptionsDataCollector.primerD709 = primerD709;
+    }
+    public static String getPrimerD709() {return primerD709+"\n";}
+    public static void setPrimerD710a(String primerD710a) {
+        illumina_Dual_Indexing_OptionsDataCollector.primerD710a = primerD710a;
+    }
+    public static String getPrimerD710a() {return primerD710a+"\n";}
+    public static void setPrimerD711(String primerD711) {
+        illumina_Dual_Indexing_OptionsDataCollector.primerD711 = primerD711;
+    }
+    public static String getPrimerD711() {return primerD711+"\n";}
+    public static void setPrimerD712(String primerD712) {
+        illumina_Dual_Indexing_OptionsDataCollector.primerD712 = primerD712;
+    }
+    public static String getPrimerD712() {return primerD712+"\n";}
 }
