@@ -2,6 +2,8 @@ module gupta_lab.beithir {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires javafx.base;
+    requires javafx.graphics;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
@@ -14,10 +16,11 @@ module gupta_lab.beithir {
     requires java.desktop;
 
     opens gupta_lab.beithir to javafx.fxml;
-    exports gupta_lab.beithir;
-    exports gupta_lab.beithir.Controllers;
     opens gupta_lab.beithir.Controllers to javafx.fxml;
-    opens gupta_lab.beithir.Models to javafx.base;
+
+    exports gupta_lab.beithir;
+
+
 
     uses gupta_lab.beithir.MainApp;
 

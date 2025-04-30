@@ -36,7 +36,7 @@ public class InputValidation {
         return m.matches();
     }
     public static Boolean textValidate(String str){
-        String pattern = "[~`!@#$%'^&*)(;:\"}{=+?.><,-]";
+        String pattern = "[~`!@#$%'^&*)(;:\"}{=+?.><,]";
         Pattern r = Pattern.compile(pattern);
         Matcher m = r.matcher(str);
         return !m.find();

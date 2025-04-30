@@ -301,11 +301,10 @@ public class ddPCR_VistaController implements Initializable{
         */
         target1Name.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!StringUtils.isBlank(target1Name.getText()) && textValidate(target1Name.getText())) {
-                target1Name.pseudoClassStateChanged(errorClass, false);
                 ddPCR_OptionsDataCollector.setTarget1Name(target1Name.getText());
+                target1Name.pseudoClassStateChanged(errorClass, false);
             } else {
                 target1Name.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget1Name(target1Name.getText());
             }
         });
         target1Well.textProperty().addListener((observable, oldValue, newValue) -> {
