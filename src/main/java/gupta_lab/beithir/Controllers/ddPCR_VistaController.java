@@ -162,7 +162,7 @@ public class ddPCR_VistaController implements Initializable{
         });
 
         if (RightPipetteFirstTip.getText().equalsIgnoreCase("A1")){
-            commonDataCollector.setLeftPipetteFirstTip("A1");
+            commonDataCollector.setRightPipetteFirstTip("A1");
         }
        RightPipetteFirstTip.textProperty().addListener((observable, oldValue, newValue) -> {
            commonDataCollector.setRightPipetteFirstTip(RightPipetteFirstTip.getText().toUpperCase());
@@ -188,8 +188,9 @@ public class ddPCR_VistaController implements Initializable{
 //      Selection for use of Temperature Module.  Set Temperature field is only active when the module is selected for use.
         useTemperatureModule.setSelected(false);
         setTemperature.disableProperty().bind(useTemperatureModule.selectedProperty().not());
-        commonDataCollector.setUseTemperatureModule(useTemperatureModule);
+
         setTemperature.textProperty().addListener((observable, oldValue, newValue) -> {
+            commonDataCollector.setSetTemperature(setTemperature.getText());
             if (!StringUtils.isNotEmpty(setTemperature.getText()) && numberValidate(setTemperature.getText())) {
                 setTemperature.pseudoClassStateChanged(errorClass, false);
             } else {
@@ -241,7 +242,7 @@ public class ddPCR_VistaController implements Initializable{
                 waterResVol.pseudoClassStateChanged(errorClass, true);
             }
         });
-
+        if (prcVolume.getText().equalsIgnoreCase("25")){commonDataCollector.setPCR_Volume("25");}
         prcVolume.textProperty().addListener((observable, oldValue, newValue) -> {
             commonDataCollector.setPCR_Volume(prcVolume.getText());
             if (!StringUtils.isBlank(prcVolume.getText()) && numberValidate(prcVolume.getText())) {

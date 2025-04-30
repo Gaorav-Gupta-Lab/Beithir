@@ -145,7 +145,7 @@ public class ddPCR_OptionsDataCollector {
                 append("\n--Target9\t").append(getTarget9Name()).append(getTarget9Well()).append(getTarget9Volume()).
                 append("\n--Target10\t").append(getTarget10Name()).append(getTarget10Well()).append(getTarget10Volume()).
 
-                append("\n# Samples\n").
+                append("\n\n# Samples\n").
                 append(sampleData);
         System.out.println("User Name: " + commonDataCollector.getUserName() + "\nModule: " + runModule);
         return returnString.toString();
