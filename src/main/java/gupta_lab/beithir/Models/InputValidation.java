@@ -23,6 +23,12 @@ public class InputValidation {
         Matcher m = r.matcher(value);
         return m.matches();
     }
+    public static Boolean targetValidate(String value){
+        String pattern = "([1-9]|10+,)";
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(value);
+        return m.matches();
+    }
     public static Boolean wellValidate(String value){
         String pattern = "[ABCD]([1-6])";
         Pattern r = Pattern.compile(pattern);

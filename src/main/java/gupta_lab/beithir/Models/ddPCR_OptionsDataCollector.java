@@ -134,16 +134,16 @@ public class ddPCR_OptionsDataCollector {
                 append("--DNA_in_Reaction\t").append(commonDataCollector.getDNAPerWell()).
 
                 append("\n# Targets\n").
-                append("--Target1\t").append(getTarget1Name()).append(getTarget1Well()).append(getTarget1Volume()).
-                append("\n--Target2\t").append(getTarget2Name()).append(getTarget2Well()).append(getTarget2Volume()).
-                append("\n--Target3\t").append(getTarget3Name()).append(getTarget3Well()).append(getTarget3Volume()).
-                append("\n--Target4\t").append(getTarget4Name()).append(getTarget4Well()).append(getTarget4Volume()).
-                append("\n--Target5\t").append(getTarget5Name()).append(getTarget5Well()).append(getTarget5Volume()).
-                append("\n--Target6\t").append(getTarget6Name()).append(getTarget6Well()).append(getTarget6Volume()).
-                append("\n--Target7\t").append(getTarget7Name()).append(getTarget7Well()).append(getTarget7Volume()).
-                append("\n--Target8\t").append(getTarget8Name()).append(getTarget8Well()).append(getTarget8Volume()).
-                append("\n--Target9\t").append(getTarget9Name()).append(getTarget9Well()).append(getTarget9Volume()).
-                append("\n--Target10\t").append(getTarget10Name()).append(getTarget10Well()).append(getTarget10Volume()).
+                append("--Target_1\t").append(getTarget1Name()).append(getTarget1Well()).append(getTarget1Volume()).
+                append("\n--Target_2\t").append(getTarget2Name()).append(getTarget2Well()).append(getTarget2Volume()).
+                append("\n--Target_3\t").append(getTarget3Name()).append(getTarget3Well()).append(getTarget3Volume()).
+                append("\n--Target_4\t").append(getTarget4Name()).append(getTarget4Well()).append(getTarget4Volume()).
+                append("\n--Target_5\t").append(getTarget5Name()).append(getTarget5Well()).append(getTarget5Volume()).
+                append("\n--Target_6\t").append(getTarget6Name()).append(getTarget6Well()).append(getTarget6Volume()).
+                append("\n--Target_7\t").append(getTarget7Name()).append(getTarget7Well()).append(getTarget7Volume()).
+                append("\n--Target_8\t").append(getTarget8Name()).append(getTarget8Well()).append(getTarget8Volume()).
+                append("\n--Target_9\t").append(getTarget9Name()).append(getTarget9Well()).append(getTarget9Volume()).
+                append("\n--Target_10\t").append(getTarget10Name()).append(getTarget10Well()).append(getTarget10Volume()).
 
                 append("\n\n# Samples\n").
                 append(sampleData);

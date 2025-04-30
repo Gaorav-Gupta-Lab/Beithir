@@ -3,7 +3,7 @@
  * Package loosely based on GitHub Gist (https://gist.github.com/jewelsea/6460130).
  * @author Dennis A. Simpson
  * @since March 2025
- * @version 0.9.0
+ * @version 0.10.0
  */
 
 package gupta_lab.beithir.Controllers;
@@ -28,6 +28,8 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Locale;
 
 public class ddPCR_VistaController implements Initializable{
     //Required Parameters tab
@@ -134,6 +136,12 @@ public class ddPCR_VistaController implements Initializable{
         waterResVol.pseudoClassStateChanged(errorClass, true);
         masterMixPerRxn.pseudoClassStateChanged(errorClass, true);
         dnaPerWell.pseudoClassStateChanged(errorClass, true);
+        addSampleInformationButton.pseudoClassStateChanged(errorClass, true);
+        addSampleWell.pseudoClassStateChanged(errorClass, true);
+        addSampleName.pseudoClassStateChanged(errorClass, true);
+        addSampleConcentration.pseudoClassStateChanged(errorClass, true);
+        addSampleTargets.pseudoClassStateChanged(errorClass, true);
+        addSampleReplicates.pseudoClassStateChanged(errorClass, true);
 
         ddPCR_OptionsDataCollector.setVersionString(versionNumber.getText());
         ddPCR_OptionsDataCollector.setRunModule("#ddPCR Parameters\t");
@@ -604,10 +612,55 @@ public class ddPCR_VistaController implements Initializable{
             }
         });
 
+        /*
+         * Apply error checking to samples.
+         * */
+        addSampleSlot.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(addSampleSlot.getText()) && slotValidate(addSampleSlot.getText())) {
+                addSampleSlot.pseudoClassStateChanged(errorClass, false);
+            } else {
+                addSampleSlot.pseudoClassStateChanged(errorClass, true);
+            }
+        });
+        addSampleWell.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(addSampleWell.getText()) && wellValidate(addSampleWell.getText())) {
+                addSampleWell.pseudoClassStateChanged(errorClass, false);
+            } else {
+                addSampleWell.pseudoClassStateChanged(errorClass, true);
+            }
+        });
+        addSampleName.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(addSampleName.getText())) {
+                addSampleName.pseudoClassStateChanged(errorClass, false);
+            } else {
+                addSampleName.pseudoClassStateChanged(errorClass, true);
+            }
+        });
+        addSampleConcentration.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(addSampleConcentration.getText()) && numberValidate(addSampleConcentration.getText())) {
+                addSampleConcentration.pseudoClassStateChanged(errorClass, false);
+            } else {
+                addSampleConcentration.pseudoClassStateChanged(errorClass, true);
+            }
+        });
+        addSampleTargets.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(addSampleTargets.getText()) && targetValidate(addSampleConcentration.getText())) {
+                addSampleTargets.pseudoClassStateChanged(errorClass, false);
+            } else {
+                addSampleTargets.pseudoClassStateChanged(errorClass, true);
+            }
+        });
+        addSampleReplicates.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(addSampleReplicates.getText()) && numberValidate(addSampleReplicates.getText())) {
+                addSampleReplicates.pseudoClassStateChanged(errorClass, false);
+            } else {
+                addSampleReplicates.pseudoClassStateChanged(errorClass, true);
+            }
+        });
         addSampleInformationButton.setOnAction(_ -> {
             sampleData.add(new ddPCR_OptionsDataCollector(
                     addSampleSlot.getText(),
-                    addSampleWell.getText(),
+                    addSampleWell.getText().toUpperCase(),
                     addSampleName.getText(),
                     addSampleConcentration.getText(),
                     addSampleTargets.getText(),
