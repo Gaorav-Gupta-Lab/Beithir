@@ -3,7 +3,7 @@
  * Package loosely based on GitHub Gist (https://gist.github.com/jewelsea/6460130).
  * @author Dennis A. Simpson
  * @since April 2025
- * @version 0.8.1
+ * @version 0.9.0
  */
 
 package gupta_lab.beithir.Controllers;
@@ -114,6 +114,11 @@ public class Illumina_Dual_Indexing_VistaController implements Initializable {
         waterResVol.pseudoClassStateChanged(errorClass, true);
         masterMixPerRxn.pseudoClassStateChanged(errorClass, true);
         dnaPerWell.pseudoClassStateChanged(errorClass, true);
+        addSampleSlot.pseudoClassStateChanged(errorClass, true);
+        addSampleWell.pseudoClassStateChanged(errorClass, true);
+        addSampleName.pseudoClassStateChanged(errorClass, true);
+        addSampleConcentration.pseudoClassStateChanged(errorClass, true);
+        addSampleTargets.pseudoClassStateChanged(errorClass, true);
 
         illumina_Dual_Indexing_OptionsDataCollector.setVersionString(versionNumber.getText());
         illumina_Dual_Indexing_OptionsDataCollector.setRunModule("#Illumina Dual Indexing Parameters\t");
@@ -132,7 +137,7 @@ public class Illumina_Dual_Indexing_VistaController implements Initializable {
 
         if (LeftPipetteFirstTip.getText().equalsIgnoreCase("A1")){
             commonDataCollector.setLeftPipetteFirstTip("A1");
-            System.out.println("Left Tip: "+LeftPipetteFirstTip.getText().toUpperCase());
+            // System.out.println("Left Tip: "+LeftPipetteFirstTip.getText().toUpperCase());
         }
         LeftPipetteFirstTip.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             if (!StringUtils.isBlank(LeftPipetteFirstTip.getText()) && firstTipLocationValidate(LeftPipetteFirstTip.getText())) {
@@ -159,7 +164,7 @@ public class Illumina_Dual_Indexing_VistaController implements Initializable {
         //System.out.println(numberValidate(BottomOffset.getText()));
         if (BottomOffset.getText().equalsIgnoreCase("1.0")){
             commonDataCollector.setBottomOffset("1.0");
-            System.out.println("Bottom Offset: "+BottomOffset.getText());
+            // System.out.println("Bottom Offset: "+BottomOffset.getText());
         }
         BottomOffset.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!StringUtils.isBlank(BottomOffset.getText()) && numberValidate(BottomOffset.getText())) {
@@ -374,6 +379,44 @@ public class Illumina_Dual_Indexing_VistaController implements Initializable {
             }
         });
 
+        /*
+         * Apply error checking to samples.
+         * */
+        addSampleSlot.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(addSampleSlot.getText()) && slotValidate(addSampleSlot.getText())) {
+                addSampleSlot.pseudoClassStateChanged(errorClass, false);
+            } else {
+                addSampleSlot.pseudoClassStateChanged(errorClass, true);
+            }
+        });
+        addSampleWell.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(addSampleWell.getText()) && wellValidate(addSampleWell.getText())) {
+                addSampleWell.pseudoClassStateChanged(errorClass, false);
+            } else {
+                addSampleWell.pseudoClassStateChanged(errorClass, true);
+            }
+        });
+        addSampleName.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(addSampleName.getText())) {
+                addSampleName.pseudoClassStateChanged(errorClass, false);
+            } else {
+                addSampleName.pseudoClassStateChanged(errorClass, true);
+            }
+        });
+        addSampleConcentration.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(addSampleConcentration.getText()) && numberValidate(addSampleConcentration.getText())) {
+                addSampleConcentration.pseudoClassStateChanged(errorClass, false);
+            } else {
+                addSampleConcentration.pseudoClassStateChanged(errorClass, true);
+            }
+        });
+        addSampleTargets.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isBlank(addSampleTargets.getText()) && targetValidate(addSampleConcentration.getText())) {
+                addSampleTargets.pseudoClassStateChanged(errorClass, false);
+            } else {
+                addSampleTargets.pseudoClassStateChanged(errorClass, true);
+            }
+        });
         addSampleInformationButton.setOnAction(_ -> {
             sampleData.add(new illumina_Dual_Indexing_OptionsDataCollector(
                     addSampleSlot.getText(),
