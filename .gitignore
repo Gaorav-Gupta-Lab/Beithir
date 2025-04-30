@@ -32,3 +32,4 @@ out/
 # Build directory
 target/
 
+!/out/

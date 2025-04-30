@@ -3,7 +3,7 @@
  * Package loosely based on GitHub Gist (https://gist.github.com/jewelsea/6460130).
  * @author Dennis A. Simpson
  * @since March 2025
- * @version 0.8.0
+ * @version 0.9.0
  */
 
 package gupta_lab.beithir.Controllers;
@@ -114,12 +114,10 @@ public class ddPCR_VistaController implements Initializable{
     private final ObservableList<ddPCR_OptionsDataCollector> sampleData = FXCollections.observableArrayList();
 
     /*
-    * debugging code to add some data to the sampleTable.  Will remove in future version.
+    * debugging code to add some data to the sampleTable.  Will remove in a future version.
     *
     private final ObservableList<OptionsDataCollector> sampleData = FXCollections.observableArrayList(
-            new OptionsDataCollector(
-                    "Slot", "Well", "My Awesome  Sample",
-                    "27.9", "1,2", "1")
+            new OptionsDataCollector("Slot", "Well", "My Awesome Sample", "27.9", "1,2", "1")
     );
     */
 
@@ -143,12 +141,11 @@ public class ddPCR_VistaController implements Initializable{
         runDate.setOnAction(_ -> commonDataCollector.getRunDate(runDate.getValue().toString()));
 
         userName.textProperty().addListener((observable, oldValue, newValue) -> {
+            commonDataCollector.setUserName(userName.getText());
             if (!StringUtils.isBlank(userName.getText()) && textValidate(userName.getText())) {
                 userName.pseudoClassStateChanged(errorClass, false);
-                commonDataCollector.setUserName(userName.getText());
             } else {
                 userName.pseudoClassStateChanged(errorClass, true);
-                commonDataCollector.setUserName(userName.getText());
             }
         });
 
@@ -156,12 +153,11 @@ public class ddPCR_VistaController implements Initializable{
             commonDataCollector.setLeftPipetteFirstTip("A1");
         }
         LeftPipetteFirstTip.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!StringUtils.isBlank(LeftPipetteFirstTip.getText()) && firstTipLocationValidate(LeftPipetteFirstTip.getText())) {
+            commonDataCollector.setLeftPipetteFirstTip(LeftPipetteFirstTip.getText().toUpperCase());
+            if (!StringUtils.isBlank(LeftPipetteFirstTip.getText()) && firstTipLocationValidate(LeftPipetteFirstTip.getText().toUpperCase())) {
                 LeftPipetteFirstTip.pseudoClassStateChanged(errorClass, false);
-                commonDataCollector.setLeftPipetteFirstTip(LeftPipetteFirstTip.getText().toUpperCase());
             } else {
                 LeftPipetteFirstTip.pseudoClassStateChanged(errorClass, true);
-                commonDataCollector.setLeftPipetteFirstTip(LeftPipetteFirstTip.getText());
             }
         });
 
@@ -169,10 +165,9 @@ public class ddPCR_VistaController implements Initializable{
             commonDataCollector.setLeftPipetteFirstTip("A1");
         }
        RightPipetteFirstTip.textProperty().addListener((observable, oldValue, newValue) -> {
-
-           if (!StringUtils.isBlank(RightPipetteFirstTip.getText()) && firstTipLocationValidate(RightPipetteFirstTip.getText())) {
+           commonDataCollector.setRightPipetteFirstTip(RightPipetteFirstTip.getText().toUpperCase());
+           if (!StringUtils.isBlank(RightPipetteFirstTip.getText()) && firstTipLocationValidate(RightPipetteFirstTip.getText().toUpperCase())) {
                RightPipetteFirstTip.pseudoClassStateChanged(errorClass, false);
-               commonDataCollector.setRightPipetteFirstTip(RightPipetteFirstTip.getText().toUpperCase());
            } else {
                RightPipetteFirstTip.pseudoClassStateChanged(errorClass, true);
            }
@@ -182,9 +177,9 @@ public class ddPCR_VistaController implements Initializable{
             commonDataCollector.setBottomOffset("1.0");
         }
         BottomOffset.textProperty().addListener((observable, oldValue, newValue) -> {
+            commonDataCollector.setBottomOffset(BottomOffset.getText());
             if (!StringUtils.isBlank(BottomOffset.getText()) && numberValidate(BottomOffset.getText())) {
                 BottomOffset.pseudoClassStateChanged(errorClass, false);
-                commonDataCollector.setBottomOffset(BottomOffset.getText());
             } else {
                 BottomOffset.pseudoClassStateChanged(errorClass, true);
             }
@@ -195,45 +190,83 @@ public class ddPCR_VistaController implements Initializable{
         setTemperature.disableProperty().bind(useTemperatureModule.selectedProperty().not());
         commonDataCollector.setUseTemperatureModule(useTemperatureModule);
         setTemperature.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!StringUtils.isNotEmpty(setTemperature.getText()) && textValidate(setTemperature.getText())) {
+            if (!StringUtils.isNotEmpty(setTemperature.getText()) && numberValidate(setTemperature.getText())) {
                 setTemperature.pseudoClassStateChanged(errorClass, false);
-                commonDataCollector.setSetTemperature(setTemperature.getText());
             } else {
                 setTemperature.pseudoClassStateChanged(errorClass, true);
-                commonDataCollector.setSetTemperature(setTemperature.getText());
             }
         });
 
         pcrPlateSlot.textProperty().addListener((observable, oldValue, newValue) -> {
             commonDataCollector.setPCR_PlateSlot(pcrPlateSlot.getText());
+            if (!StringUtils.isBlank(pcrPlateSlot.getText()) && slotValidate(pcrPlateSlot.getText())) {
+                pcrPlateSlot.pseudoClassStateChanged(errorClass, false);
+            }else {
+                pcrPlateSlot.pseudoClassStateChanged(errorClass, true);
+            }
         });
 
         dilutionPlateSlot.textProperty().addListener((observable, oldValue, newValue) -> {
             commonDataCollector.setDilutionPlateSlot(dilutionPlateSlot.getText());
+            if (!StringUtils.isBlank(dilutionPlateSlot.getText()) && slotValidate(dilutionPlateSlot.getText())) {
+                dilutionPlateSlot.pseudoClassStateChanged(errorClass, false);
+            }else {
+                dilutionPlateSlot.pseudoClassStateChanged(errorClass, true);
+            }
         });
 
         reagentSlot.textProperty().addListener((observable, oldValue, newValue) -> {
             commonDataCollector.setReagentSlot(reagentSlot.getText());
+            if (!StringUtils.isBlank(reagentSlot.getText()) && slotValidate(reagentSlot.getText())) {
+                reagentSlot.pseudoClassStateChanged(errorClass, false);
+            }else {
+                reagentSlot.pseudoClassStateChanged(errorClass, true);
+            }
         });
 
         waterReservoirWell.textProperty().addListener((observable, oldValue, newValue) -> {
-            commonDataCollector.setWaterReservoirWell(waterReservoirWell.getText());
+            commonDataCollector.setWaterReservoirWell(waterReservoirWell.getText().toUpperCase());
+            if (!StringUtils.isBlank(waterReservoirWell.getText()) && wellValidate(waterReservoirWell.getText().toUpperCase())) {
+                waterReservoirWell.pseudoClassStateChanged(errorClass, false);
+            }else {
+                waterReservoirWell.pseudoClassStateChanged(errorClass, true);
+            }
         });
 
         waterResVol.textProperty().addListener((observable, oldValue, newValue) -> {
             commonDataCollector.setWaterResVol(waterResVol.getText());
+            if (!StringUtils.isBlank(waterResVol.getText()) && numberValidate(waterResVol.getText())) {
+                waterResVol.pseudoClassStateChanged(errorClass, false);
+            }else {
+                waterResVol.pseudoClassStateChanged(errorClass, true);
+            }
         });
 
         prcVolume.textProperty().addListener((observable, oldValue, newValue) -> {
             commonDataCollector.setPCR_Volume(prcVolume.getText());
+            if (!StringUtils.isBlank(prcVolume.getText()) && numberValidate(prcVolume.getText())) {
+                prcVolume.pseudoClassStateChanged(errorClass, false);
+            }else {
+                prcVolume.pseudoClassStateChanged(errorClass, true);
+            }
         });
 
         masterMixPerRxn.textProperty().addListener((observable, oldValue, newValue) -> {
             commonDataCollector.setMasterMixPerRxn(masterMixPerRxn.getText());
+            if (!StringUtils.isBlank(masterMixPerRxn.getText()) && numberValidate(masterMixPerRxn.getText())) {
+                masterMixPerRxn.pseudoClassStateChanged(errorClass, false);
+            }else {
+                masterMixPerRxn.pseudoClassStateChanged(errorClass, true);
+            }
         });
 
         dnaPerWell.textProperty().addListener((observable, oldValue, newValue) -> {
             commonDataCollector.setDNAPerWell(dnaPerWell.getText());
+            if (!StringUtils.isBlank(dnaPerWell.getText()) && numberValidate(dnaPerWell.getText())) {
+                dnaPerWell.pseudoClassStateChanged(errorClass, false);
+            }else {
+                dnaPerWell.pseudoClassStateChanged(errorClass, true);
+            }
         });
 
        /*
@@ -275,264 +308,235 @@ public class ddPCR_VistaController implements Initializable{
             }
         });
         target1Well.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget1Well(target1Well.getText().toUpperCase());
             if (!StringUtils.isBlank(target1Well.getText()) && wellValidate(target1Well.getText())) {
                 target1Well.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget1Well(target1Well.getText());
             } else {
                 target1Well.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget1Well(target1Well.getText());
             }
         });
         target1Volume.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget1Volume(target1Volume.getText());
             if (!StringUtils.isBlank(target1Volume.getText()) && numberValidate(target1Volume.getText())) {
                 target1Volume.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget1Volume(target1Volume.getText());
             } else {
                 target1Volume.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget1Volume(target1Volume.getText());
             }
         });
         target2Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget2Name(target2Name.getText());
             if (!StringUtils.isBlank(target2Name.getText()) && textValidate(target2Name.getText())) {
                 target2Name.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget2Name(target2Name.getText());
             } else {
                 target2Name.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget2Name(target2Name.getText());
             }
         });
         target2Well.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget2Well(target2Well.getText().toUpperCase());
             if (!StringUtils.isBlank(target2Well.getText()) && wellValidate(target2Well.getText())) {
                 target2Well.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget2Well(target2Well.getText());
             } else {
                 target2Well.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget2Well(target2Well.getText());
             }
         });
         target2Volume.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget2Volume(target2Volume.getText());
             if (!StringUtils.isBlank(target2Volume.getText()) && numberValidate(target2Volume.getText())) {
                 target2Volume.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget2Volume(target2Volume.getText());
             } else {
                 target2Volume.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget2Volume(target2Volume.getText());
             }
         });
         target3Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget3Name(target3Name.getText());
             if (!StringUtils.isBlank(target3Name.getText()) && textValidate(target3Name.getText())) {
                 target3Name.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget3Name(target3Name.getText());
             } else {
                 target3Name.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget3Name(target3Name.getText());
             }
         });
         target3Well.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget3Well(target3Well.getText().toUpperCase());
             if (!StringUtils.isBlank(target3Well.getText()) && wellValidate(target3Well.getText())) {
                 target3Well.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget3Well(target3Well.getText());
             } else {
                 target3Well.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget3Well(target3Well.getText());
             }
         });
         target3Volume.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget3Volume(target3Volume.getText());
             if (!StringUtils.isBlank(target3Volume.getText()) && numberValidate(target3Volume.getText())) {
                 target3Volume.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget3Volume(target3Volume.getText());
             } else {
                 target3Volume.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget3Volume(target3Volume.getText());
             }
         });
         target4Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget4Name(target4Name.getText());
             if (!StringUtils.isBlank(target4Name.getText()) && textValidate(target4Name.getText())) {
                 target4Name.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget4Name(target4Name.getText());
             } else {
                 target4Name.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget4Name(target4Name.getText());
             }
         });
         target4Well.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget4Well(target4Well.getText().toUpperCase());
             if (!StringUtils.isBlank(target4Well.getText()) && wellValidate(target4Well.getText())) {
                 target4Well.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget4Well(target4Well.getText());
             } else {
                 target4Well.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget4Well(target4Well.getText());
             }
         });
         target4Volume.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget4Volume(target4Volume.getText());
             if (!StringUtils.isBlank(target4Volume.getText()) && numberValidate(target4Volume.getText())) {
                 target4Volume.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget4Volume(target4Volume.getText());
             } else {
                 target4Volume.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget4Volume(target4Volume.getText());
             }
         });
         target5Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget5Name(target5Name.getText());
             if (!StringUtils.isBlank(target5Name.getText()) && textValidate(target5Name.getText())) {
                 target5Name.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget5Name(target5Name.getText());
             } else {
                 target5Name.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget5Name(target5Name.getText());
             }
         });
         target5Well.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget5Well(target5Well.getText().toUpperCase());
             if (!StringUtils.isBlank(target5Well.getText()) && wellValidate(target5Well.getText())) {
                 target5Well.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget5Well(target5Well.getText());
             } else {
                 target5Well.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget5Well(target5Well.getText());
             }
         });
         target5Volume.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget5Volume(target5Volume.getText());
             if (!StringUtils.isBlank(target5Volume.getText()) && numberValidate(target5Volume.getText())) {
                 target5Volume.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget5Volume(target5Volume.getText());
             } else {
                 target5Volume.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget5Volume(target5Volume.getText());
             }
         });
         target6Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget6Name(target6Name.getText());
             if (!StringUtils.isBlank(target6Name.getText()) && textValidate(target6Name.getText())) {
                 target6Name.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget6Name(target6Name.getText());
             } else {
                 target6Name.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget6Name(target6Name.getText());
             }
         });
         target6Well.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget6Well(target6Well.getText().toUpperCase());
             if (!StringUtils.isBlank(target6Well.getText()) && wellValidate(target6Well.getText())) {
                 target6Well.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget6Well(target6Well.getText());
             } else {
                 target6Well.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget6Well(target6Well.getText());
             }
         });
         target6Volume.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget6Volume(target6Volume.getText());
             if (!StringUtils.isBlank(target6Volume.getText()) && numberValidate(target6Volume.getText())) {
                 target6Volume.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget6Volume(target6Volume.getText());
             } else {
                 target6Volume.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget6Volume(target6Volume.getText());
             }
         });
         target7Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget7Name(target7Name.getText());
             if (!StringUtils.isBlank(target7Name.getText()) && textValidate(target7Name.getText())) {
                 target7Name.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget7Name(target7Name.getText());
             } else {
                 target7Name.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget7Name(target7Name.getText());
             }
         });
         target7Well.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget7Well(target7Well.getText().toUpperCase());
             if (!StringUtils.isBlank(target7Well.getText()) && wellValidate(target7Well.getText())) {
                 target7Well.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget7Well(target7Well.getText());
             } else {
                 target7Well.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget7Well(target7Well.getText());
             }
         });
         target7Volume.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget7Volume(target7Volume.getText());
             if (!StringUtils.isBlank(target7Volume.getText()) && numberValidate(target7Volume.getText())) {
                 target7Volume.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget7Volume(target7Volume.getText());
             } else {
                 target7Volume.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget7Volume(target7Volume.getText());
             }
         });
         target8Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget8Name(target8Name.getText());
             if (!StringUtils.isBlank(target8Name.getText()) && textValidate(target8Name.getText())) {
                 target8Name.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget8Name(target8Name.getText());
             } else {
                 target8Name.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget8Name(target8Name.getText());
             }
         });
         target8Well.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget8Well(target8Well.getText().toUpperCase());
             if (!StringUtils.isBlank(target8Well.getText()) && wellValidate(target8Well.getText())) {
                 target8Well.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget8Well(target8Well.getText());
             } else {
                 target8Well.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget8Well(target8Well.getText());
             }
         });
         target8Volume.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget8Volume(target8Volume.getText());
             if (!StringUtils.isBlank(target8Volume.getText()) && numberValidate(target8Volume.getText())) {
                 target8Volume.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget8Volume(target8Volume.getText());
             } else {
                 target8Volume.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget8Volume(target8Volume.getText());
             }
         });
         target9Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget9Name(target9Name.getText());
             if (!StringUtils.isBlank(target9Name.getText()) && textValidate(target9Name.getText())) {
                 target9Name.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget9Name(target9Name.getText());
             } else {
                 target9Name.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget9Name(target9Name.getText());
             }
         });
         target9Well.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget9Well(target9Well.getText().toUpperCase());
             if (!StringUtils.isBlank(target9Well.getText()) && wellValidate(target9Well.getText())) {
                 target9Well.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget9Well(target9Well.getText());
             } else {
                 target9Well.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget9Well(target9Well.getText());
             }
         });
         target9Volume.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget9Volume(target9Volume.getText());
             if (!StringUtils.isBlank(target9Volume.getText()) && numberValidate(target9Volume.getText())) {
                 target9Volume.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget9Volume(target9Volume.getText());
             } else {
                 target9Volume.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget9Volume(target9Volume.getText());
             }
         });
         target10Name.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget10Name(target10Name.getText());
             if (!StringUtils.isBlank(target10Name.getText()) && textValidate(target10Name.getText())) {
                 target10Name.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget10Name(target10Name.getText());
             } else {
                 target10Name.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget10Name(target10Name.getText());
             }
         });
         target10Well.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget10Well(target10Well.getText().toUpperCase());
             if (!StringUtils.isBlank(target10Well.getText()) && wellValidate(target10Well.getText())) {
                 target10Well.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget10Well(target10Well.getText());
             } else {
                 target10Well.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget10Well(target10Well.getText());
             }
         });
         target10Volume.textProperty().addListener((observable, oldValue, newValue) -> {
+            ddPCR_OptionsDataCollector.setTarget10Volume(target10Volume.getText());
             if (!StringUtils.isBlank(target10Volume.getText()) && numberValidate(target10Volume.getText())) {
                 target10Volume.pseudoClassStateChanged(errorClass, false);
-                ddPCR_OptionsDataCollector.setTarget1Volume(target10Volume.getText());
             } else {
                 target10Volume.pseudoClassStateChanged(errorClass, true);
-                ddPCR_OptionsDataCollector.setTarget10Volume(target10Volume.getText());
             }
         });
 
