@@ -2,6 +2,9 @@
   <artifact type="jar" build-on-make="true" name="Beithir:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Beithir_jar</output-path>
     <root id="archive" name="Beithir.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/../javafx-sdk-24.0.1/META-INF/MANIFEST.MF" />
+      </element>
       <element id="module-output" name="Beithir" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/commons-io/commons-io/2.18.0/commons-io-2.18.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.17.2/commons-codec-1.17.2.jar" path-in-jar="/" />

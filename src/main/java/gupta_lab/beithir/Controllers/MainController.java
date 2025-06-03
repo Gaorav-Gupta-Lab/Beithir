@@ -25,6 +25,7 @@ public class MainController {
     @FXML private MenuItem fileSave;
     @FXML private MenuItem programExit;
     @FXML private MenuItem ddPCR;
+
     private boolean savingDdPCRdata = false;
     private boolean savingIlluminaDualIndexingData = false;
 
