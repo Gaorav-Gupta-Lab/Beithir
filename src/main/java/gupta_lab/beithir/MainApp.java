@@ -3,7 +3,7 @@
  * Package loosely based on GitHub Gist (https://gist.github.com/jewelsea/6460130).
  * @author Dennis A. Simpson
  * @since March 2025
- * @version 0.10.0
+ * @version 0.10.1
  */
 
 package gupta_lab.beithir;

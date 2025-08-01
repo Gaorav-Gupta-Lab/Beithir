@@ -3,7 +3,7 @@
  * Package loosely based on GitHub Gist (https://gist.github.com/jewelsea/6460130).
  * @author Dennis A. Simpson
  * @since March 2025
- * @version 0.10.0
+ * @version 0.10.3
  */
 
 package gupta_lab.beithir.Controllers;
@@ -144,7 +144,7 @@ public class ddPCR_VistaController implements Initializable{
         addSampleReplicates.pseudoClassStateChanged(errorClass, true);
 
         ddPCR_OptionsDataCollector.setVersionString(versionNumber.getText());
-        ddPCR_OptionsDataCollector.setRunModule("#ddPCR Parameters\t");
+        ddPCR_OptionsDataCollector.setRunModule("# ddPCR Parameters\t");
 
         runDate.setOnAction(_ -> commonDataCollector.getRunDate(runDate.getValue().toString()));
 

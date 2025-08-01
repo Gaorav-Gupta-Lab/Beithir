@@ -112,7 +112,7 @@ public class illumina_Dual_Indexing_OptionsDataCollector {
                 append("--RightPipetteFirstTip\t").append(commonDataCollector.getRightPipetteFirstTip()).
                 append("--BottomOffset\t").append(commonDataCollector.getBottomOffset()).
                 append("\n# Temperature Module Settings\n").
-                append("--UseTemperatureModule\t").append(commonDataCollector.getUseTemperatureModule().isSelected() ? "True\n" : "False\n").
+                //append("--UseTemperatureModule\t").append(commonDataCollector.getUseTemperatureModule().isSelected() ? "True\n" : "False\n").
                 append("--Temperature\t").append(commonDataCollector.getSetTemperature()).
 
                 append("\n# Location of Reagents and Volumes\n").

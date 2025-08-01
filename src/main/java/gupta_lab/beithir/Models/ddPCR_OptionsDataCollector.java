@@ -3,7 +3,7 @@
  * Package loosely based on GitHub Gist (https://gist.github.com/jewelsea/6460130).
  * @author Dennis A. Simpson
  * @since March 2025
- * @version 0.9.0
+ * @version 0.10.3
  */
 
 package gupta_lab.beithir.Models;
@@ -99,8 +99,8 @@ public class ddPCR_OptionsDataCollector {
     }
     public static String fileName(){return "ddPCR Parameters";}
     public static String generateOptionsFile() {
-        returnString.append(runModule).append(getVersionNumber()).append("#Run Date:\t").append(commonDataCollector.runDate).append("\n").
-                append("--User\t").append(commonDataCollector.getUserName()).append("\n").
+        returnString.append(runModule).append(getVersionNumber()).append("# Run Date:\t").append(commonDataCollector.runDate).append("\n").
+                append("--User\t").append(commonDataCollector.getUserName()).append("\n\n").
 
                 append("\n# Deck Layout\n").
                 append("--Slot1\t").append(commonDataCollector.getSlot1()).
@@ -115,15 +115,16 @@ public class ddPCR_OptionsDataCollector {
                 append("--Slot10\t").append(commonDataCollector.getSlot10()).
                 append("--Slot11\t").append(commonDataCollector.getSlot11()).
 
-                append("\n# Location of the first tip in pipette tip boxes and bottom offset value for tips\n").
+                append("\n\n# Location of the first tip in pipette tip boxes and bottom offset value for tips\n").
                 append("--LeftPipetteFirstTip\t").append(commonDataCollector.getLeftPipetteFirstTip()).
                 append("--RightPipetteFirstTip\t").append(commonDataCollector.getRightPipetteFirstTip()).
                 append("--BottomOffset\t").append(commonDataCollector.getBottomOffset()).
-                append("\n# Temperature Module Settings\n").
+
+                append("\n\n\n# Temperature Module Settings\n").
                 append("--UseTemperatureModule\t").append(commonDataCollector.getUseTemperatureModule().isSelected() ? "True\n" : "False\n").
                 append("--Temperature\t").append(commonDataCollector.getSetTemperature()).
 
-                append("\n# Location of Reagents and Volumes\n").
+                append("\n\n# Location of Reagents and Volumes\n").
                 append("--PCR_PlateSlot\t").append(commonDataCollector.getPCR_PlateSlot()).
                 append("--DilutionPlateSlot\t").append(commonDataCollector.getDilutionPlateSlot()).
                 append("--ReagentSlot\t").append(commonDataCollector.getReagentSlot()).
@@ -133,7 +134,7 @@ public class ddPCR_OptionsDataCollector {
                 append("--MasterMixPerRxn\t").append(commonDataCollector.getMasterMixPerRxn()).
                 append("--DNA_in_Reaction\t").append(commonDataCollector.getDNAPerWell()).
 
-                append("\n# Targets\n").
+                append("\n\n# Target\tTarget Name\tWell\tVolume in Tube (uL)\n").
                 append("--Target_1\t").append(getTarget1Name()).append(getTarget1Well()).append(getTarget1Volume()).
                 append("\n--Target_2\t").append(getTarget2Name()).append(getTarget2Well()).append(getTarget2Volume()).
                 append("\n--Target_3\t").append(getTarget3Name()).append(getTarget3Well()).append(getTarget3Volume()).
@@ -145,7 +146,8 @@ public class ddPCR_OptionsDataCollector {
                 append("\n--Target_9\t").append(getTarget9Name()).append(getTarget9Well()).append(getTarget9Volume()).
                 append("\n--Target_10\t").append(getTarget10Name()).append(getTarget10Well()).append(getTarget10Volume()).
 
-                append("\n\n# Samples\n").
+                append("\n\n\n# Sample Information").
+                append("\n# Source Slot\tSource Well\tSample Name\tConcentration ng/uL\tTarget(s)\tReplicates\n").
                 append(sampleData);
         System.out.println("User Name: " + commonDataCollector.getUserName() + "\nModule: " + runModule);
         return returnString.toString();

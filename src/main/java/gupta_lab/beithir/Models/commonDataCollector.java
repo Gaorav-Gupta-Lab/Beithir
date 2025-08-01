@@ -55,6 +55,7 @@ public class commonDataCollector {
     public static void setBottomOffset(String bottomOffset) {
         commonDataCollector.BottomOffset = bottomOffset;
     }
+
     public static CheckBox getUseTemperatureModule(){return useTemperatureModule;}
     public static void setUseTemperatureModule(CheckBox useTemperatureModule){
         commonDataCollector.useTemperatureModule = useTemperatureModule;
